@@ -38,12 +38,13 @@ Desarrollar una aplicación web que permita al usuario planificar comidas, acced
 
 <h2 align='center' >💻 Tecnologías Aplicadas</h2>
 
-[![HTML](https://img.shields.io/badge/HTML-%23E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://www.w3.org/html/)
-[![CSS](https://img.shields.io/badge/CSS-%231572B6?style=for-the-badge&logo=css3&logoColor=white)](https://www.w3.org/Style/CSS/)
-[![Angular](https://img.shields.io/badge/Angular-%23DD0031?style=for-the-badge&logo=angular&logoColor=white)](https://angular.io/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-%233178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![SQL](https://img.shields.io/badge/SQL-%2300758F?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
+[![HTML](https://img.shields.io/badge/HTML-%23E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://www.w3.org/html/)&nbsp;&nbsp;&nbsp;
+[![CSS](https://img.shields.io/badge/CSS-%231572B6?style=for-the-badge&logo=css3&logoColor=white)](https://www.w3.org/Style/CSS/)&nbsp;&nbsp;&nbsp;
+[![Angular](https://img.shields.io/badge/Angular-%23DD0031?style=for-the-badge&logo=angular&logoColor=white)](https://angular.io/)&nbsp;&nbsp;&nbsp;
+[![TypeScript](https://img.shields.io/badge/TypeScript-%233178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)&nbsp;&nbsp;&nbsp;
+[![SQL](https://img.shields.io/badge/SQL-%2300758F?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)&nbsp;&nbsp;&nbsp;
 [![Django](https://img.shields.io/badge/Django-%23092620?style=for-the-badge&logo=django&logoColor=white)](https://www.djangoproject.com/)
+
 
 
 
