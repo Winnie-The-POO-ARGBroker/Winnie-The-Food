@@ -1,0 +1,329 @@
+:root {
+    font-family: 'Poppins', sans-serif;
+    background: #FDF6E3;
+    color: #474747;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+/* Tipografia */
+
+h1 {
+    font-size: 3.813rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin: 0;
+    padding: 0;
+    text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+h2 {
+    font-size: 3.063rem;
+    font-weight: 700;
+}
+
+h3 {
+    font-size: 2.25rem;
+    font-weight: 600;
+}
+
+h4 {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+p {
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+span {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+/* Contenedores */
+
+.container {
+    max-width: 1140px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+
+/* Colores */
+
+.bg-color {
+    background-color: #FDF6E3;
+}
+
+.texto-color {
+    color: #474747;
+}
+
+/* Colores Navbar */
+
+.nav-texto {
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+.nav-color {
+    background-color: #5C3C16;
+}
+
+/* --------------------------------------------------------- */
+
+.h2-color-1 {
+    color: #1A3C34;
+}
+
+.h2-color-2 {
+    color: #D49643;
+}
+
+.border-color {
+    border-color: #E9883A;
+}
+
+.primario {
+    background-color: #E9883A;
+    color: #FFFFFF;
+}
+
+.secundario {
+    background-color: #CFC6AE;
+    color: #5C3C16;
+}
+
+/* Botones */
+
+.btn {
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding: 0.7rem 1rem;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    border: none;
+}
+
+/* Input con Label */
+
+input {
+    font-size: 1.25rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid #CACACA;
+    background-color: #ffffff;
+}
+
+input::placeholder {
+    color: #CACACA;
+}
+
+input:focus {
+    outline: none;
+    border: 2px solid #cacaca;
+}
+
+label {
+    width: 100%;
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+/* Listas */
+
+li {
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+li::marker {
+    color: #E9883A;
+}
+
+/* Circulo */
+
+.circulo {
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circulo.facil {
+    background-color: #19BC2C;
+}
+
+.circulo.medio {
+    background-color: #D49643;
+}
+
+.circulo.dificil {
+    background-color: #AF2E17;
+}
+
+
+/* Media Queries */
+
+/* Laptop */
+
+@media (max-width: 1366px) {
+
+    .container {
+        max-width: 1100px;
+    }
+
+    h1 {
+    font-size: 3.5rem;
+    }
+
+    h2 {
+        font-size: 2.813rem;
+    }
+
+    h3 {
+        font-size: 2.25rem;
+    }
+
+    h4 {
+        font-size: 1.75rem;
+    }
+
+    p {
+        font-size: 1.125rem;
+    }
+
+    span {
+        font-size: 0.875rem;
+    }
+
+    label {
+        font-size: 1.125rem;
+    }
+}
+
+/* Tablet */
+
+@media (max-width: 768px) {
+
+    .container {
+        max-width: 720px;
+    }
+
+    h1 {
+    font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 2.375rem;
+    }
+
+    h3 {
+        font-size: 1.875rem;
+    }
+
+    h4 {
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    span {
+        font-size: 0.875rem;
+    }
+
+    label {
+        font-size: 1rem;
+    }
+
+}
+
+/* Mobile XL */
+
+@media screen and (max-width: 720px) {
+
+    .container {
+        max-width: 680px;
+    }
+
+    h1 {
+        font-size: 2.265rem;
+    }
+
+    h2 {
+        font-size: 2.125rem;
+    }
+
+    h3 {
+        font-size: 1.625rem;
+    }
+
+    h4 {
+        font-size: 1.375rem;
+    }
+    
+    p {
+        font-size: 1rem;
+    }
+
+    label {
+        font-size: 1rem;
+    }
+
+}
+
+/* Mobile */
+
+@media screen and (max-width: 360px) {
+
+    .container {
+        max-width: 320px;
+    }
+
+    h1 {
+        font-size: 2.25rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    h3 {
+        font-size: 1.375rem;
+    }
+
+    h4 {
+        font-size: 1.125rem;
+    }
+    
+    p {
+        font-size: 0.875rem;
+    }
+
+    span {
+        font-size: 0.75rem;
+    }
+
+    label {
+        font-size: 0.875rem;
+    }
+}
