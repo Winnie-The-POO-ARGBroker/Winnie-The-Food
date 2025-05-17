@@ -720,11 +720,12 @@ li::marker {
     flex: 1;
 }
 
+
 .linea-dashed {
-    border-top: 2px dashed #cacaca; /* Color gris claro */
+    border-top: 2px dashed #cacaca; 
     height: 0;
-    width: 100%; /* Se ajusta al ancho disponible */
-    margin: 20px 0; /* Separación arriba y abajo (opcional) */
+    width: 100%; 
+    margin: 20px 0; 
 }
 
 .receta-btn-avance {
@@ -732,4 +733,28 @@ li::marker {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+/* PASO 2 */
+
+.receta-inputs.ingrediente-container {
+    display: flex;
+    width: 100%;
+    flex-direction: row; 
+    gap: 2rem ;
+}
+
+
+.receta-inputs.ingrediente-container .input-container:nth-child(1) {
+    flex: 3; 
+}
+
+.receta-inputs.ingrediente-container .dual-inputs {
+    display: flex;
+    flex: 2;
+    gap: 2rem;
+}
+
+.receta-inputs.ingrediente-container .dual-inputs .input-container {
+    flex: 1;
 }
