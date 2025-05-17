@@ -7,6 +7,10 @@
     box-sizing: border-box;
 }
 
+main {
+    margin: 100px auto;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -198,6 +202,32 @@ input {
 }
 
 input::placeholder {
+    color: #CACACA;
+}
+
+select {
+    font-size: 1.25rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid #CACACA;
+    background-color: #ffffff;
+
+}
+
+select::placeholder {
+    color: #CACACA;
+}
+
+textarea {
+    font-size: 1.25rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid #CACACA;
+    background-color: #ffffff;
+    margin-bottom: .5rem;
+}
+
+textarea::placeholder {
     color: #CACACA;
 }
 
@@ -579,4 +609,127 @@ li::marker {
 .login-link {
   text-align: center;
   margin-top: 1rem;
+}
+
+
+
+/* ESTILOS PARA CARGA DE NUEVA RECETA */
+
+.titulo-nueva-receta {
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.titulo-nueva-receta::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 5px;
+    background-color: #E9883A;
+}
+
+.container-nueva-receta {
+    width: 100%;
+    padding: 1rem 2rem;
+    background-color: #ffffff;
+    border: 1px solid #CACACA;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.container-paso {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.linea-paso {
+    height: 4px;
+    background-color: #cacaca;
+    flex-grow: 1;
+    margin: 0 10px;
+    border-radius: 2px;
+}
+
+.item-paso {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #E1C7A4;
+    color: #ffffff;
+}
+
+.item-paso.activo {
+    background-color: #E9883A;
+}
+
+.imagen-receta {
+    width: 100%;
+    height: max-content;
+    border: 1px dashed #CACACA;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.detalles-imagen {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem 0;
+}
+
+.receta-inputs {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 0;
+}
+
+.input-container input, textarea, select{
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+}
+
+.dual-inputs {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.dual-inputs .input-container {
+    flex: 1;
+}
+
+.linea-dashed {
+    border-top: 2px dashed #cacaca; /* Color gris claro */
+    height: 0;
+    width: 100%; /* Se ajusta al ancho disponible */
+    margin: 20px 0; /* Separación arriba y abajo (opcional) */
+}
+
+.receta-btn-avance {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

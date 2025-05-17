@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main.css">
+    <title>Paso 1 - Cargar nueva receta</title>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="container navbar">
+
+            <!-- IZQUIERDA -->
+            <div class="navbar-left">
+                <img src="./imagenes/Logo.png" alt="Logo" width="40" height="40">
+                <span class="nav-texto">Winnie The Food</span>
+            </div>
+
+            <!-- DERECHA -->
+            <div class="navbar-right">
+                <a href="Inicio" class="nav-texto">Inicio</a>
+                <a href="#recetas" class="nav-texto">Recetas</a>
+                <a href="#sobre-nosotros" class="nav-texto">Sobre Nosotros</a>
+                <a href="#registrarme" class="btn secundario">Registrarme</a>
+                <a href="#iniciar-sesion" class="btn primario">Iniciar sesión</a>
+                <a href="#menu" class="nav-texto">&#9776;</a>
+            </div>
+
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <h2 class="h2-color-1 titulo-nueva-receta">Cargar nueva receta</h2>
+        </div>
+
+        <div class="container container-paso">
+            <div class="item-paso activo">
+                <p>1</p>
+            </div>
+
+            <div class="linea-paso"></div>
+
+            <div class="item-paso">
+                <p>2</p>
+            </div>
+
+            <div class="linea-paso"></div>
+
+            <div class="item-paso">
+                <p>3</p>
+            </div>
+
+            <div class="linea-paso"></div>
+
+            <div class="item-paso">
+                <p>4</p>
+            </div>
+        </div>
+
+        <div class="container container-nueva-receta">
+            <h4 class="h2-color-1">Informacion basica</h4>
+
+            <div class="imagen-receta">
+                <div class="detalles-imagen">
+                    <p>Deja una foto de tu receta</p>
+                    <p>o</p>
+                    <div class="btn secundario">Cargar imagen</div>
+                    <p>PNG, JPG o JPEG (Max 5MB)</p>
+                </div>
+                
+            </div>
+
+            <div class="receta-inputs">
+                <div class="input-container">
+                    <label for="nombre-receta">Nombre de la receta</label>
+                    <input type="text" id="nombre-receta">
+                </div>
+               
+                <div class="input-container">
+                    <label for="descripcion-receta">Descripcion de la receta</label>
+                    <textarea name="receta-descripcion" id="descripcion-receta" cols="30" rows="10" id="descripcion-receta" placeholder="Describe tu receta"></textarea> 
+                </div>
+                
+            </div>
+
+            <div class="receta-inputs dual-inputs">
+                <div class="input-container">
+                    <label for="nombre-receta">Categoria</label>
+                    <select name="categoria" id="">
+                        <option value="desayuno">Desayuno</option>
+                        <option value="almuerzo">Almuerzo</option>
+                        <option value="cena">Cena</option>
+                        <option value="postre">Postre</option>
+                        <option value="snack">Snack</option>
+                        <option value="bebida">Bebida</option>
+                        <option value="otros">Otros</option>
+                    </select>
+                </div>
+                
+                <div class="input-container">
+                    <label for="dificultad-receta">Dificultad</label>
+                    <select name="dificultad" id="">
+                        <option value="facil">Facil</option>
+                        <option value="media">Media</option>
+                        <option value="dificil">Dificil</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="receta-inputs dual-inputs">
+                <div class="input-container">
+                    <label for="tiempo-preparacion">Tiempo de preparacion (en min)</label>
+                    <input type="text" id="tiempo-preparacion">
+                </div>
+                
+                <div class="input-container">
+                    <label for="tiempo-coccion">Tiempo de coccion (en min)</label>
+                    <input type="text" id="tiempo-coccion">
+                </div>
+                
+            </div>
+
+            <div class="receta-inputs dual-inputs">
+                <div class="input-container">
+                    <label for="porciones">Porciones</label>
+                    <input type="number" id="porciones">
+                </div>
+                
+                <div class="input-container">
+                    <label for="etiquetas">Etiquetas</label>
+                    <input type="text" id="etiquetas">
+                </div>
+                
+            </div>
+
+            <div class="linea-dashed"></div>
+
+            <div class="receta-btn-avance">
+                <button class="btn secundario">Cancelar</button>
+                <button class="btn primario">Siguiente</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- CONTENEDOR -->
+    
+
+    <!-- FOOTER -->
+     <footer>
+        <div class="footer-content">
+            <div class="navbar-left">
+                <img src="./imagenes/Logo.png" alt="Logo Winnie The Food" width="40" height="40">
+                <span>Winnie The Food</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
