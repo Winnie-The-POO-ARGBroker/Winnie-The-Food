@@ -11,7 +11,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
+
 }
 
 /* Tipografia */
@@ -58,7 +58,6 @@ span {
     margin: 0 auto;
     padding: 0 1rem;
     display: flex;
-    flex-direction: column;
     align-items: flex-start;
 }
 
@@ -73,19 +72,6 @@ span {
     color: #474747;
 }
 
-/* Colores Navbar */
-
-.nav-texto {
-    font-weight: 700;
-    font-size: 1.25rem;
-}
-
-.nav-color {
-    background-color: #5C3C16;
-}
-
-/* --------------------------------------------------------- */
-
 .h2-color-1 {
     color: #1A3C34;
 }
@@ -98,14 +84,12 @@ span {
     border-color: #E9883A;
 }
 
-.primario {
-    background-color: #E9883A;
-    color: #FFFFFF;
-}
 
-.secundario {
-    background-color: #CFC6AE;
-    color: #5C3C16;
+
+.subrayado-naranja {
+    border-bottom: 4px solid #E9883A;
+    display: inline-block;
+    padding-bottom: 4px;
 }
 
 /* Botones */
@@ -118,6 +102,90 @@ span {
     text-decoration: none;
     border: none;
 }
+
+.primario {
+    background-color: #E9883A;
+    color: #FFFFFF;
+}
+
+.secundario {
+    background-color: #CFC6AE;
+    color: #5C3C16;
+}
+
+/* Colores Navbar */
+/* Estilos generales para navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    width: 100%;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Barra de navegación fija */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: #FDF6E3;
+    /* Fondo claro */
+}
+
+/* Estilos del texto en la navbar */
+.nav-texto {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #403019;
+    text-decoration: none;
+    /* Color oscuro para los enlaces */
+}
+
+/* --------------------------------------------------------- */
+header {
+    margin-top: 70px;
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-image: url('../imagenes/fondo\ header.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.header-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+}
+
+.header-text h1 {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    font-size: 46px;
+}
+
+.header-text p {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    font-size: 20px;
+}
+
+
 
 /* Input con Label */
 
@@ -179,6 +247,13 @@ li::marker {
     background-color: #AF2E17;
 }
 
+.nivel-dificultad {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 8px 0;
+}
+
 
 /* Media Queries */
 
@@ -191,7 +266,7 @@ li::marker {
     }
 
     h1 {
-    font-size: 3.5rem;
+        font-size: 3.5rem;
     }
 
     h2 {
@@ -228,7 +303,7 @@ li::marker {
     }
 
     h1 {
-    font-size: 3rem;
+        font-size: 3rem;
     }
 
     h2 {
@@ -280,7 +355,7 @@ li::marker {
     h4 {
         font-size: 1.375rem;
     }
-    
+
     p {
         font-size: 1rem;
     }
@@ -314,7 +389,7 @@ li::marker {
     h4 {
         font-size: 1.125rem;
     }
-    
+
     p {
         font-size: 0.875rem;
     }
@@ -326,4 +401,109 @@ li::marker {
     label {
         font-size: 0.875rem;
     }
+}
+
+
+
+.categorias {
+    text-align: center;
+    padding: 40px;
+}
+
+.categorias-contenedor {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.categoria {
+    text-decoration: none;
+
+    width: 150px;
+}
+
+.categoria img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+
+.destacadas {
+    text-align: center;
+    padding: 40px;
+}
+
+.recetas-contenedor {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.receta {
+    position: relative;
+    width: 400px;
+    height: 320px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.tiempo-receta {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: white;
+    color: #D49643;
+    font-weight: bold;
+    padding: 5px 12px;
+    border-radius: 50px;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+}
+
+.receta img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+.receta div {
+    padding: 15px;
+
+}
+
+.receta h3 {
+    margin: 0;
+    font-size: 20px;
+}
+
+
+.receta p {
+    font-size: 14px;
+    color: #555;
+    margin: 10px 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    background-color: #E1C7A4;
+    padding: 20px;
 }
