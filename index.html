@@ -1,65 +1,151 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Importar CSS  -->
-    <link rel="stylesheet" href="./styles/main.css">
-    <title>Document</title>
+    <meta charset="utf-8" />
+    <title>Winnie The Food</title>
+    <link rel="stylesheet" href="estilos.css">
 </head>
+
 <body>
-    <h1>
-        Encabezado 1
-    </h1>
-    <h2>
-        Encabezado 2
-    </h2>
-    <h3>
-        Encabezado 3
-    </h3>
-    <h4>
-        Encabezado 4
-    </h4>
-    <p>
-        Parrafo
-    </p>
 
-    <a class="btn primario">Boton primario</a>
+    <nav>
+        <div class="container navbar">
 
-    <a href="#" class="btn secundario">Boton secundario</a>
+            <!-- IZQUIERDA -->
+            <div class="navbar-left">
+                <img src="Logo.png" alt="Logo" width="40" height="40">
+                <span class="nav-texto">Winnie The Food</span>
+            </div>
 
-    <br>
-    <br>
+            <!-- DERECHA -->
+            <div class="navbar-right">
+                <a href="Inicio" class="nav-texto">Inicio</a>
+                <a href="#recetas" class="nav-texto">Recetas</a>
+                <a href="#sobre-nosotros" class="nav-texto">Sobre Nosotros</a>
+                <a href="#registrarme" class="btn secundario">Registrarme</a>
+                <a href="#iniciar-sesion" class="btn primario">Iniciar sesión</a>
+                <a href="#menu" class="nav-texto">&#9776;</a>
+            </div>
 
-    <div>
-        <label for="input1">Label</label>
-        <input type="text" name="input1" id="input1" placeholder="Placeholder">
-    </div>
+        </div>
+    </nav>
 
-    <ul>
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
-    </ul>
 
-    <ol>
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
-    </ol>
 
-    <div class="circulo facil">
-    </div>
-    
-    <div class="circulo medio">
-    </div>
 
-    <div class="circulo dificil">
-    </div>
+    <!-- Header con imagen de fondo -->
+    <header>
+        <div class="header-text">
+            <h1>Descubre el placer de cocinar</h1>
+            <p>Miles de recetas deliciosas para todos los gustos y ocasiones</p>
+            <a href="#recetas" class="btn primario">Explorar Recetas</a>
+        </div>
+    </header>
 
-    <div class="container">
-        <button class="btn primario">Boton primario</button>
-        <p>Texto</p>
-    </div>
+    <section class="categorias">
+        <h2 class="h2-color-1 subrayado-naranja">Categorías</h2>
+        <p>Explora nuestras recetas por categoría y encuentra la inspiración que necesitas para tu próxima comida</p>
+        <div class="categorias-contenedor">
+
+            <!-- Desayunos -->
+            <a href="#desayunos" class="categoria">
+                <img src="deliciosa-granola-vegana-saludable-con-nueces-pecanas-en-un-tazon-de-frutas-con-yogur-sobre-una-mesa-blanca.jpg"
+                    alt="Desayunos">
+                <p class="h2-color-1">Desayunos</p>
+            </a>
+
+            <!-- Comidas Rápidas -->
+            <a href="#comidas-rapidas" class="categoria">
+                <img src="pexels-mikhail-nilov-8920157.jpg" alt="Comidas Rápidas">
+                <p class="h2-color-1">Comidas Rápidas</p>
+            </a>
+
+            <!-- Vegetarianas -->
+            <a href="#vegetarianas" class="categoria">
+                <img src="pexels-olenkabohovyk-3743537.jpg" alt="Vegetarianas">
+                <p class="h2-color-1">Vegetarianas</p>
+            </a>
+
+            <!-- Postres -->
+            <a href="#postres" class="categoria">
+                <img src="2d5e5ce3-915f-41ab-8271-7fa01c4b191b.jpeg" alt="Postres">
+                <p class="h2-color-1">Postres</p>
+            </a>
+
+            <!-- Sopas -->
+            <a href="#sopas" class="categoria">
+                <img src="Low fat soups make healthy eating simple and….jpeg" alt="Sopas">
+                <p class="h2-color-1">Sopas</p>
+            </a>
+
+            <!-- Carnes -->
+            <a href="#carnes" class="categoria">
+                <img src="ca0ff866-ba23-4f3b-9aff-3732dbd2e66f.jpeg" alt="Carnes">
+                <p class="h2-color-1">Carnes</p>
+            </a>
+
+        </div>
+    </section>
+
+    <section id="destacadas" class="destacadas">
+        <h2 class="h2-color-1 subrayado-naranja">Recetas destacadas</h2>
+        <p>Nuestras recetas más populares y mejor valoradas por la comunidad</p>
+        <div class="recetas-contenedor">
+
+            <div class="receta">
+                <img src="un-plato-de-tacos-con-un-monton-de-tacos-un-lado.jpg" alt="Tacos">
+                <div class="tiempo-receta">45 min</div>
+                <div>
+                    <h3 class="h2-color-1">Tacos</h3>
+                    <p>Clásicos de la cocina mexicana, con tortillas suaves rellenas y combinaciones
+                        irresistibles.</p>
+                    <div class="nivel-dificultad">
+                        <div class="circulo facil"></div>
+                        <span>Fácil</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="receta">
+                <img src="vista-cercana-del-delicioso-pastel-de-chocolate.jpg" alt="Tarta de chocolate">
+                <div class="tiempo-receta">60 min</div>
+                <div>
+                    <h3 class="h2-color-1">Tarta de Chocolate</h3>
+                    <p>Postre irresistible con base crocante y relleno cremoso de chocolate.</p>
+                    <div class="nivel-dificultad">
+                        <div class="circulo medio"></div>
+                        <span>Media</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="receta">
+                <img src="sushi-maki-conjunto-sobre-fondo-de-madera.jpg" alt="Sushi">
+                <div class="tiempo-receta">90 min</div>
+                <div>
+                    <h3 class="h2-color-1">Sushi</h3>
+                    <p>Delicados rollos de arroz y pescado con sabores frescos.</p>
+                    <div class="nivel-dificultad">
+                        <div class="circulo dificil"></div>
+                        <span>Dificil</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="navbar-left">
+                <img src="Logo.png" alt="Logo Winnie The Food" width="40" height="40">
+                <span>Winnie The Food</span>
+            </div>
+        </div>
+    </footer>
+
+
+
 </body>
+
 </html>
