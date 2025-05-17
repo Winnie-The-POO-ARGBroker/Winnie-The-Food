@@ -514,7 +514,7 @@ li::marker {
 .card-registro {
   width: 100%;
   max-width: 500px;
-  margin: 4rem auto;
+  margin: 100px auto;
   padding: 2rem;
   background-color: #ffffff;
   border-radius: 1rem;
