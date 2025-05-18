@@ -829,3 +829,302 @@ margin-top: 1rem;
 .receta-inputs.ingrediente-container .dual-inputs .input-container {
     flex: 1;
 }
+
+/* DETALLE RECETA */
+
+
+.modulo-detalle {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+
+.modulo-detalle h3 {
+  color: #1A3C34;
+  border-bottom: 4px solid #E9883A;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+
+/* Números pasos circulares */
+.lista-pasos {
+  counter-reset: paso;
+  list-style: none;
+  padding-left: 0;
+}
+
+
+.lista-pasos li {
+  counter-increment: paso;
+  position: relative;
+  padding-left: 3rem;
+  margin-bottom: 1rem;
+}
+
+
+.lista-pasos li::before {
+  content: counter(paso);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2rem;
+  height: 2rem;
+  background-color: #E9883A;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+
+/* Consejos útiles */
+.consejos-verde {
+  background-color: #EAF8EB;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+
+.consejo-verde {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  color: #0B8F2F;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+
+.check-verde {
+  min-width: 20px;
+  height: 20px;
+  background-color: #0B8F2F;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: bold;
+}
+
+
+/* Cuadro nutricional */
+.nutricional-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+
+.nutricional-box {
+  background-color: #FDF6E3;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  width: 100px;
+  text-align: center;
+}
+
+
+.modulo-detalle {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+
+.modulo-detalle h3 {
+  color: #1A3C34;
+  border-bottom: 4px solid #E9883A;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+
+/* Lista en círculo */
+.lista-pasos {
+  counter-reset: paso;
+  list-style: none;
+  padding-left: 0;
+}
+
+
+.lista-pasos li {
+  counter-increment: paso;
+  position: relative;
+  padding-left: 3rem;
+  margin-bottom: 1rem;
+}
+
+
+.lista-pasos li::before {
+  content: counter(paso);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2rem;
+  height: 2rem;
+  background-color: #E9883A;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+
+.consejos-verde {
+  background-color: #EAF8EB;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+
+.consejo-verde {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  color: #0B8F2F;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+
+.check-verde {
+  min-width: 20px;
+  height: 20px;
+  background-color: #0B8F2F;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: bold;
+}
+
+
+/* Cuadro nutricional */
+.nutricional-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+
+.nutricional-box {
+  background-color: #FDF6E3;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  width: 100px;
+  text-align: center;
+}
+
+
+/* Categorías bajo el título */
+.categorias-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+
+.categoria-tag {
+  background-color: #E1C7A4;
+  color: #5C3C16;
+  padding: 0.3rem 0.75rem;
+  border-radius: 2rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+
+/* Ajuste a recetas relacionadas */
+.receta-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem 1rem;
+  font-size: 0.875rem;
+}
+
+
+.recetas-contenedor .receta h3 {
+  padding: 1rem;
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+
+/* Espacio extra entre bloques */
+.modulo-detalle + .modulo-detalle {
+  margin-top: 2rem;
+}
+
+
+.recetas-contenedor .circulo {
+  width: 1px;
+  height: 1px;
+}
+
+
+.receta {
+  width: 30%;
+  min-width: 280px;
+  height: auto;
+}
+
+
+.seccion-modulos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+
+.modulo-detalle {
+  flex: 1 1 100%;
+  box-sizing: border-box;
+}
+
+
+.flex-column {
+    flex-direction: column;
+  }
+  .seccion-superior {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+
+  @media (min-width: 768px) {
+    .seccion-superior {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+
+
+    .seccion-superior > div {
+      flex: 1;
+      min-width: 300px;
+    }
+  }
