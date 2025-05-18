@@ -829,3 +829,160 @@ margin-top: 1rem;
 .receta-inputs.ingrediente-container .dual-inputs .input-container {
     flex: 1;
 }
+
+
+/* ESTILOS PARA MIS RECETAS */
+
+.mis-recetas {
+    margin-top: 120px; /* Por navbar fija */
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 1rem;
+}
+
+.titulo-principal {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1B3D2F;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* Grid de recetas */
+.recetas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+/* Tarjeta de receta */
+.card-receta {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+    overflow: hidden;
+    width: 100%;
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.imagen-receta {
+    position: relative;
+}
+
+.imagen-receta img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.tiempo {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background-color: rgba(215, 103, 41, 0.85);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.contenido-receta {
+    padding: 1rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.titulo-receta {
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem 0;
+    color: #1B3D2F;
+}
+
+.descripcion-receta {
+    font-size: 1rem;
+    color: #474747;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+}
+
+.info-extra {
+    margin-bottom: 1rem;
+}
+
+.dificultad {
+    font-weight: 600;
+    color: #403019;
+    display: flex;
+    align-items: center;
+}
+
+.circulo-verde {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background-color: #19BC2C;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+/* Botones dentro de tarjeta */
+.acciones-receta {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-editar, .btn-eliminar {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: white;
+    flex: 1;
+    text-align: center;
+}
+
+.btn-editar {
+    background-color: #19BC2C;
+}
+
+.btn-editar:hover {
+    background-color: #148922;
+}
+
+.btn-eliminar {
+    background-color: #AF2E17;
+}
+
+.btn-eliminar:hover {
+    background-color: #8a2513;
+}
+
+/* Botón mostrar más */
+.contenedor-mostrar {
+    text-align: center;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.btn-mostrar {
+    background-color: #D76729;
+    color: white;
+    padding: 0.7rem 1.5rem;
+    font-weight: 700;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-mostrar:hover {
+    background-color: #B25421;
+}
