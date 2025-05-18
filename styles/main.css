@@ -1,0 +1,831 @@
+:root {
+    font-family: 'Poppins', sans-serif;
+    background: #FDF6E3;
+    color: #474747;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main {
+    margin: 100px auto;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+/* Tipografia */
+
+h1 {
+    font-size: 3.813rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin: 0;
+    padding: 0;
+    text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+h2 {
+    font-size: 3.063rem;
+    font-weight: 700;
+}
+
+h3 {
+    font-size: 2.25rem;
+    font-weight: 600;
+}
+
+h4 {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+p {
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+span {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+/* Contenedores */
+
+.container {
+    max-width: 1140px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    align-items: flex-start;
+}
+
+
+/* Colores */
+
+.bg-color {
+    background-color: #FDF6E3;
+}
+
+.texto-color {
+    color: #474747;
+}
+
+.h2-color-1 {
+    color: #1A3C34;
+}
+
+.h2-color-2 {
+    color: #D49643;
+}
+
+.border-color {
+    border-color: #E9883A;
+}
+
+
+
+.subrayado-naranja {
+    border-bottom: 4px solid #E9883A;
+    display: inline-block;
+    padding-bottom: 4px;
+}
+
+/* Botones */
+
+.btn {
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding: 0.7rem 1rem;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    border: none;
+}
+
+.primario {
+    background-color: #E9883A;
+    color: #FFFFFF;
+}
+
+.secundario {
+    background-color: #CFC6AE;
+    color: #5C3C16;
+}
+
+/* Colores Navbar */
+/* Estilos generales para navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    width: 100%;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Barra de navegación fija */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: #FDF6E3;
+    /* Fondo claro */
+}
+
+/* Estilos del texto en la navbar */
+.nav-texto {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #403019;
+    text-decoration: none;
+    /* Color oscuro para los enlaces */
+}
+
+/* --------------------------------------------------------- */
+header {
+    margin-top: 70px;
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-image: url('../imagenes/fondo\ header.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.header-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+}
+
+.header-text h1 {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    font-size: 46px;
+}
+
+.header-text p {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    font-size: 20px;
+}
+
+
+
+/* Input con Label */
+
+input {
+    font-size: 1.25rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid #CACACA;
+    background-color: #ffffff;
+}
+
+input::placeholder {
+    color: #CACACA;
+}
+
+select {
+    font-size: 1.25rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid #CACACA;
+    background-color: #ffffff;
+
+}
+
+select::placeholder {
+    color: #CACACA;
+}
+
+textarea {
+    font-size: 1.25rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid #CACACA;
+    background-color: #ffffff;
+    margin-bottom: .5rem;
+}
+
+textarea::placeholder {
+    color: #CACACA;
+}
+
+input:focus {
+    outline: none;
+    border: 2px solid #cacaca;
+}
+
+label {
+    width: 100%;
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+/* Listas */
+
+li {
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+li::marker {
+    color: #E9883A;
+}
+
+/* Circulo */
+
+.circulo {
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circulo.facil {
+    background-color: #19BC2C;
+}
+
+.circulo.medio {
+    background-color: #D49643;
+}
+
+.circulo.dificil {
+    background-color: #AF2E17;
+}
+
+.nivel-dificultad {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 8px 0;
+}
+
+
+/* Media Queries */
+
+/* Laptop */
+
+@media (max-width: 1366px) {
+
+    .container {
+        max-width: 1100px;
+    }
+
+    h1 {
+        font-size: 3.5rem;
+    }
+
+    h2 {
+        font-size: 2.813rem;
+    }
+
+    h3 {
+        font-size: 2.25rem;
+    }
+
+    h4 {
+        font-size: 1.75rem;
+    }
+
+    p {
+        font-size: 1.125rem;
+    }
+
+    span {
+        font-size: 0.875rem;
+    }
+
+    label {
+        font-size: 1.125rem;
+    }
+}
+
+/* Tablet */
+
+@media (max-width: 768px) {
+
+    .container {
+        max-width: 720px;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 2.375rem;
+    }
+
+    h3 {
+        font-size: 1.875rem;
+    }
+
+    h4 {
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    span {
+        font-size: 0.875rem;
+    }
+
+    label {
+        font-size: 1rem;
+    }
+
+}
+
+/* Mobile XL */
+
+@media screen and (max-width: 720px) {
+
+    .container {
+        max-width: 680px;
+    }
+
+    h1 {
+        font-size: 2.265rem;
+    }
+
+    h2 {
+        font-size: 2.125rem;
+    }
+
+    h3 {
+        font-size: 1.625rem;
+    }
+
+    h4 {
+        font-size: 1.375rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    label {
+        font-size: 1rem;
+    }
+
+}
+
+/* Mobile */
+
+@media screen and (max-width: 360px) {
+
+    .container {
+        max-width: 320px;
+    }
+
+    h1 {
+        font-size: 2.25rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    h3 {
+        font-size: 1.375rem;
+    }
+
+    h4 {
+        font-size: 1.125rem;
+    }
+
+    p {
+        font-size: 0.875rem;
+    }
+
+    span {
+        font-size: 0.75rem;
+    }
+
+    label {
+        font-size: 0.875rem;
+    }
+}
+
+
+
+.categorias {
+    text-align: center;
+    padding: 40px;
+}
+
+.categorias-contenedor {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.categoria {
+    text-decoration: none;
+
+    width: 150px;
+}
+
+.categoria img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+
+.destacadas {
+    text-align: center;
+    padding: 40px;
+}
+
+.recetas-contenedor {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.receta {
+    position: relative;
+    width: 400px;
+    height: 320px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.tiempo-receta {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: white;
+    color: #D49643;
+    font-weight: bold;
+    padding: 5px 12px;
+    border-radius: 50px;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+}
+
+.receta img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+.receta div {
+    padding: 15px;
+
+}
+
+.receta h3 {
+    margin: 0;
+    font-size: 20px;
+}
+
+
+.receta p {
+    font-size: 14px;
+    color: #555;
+    margin: 10px 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    background-color: #E1C7A4;
+    padding: 20px;
+}
+
+/* ESTILOS CARD REGISTRO*/
+
+
+.card-registro {
+  width: 100%;
+  max-width: 500px;
+  margin: 100px auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+
+.card-registro h2,
+.card-registro p {
+  text-align: center;
+}
+
+
+.card-registro h2 {
+  margin-bottom: 0.3rem;
+}
+
+
+.card-registro p {
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  color: #555;
+}
+
+
+.card-registro form > div {
+  margin-bottom: 1rem;
+}
+
+
+.card-registro input[type="text"],
+.card-registro input[type="email"],
+.card-registro input[type="password"] {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+}
+
+
+.card-registro button {
+  width: 100%;
+  border-radius: 0.5em;
+}
+
+
+.checkbox-terminos {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+
+.checkbox-terminos label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+
+.login-link {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* ESTILOS LOGIN*/
+
+.card-login {
+width: 100%;
+max-width: 500px;
+margin: 100px auto;
+padding: 2rem;
+background-color: #ffffff;
+border-radius: 1rem;
+box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+
+.card-login h2,
+.card-login p {
+text-align: center;
+}
+
+
+.card-login h2 {
+margin-bottom: 0.3rem;
+}
+
+
+.card-login p {
+margin-bottom: 1.5rem;
+font-size: 1rem;
+color: #555;
+}
+
+
+.card-login form > div {
+margin-bottom: 1rem;
+}
+
+
+.card-login input[type="email"],
+.card-login input[type="password"] {
+width: 100%;
+padding: 0.5rem;
+border-radius: 0.5rem;
+border: 1px solid #ccc;
+}
+
+
+.card-login button {
+width: 100%;
+border-radius: 0.5em;
+}
+
+
+.checkbox-recordarme{
+display: flex;
+align-items: center;
+margin: 1rem 0;
+}
+
+
+.checkbox-recordarme {
+display: flex;
+align-items: center;
+gap: 0.5rem;
+font-size: 0.9rem;
+}
+
+
+.registro-link {
+text-align: center;
+margin-top: 1rem;
+}
+
+
+
+/* ESTILOS PARA CARGA DE NUEVA RECETA */
+
+.titulo-nueva-receta {
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.titulo-nueva-receta::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 5px;
+    background-color: #E9883A;
+}
+
+.container-nueva-receta {
+    width: 100%;
+    padding: 1rem 2rem;
+    background-color: #ffffff;
+    border: 1px solid #CACACA;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.container-paso {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.linea-paso {
+    height: 4px;
+    background-color: #cacaca;
+    flex-grow: 1;
+    margin: 0 10px;
+    border-radius: 2px;
+}
+
+.item-paso {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #E1C7A4;
+    color: #ffffff;
+}
+
+.item-paso.activo {
+    background-color: #E9883A;
+}
+
+.imagen-receta {
+    width: 100%;
+    height: max-content;
+    border: 1px dashed #CACACA;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.detalles-imagen {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem 0;
+}
+
+.receta-inputs {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 0;
+}
+
+.input-container input, textarea, select{
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+}
+
+.dual-inputs {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.dual-inputs .input-container {
+    flex: 1;
+}
+
+
+.linea-dashed {
+    border-top: 2px dashed #cacaca; 
+    height: 0;
+    width: 100%; 
+    margin: 20px 0; 
+}
+
+.receta-btn-avance {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* PASO 2 */
+
+.receta-inputs.ingrediente-container {
+    display: flex;
+    width: 100%;
+    flex-direction: row; 
+    gap: 2rem ;
+}
+
+
+.receta-inputs.ingrediente-container .input-container:nth-child(1) {
+    flex: 3; 
+}
+
+.receta-inputs.ingrediente-container .dual-inputs {
+    display: flex;
+    flex: 2;
+    gap: 2rem;
+}
+
+.receta-inputs.ingrediente-container .dual-inputs .input-container {
+    flex: 1;
+}

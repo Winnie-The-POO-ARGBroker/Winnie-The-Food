@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro - Winnie The Food</title>
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-color">
+
+    <nav>
+        <div class="container navbar">
+
+            <!-- IZQUIERDA -->
+            <div class="navbar-left">
+                <img src="./imagenes/Logo.png" alt="Logo" width="40" height="40">
+                <span class="nav-texto">Winnie The Food</span>
+            </div>
+
+            <!-- DERECHA -->
+            <div class="navbar-right">
+                <a href="index.html" class="nav-texto">Inicio</a>
+                <a href="#recetas" class="nav-texto">Recetas</a>
+                <a href="#sobre-nosotros" class="nav-texto">Sobre Nosotros</a>
+                <a href="registro.html" class="btn secundario">Registrarme</a>
+                <a href="#iniciar-sesion" class="btn primario">Iniciar sesión</a>
+                <a href="#menu" class="nav-texto">&#9776;</a>
+            </div>
+
+        </div>
+    </nav>
+
+    <main class="container">
+      <section class="card-registro">
+        <h2 class="h2-color-1">Winnie The Food</h2>
+        <p>Creá tu cuenta</p>
+
+        <form action="#" method="POST">
+          <div>
+            <label for="nombre">Nombre/s</label><br />
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              placeholder="Tu nombre"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="apellido">Apellido/s</label><br />
+            <input
+              type="text"
+              id="apellido"
+              name="apellido"
+              placeholder="Tu apellido"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="email">Correo electrónico</label><br />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="ejemplo@email.com"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="password">Contraseña</label><br />
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="********"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="repetir-password">Repetir contraseña</label><br />
+            <input
+              type="password"
+              id="repetir-password"
+              name="repetir-password"
+              placeholder="********"
+              required
+            />
+          </div>
+
+          <div class="checkbox-terminos">
+            <label>
+              <input type="checkbox" required />
+              <span>Acepto los <a href="#">términos y condiciones</a></span>
+            </label>
+          </div>
+
+          <div>
+            <button type="submit" class="btn primario">Registrarme</button>
+          </div>
+
+          <div class="login-link">
+            <p>¿Tienes una cuenta? <a href="login.html">Inicia sesión</a></p>
+          </div>
+        </form>
+      </section>
+    </main>
+
+<!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="navbar-left">
+                <img src="./imagenes/Logo.png" alt="Logo Winnie The Food" width="40" height="40">
+                <span>Winnie The Food</span>
+            </div>
+        </div>
+    </footer>
+
+  </body>
+</html>
