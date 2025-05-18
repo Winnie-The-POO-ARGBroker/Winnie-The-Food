@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main.css">
+    <title>Paso 3 - Cargar nueva receta</title>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="container navbar">
+
+            <!-- IZQUIERDA -->
+            <div class="navbar-left">
+                <img src="./imagenes/Logo.png" alt="Logo" width="40" height="40">
+                <span class="nav-texto">Winnie The Food</span>
+            </div>
+
+            <!-- DERECHA -->
+            <div class="navbar-right">
+                <a href="Inicio" class="nav-texto">Inicio</a>
+                <a href="#recetas" class="nav-texto">Recetas</a>
+                <a href="#sobre-nosotros" class="nav-texto">Sobre Nosotros</a>
+                <a href="#registrarme" class="btn secundario">Registrarme</a>
+                <a href="#iniciar-sesion" class="btn primario">Iniciar sesión</a>
+                <a href="#menu" class="nav-texto">&#9776;</a>
+            </div>
+
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <h2 class="h2-color-1 titulo-nueva-receta">Cargar nueva receta</h2>
+        </div>
+
+        <div class="container container-paso">
+            <div class="item-paso activo">
+                <p>1</p>
+            </div>
+
+            <div class="linea-paso"></div>
+
+            <div class="item-paso activo">
+                <p>2</p>
+            </div>
+
+            <div class="linea-paso"></div>
+
+            <div class="item-paso activo">
+                <p>3</p>
+            </div>
+
+            <div class="linea-paso"></div>
+
+            <div class="item-paso">
+                <p>4</p>
+            </div>
+        </div>
+
+        <div class="container container-nueva-receta">
+            <h4 class="h2-color-1">Pasos</h4>
+
+            <div class="receta-inputs ingrediente-container">
+                <div class="receta-inputs">
+                    <div class="input-container">
+                        <label for="nombre-paso">Nombre del paso</label>
+                        <input type="text" id="nombre-paso">
+                    </div>
+                
+                    <div class="input-container">
+                        <label for="descripcion-paso">Descripcion del paso</label>
+                        <textarea name="paso-descripcion" id="descripcion-paso" cols="20" rows="3" id="descripcion-paso" placeholder="Describe tu paso"></textarea> 
+                    </div>
+                </div>
+            </div>
+
+            <a href="#" class="btn primario">Agregar paso</a>
+
+            <div class="linea-dashed"></div>
+                
+            <h4 class="h2-color-1">Consejos utiles</h4>
+
+            <div class="receta-inputs ingrediente-container">
+                <div class="receta-inputs">
+                    <div class="input-container">
+                        <label for="nombre-consejo">Nombre del consejo</label>
+                        <input type="text" id="nombre-consejo">
+                    </div>
+                
+                    <div class="input-container">
+                        <label for="descripcion-consejo">Descripcion del consejo</label>
+                        <textarea name="consejo-descripcion" id="descripcion-consejo" cols="20" rows="3" id="descripcion-consejo" placeholder="Describe tu consejo"></textarea> 
+                    </div>
+                </div>
+            </div>
+            
+            <a href="#" class="btn primario">Agregar consejo</a>
+
+            <div class="linea-dashed"></div>
+
+            <div class="receta-btn-avance">
+                <a href="./crear_receta_paso1.html" class="btn secundario">Anterior</a>
+                <a href="./crear_receta_paso3.html" class="btn primario">Siguiente</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- CONTENEDOR -->
+    
+
+    <!-- FOOTER -->
+     <footer>
+        <div class="footer-content">
+            <div class="navbar-left">
+                <img src="./imagenes/Logo.png" alt="Logo Winnie The Food" width="40" height="40">
+                <span>Winnie The Food</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
