@@ -611,6 +611,77 @@ li::marker {
   margin-top: 1rem;
 }
 
+/* ESTILOS LOGIN*/
+
+.card-login {
+width: 100%;
+max-width: 500px;
+margin: 100px auto;
+padding: 2rem;
+background-color: #ffffff;
+border-radius: 1rem;
+box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+
+.card-login h2,
+.card-login p {
+text-align: center;
+}
+
+
+.card-login h2 {
+margin-bottom: 0.3rem;
+}
+
+
+.card-login p {
+margin-bottom: 1.5rem;
+font-size: 1rem;
+color: #555;
+}
+
+
+.card-login form > div {
+margin-bottom: 1rem;
+}
+
+
+.card-login input[type="email"],
+.card-login input[type="password"] {
+width: 100%;
+padding: 0.5rem;
+border-radius: 0.5rem;
+border: 1px solid #ccc;
+}
+
+
+.card-login button {
+width: 100%;
+border-radius: 0.5em;
+}
+
+
+.checkbox-recordarme{
+display: flex;
+align-items: center;
+margin: 1rem 0;
+}
+
+
+.checkbox-recordarme {
+display: flex;
+align-items: center;
+gap: 0.5rem;
+font-size: 0.9rem;
+}
+
+
+.registro-link {
+text-align: center;
+margin-top: 1rem;
+}
+
 
 
 /* ESTILOS PARA CARGA DE NUEVA RECETA */
