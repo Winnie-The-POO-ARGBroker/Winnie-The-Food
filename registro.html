@@ -2,35 +2,65 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./imagenes/logo.png" type="image/png">
     <title>Registro - Winnie The Food</title>
-    <link rel="stylesheet" href="styles/main.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body class="bg-color">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/main.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Bootstrap JS (para el offcanvas) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</head> 
+
+<body>
 
     <nav>
-        <div class="container navbar">
+        <div class="container navbar py-3">
 
             <!-- IZQUIERDA -->
-            <div class="navbar-left">
+            <div class="navbar-content">
                 <img src="./imagenes/Logo.png" alt="Logo" width="40" height="40">
                 <span class="nav-texto">Winnie The Food</span>
             </div>
 
+            <!-- PAGINAS -->
+            <div class="d-none d-lg-flex navbar-content pages">
+                <a href="./index.html" class="nav-texto">Inicio</a>
+                <a href="./MisRecetas.html" class="nav-texto">Recetas</a>
+                <a href="./sobre_nosotros.html" class="nav-texto">Sobre Nosotros</a>
+            </div>
+
             <!-- DERECHA -->
-            <div class="navbar-right">
-                <a href="index.html" class="nav-texto">Inicio</a>
-                <a href="#recetas" class="nav-texto">Recetas</a>
-                <a href="#sobre-nosotros" class="nav-texto">Sobre Nosotros</a>
-                <a href="registro.html" class="btn secundario">Registrarme</a>
-                <a href="#iniciar-sesion" class="btn primario">Iniciar sesión</a>
-                <a href="#menu" class="nav-texto">&#9776;</a>
+            <div class="d-none d-lg-flex navbar-content">
+                <a href="./registro.html" class="btn-personalizado secundario">Registrarme</a>
+                <a href="./login.html" class="btn-personalizado primario">Iniciar sesión</a>
+            </div>
+
+            <!-- BOTÓN HAMBURGUESA -->
+            <button class="btn d-lg-none d-xs-flex ms-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarMenu" aria-controls="navbarMenu">
+                <i class="bi bi-list fs-2"></i>
+            </button>
+
+            <!-- MENÚ LATERAL -->
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarMenu" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+                </div>
+                <div class="offcanvas-body d-flex p-8 flex-column">
+                    <a href="./index.html" class="nav-texto mb-2">Inicio</a>
+                    <a href="./MisRecetas.html" class="nav-texto mb-2">Recetas</a>
+                    <a href="./sobre_nosotros.html" class="nav-texto mb-2">Sobre Nosotros</a>
+                    <a href="./registro.html" class="btn-personalizado secundario mb-2">Registrarme</a>
+                    <a href="./login.html" class="btn-personalizado primario">Iniciar sesión</a>
+                </div>
             </div>
 
         </div>
@@ -115,15 +145,22 @@
       </section>
     </main>
 
-<!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="navbar-left">
-                <img src="./imagenes/Logo.png" alt="Logo Winnie The Food" width="40" height="40">
-                <span>Winnie The Food</span>
-            </div>
+   <!-- Footer -->
+
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top"> 
+        <div class="container d-flex justify-content-between align-items-center">
+            <p class="col-md-4 mb-0 text-body-secondary text-start">© 2025 Winnie The Food</p> 
+        
+            <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none" aria-label="Bootstrap"><img src="./imagenes/Logo.png" alt="Logo Winnie The Food" width="40" height="40"></a> 
+            
+            <ul class="nav col-md-4 justify-content-end d-none d-md-flex"> 
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Inicio</a></li> 
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Sobre Nosotros</a></li> 
+            </ul>
         </div>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
   </body>
 </html>
