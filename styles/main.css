@@ -114,7 +114,7 @@ span {
 }
 
 .primario {
-    background-color: #E9883A;
+    background-color: #E9883A !important;
     color: #FFFFFF;
 }
 
@@ -495,6 +495,7 @@ footer {
   width: 100%;
   max-width: 500px;
   margin: 100px auto;
+  margin-top: 150px;
   padding: 2rem;
   background-color: #ffffff;
   border-radius: 1rem;
