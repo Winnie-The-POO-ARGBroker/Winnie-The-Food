@@ -566,6 +566,8 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
 }
 
 .titulo-nueva-receta::after {
@@ -610,10 +612,14 @@ footer {
     height: 50px;
     border-radius: 50%;
     display: flex;
-    align-items: center;
+    align-items: end;
     justify-content: center;
     background-color: #E1C7A4;
     color: #ffffff;
+}
+
+.item-paso p {
+    margin: auto;
 }
 
 .item-paso.activo {
@@ -629,6 +635,7 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: .5rem;
 }
 
 .detalles-imagen {
