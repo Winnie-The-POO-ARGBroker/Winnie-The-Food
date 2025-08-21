@@ -1,1 +1,78 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+:root {
+  background-color: #FDF6E3;
+  
+
+  /* TODO: === Estilos para container global *NO TOCAR!* ========================= */
+
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;   /* 16px */
+    padding-right: 1rem;  /* 16px */
+  }
+
+  /* TODO: === Estilos para botones *NO TOCAR!* ================================ */
+
+  .btn-personalizado {
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding: 0.7rem 1rem;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    border: none;
+  }
+
+  .primario {
+      background-color: #E9883A !important;
+      color: #FFFFFF;
+  }
+
+  .secundario {
+      background-color: #CFC6AE;
+      color: #5C3C16;
+  }
+
+
+
+  /* sm: 640px */
+  @media (min-width: 640px) {
+    .container {
+      max-width: 640px;
+      padding-left: 1.5rem;  /* 24px */
+      padding-right: 1.5rem;
+    }
+  }
+
+  /* md: 768px */
+  @media (min-width: 768px) {
+    .container {
+      max-width: 768px;
+    }
+  }
+
+  /* lg: 1024px */
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 1024px;
+    }
+  }
+
+  /* xl: 1280px */
+  @media (min-width: 1280px) {
+    .container {
+      max-width: 1280px;
+    }
+  }
+
+  /* 2xl: 1536px */
+  @media (min-width: 1536px) {
+    .container {
+      max-width: 1536px;
+    }
+  }
+
+}
+
