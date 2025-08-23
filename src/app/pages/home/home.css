@@ -1,0 +1,52 @@
+header {
+    margin-top: 70px;
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-image: url('/img-header.webp');
+    background-size: cover;
+    background-position: center;
+}
+
+.header-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+}
+
+.header-text h1 {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    font-size: 46px;
+}
+
+.header-text p {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    font-size: 20px;
+}
+
+.categorias {
+    text-align: center; 
+}
+.destacadas {
+    text-align: center;
+}
+.titulo-seccion {
+  color: #1A3C34;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0 auto 20px auto;
+  display: inline-block;
+  border-bottom: 4px solid #E9883A; 
+  padding-bottom: 8px;
+}
+p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    text-align: center;
+}

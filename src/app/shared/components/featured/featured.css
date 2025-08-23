@@ -1,0 +1,103 @@
+.receta h3 {
+  color: #1A3C34;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+.destacadas {
+    text-align: center;
+    padding: 40px;
+}
+
+.recetas-contenedor {
+    width: 100%;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.receta {
+    position: relative;
+    width: 30%;
+    height: 320px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 15px;
+    flex-grow: 1;
+}
+
+.tiempo-receta {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: white;
+    color: #D49643;
+    font-weight: bold;
+    padding: 5px 12px;
+    border-radius: 50px;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+}
+
+
+
+.receta p {
+  font-size: 14px;
+  color: #555;
+  margin: 10px 0;
+  font-family: 'Poppins', sans-serif; 
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* Circulo */
+
+.circulo {
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circulo.facil {
+    background-color: #19BC2C;
+}
+
+.circulo.medio {
+    background-color: #D49643;
+}
+
+.circulo.dificil {
+    background-color: #AF2E17;
+}
+
+.nivel-dificultad {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 8px 0;
+    font-family: 'Poppins', sans-serif; 
+}

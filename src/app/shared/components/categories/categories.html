@@ -1,0 +1,6 @@
+<div class="categorias-contenedor">
+  <a *ngFor="let cat of categories" [href]="cat.enlace" class="categoria">
+    <img [src]="cat.imagen" [alt]="cat.nombre">
+    <span>{{ cat.nombre }}</span>
+  </a>
+</div>
