@@ -11,5 +11,4 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class App {
   protected readonly title = signal('myapp');
-}
-
+} 
