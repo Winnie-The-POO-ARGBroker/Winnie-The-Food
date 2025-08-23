@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { filter, map, startWith } from 'rxjs/operators';
+import { Menu } from '../../../shared/components/menu/menu';
+import { Footer } from '../../../shared/components/footer/footer';
 
 @Component({
   selector: 'app-new-recipe-shell',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, Menu, Footer],
   templateUrl: './new-recipe-shell.html',
   styleUrls: ['../new-recipe.css', './new-recipe-shell.css'],
 })
