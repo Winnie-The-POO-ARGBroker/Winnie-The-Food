@@ -9,9 +9,114 @@
 
   <!-- Contenido de la página -->
 
-  <section class="container">
-    <h1>Contenido</h1>
+<main class="container">
+  <section class="card-registro">
+    <h2 class="h2-color-1">Winnie The Food</h2>
+    <p>Creá tu cuenta</p>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <!-- Nombre -->
+      <div>
+        <label for="nombre">Nombre/s</label><br />
+        <input
+          type="text"
+          id="nombre"
+          formControlName="nombre"
+          placeholder="Tu nombre"
+        />
+        @if(registerForm.get('nombre')?.touched && registerForm.get('nombre')?.invalid) {
+          <small class="error">El nombre es obligatorio</small>
+        }
+      </div>
+
+      <!-- Apellido -->
+      <div>
+        <label for="apellido">Apellido/s</label><br />
+        <input
+          type="text"
+          id="apellido"
+          formControlName="apellido"
+          placeholder="Tu apellido"
+        />
+        @if(registerForm.get('apellido')?.touched && registerForm.get('apellido')?.invalid) {
+          <small class="error">El apellido es obligatorio</small>
+        }
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label for="email">Correo electrónico</label><br />
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          placeholder="ejemplo@email.com"
+        />
+        @if(registerForm.get('email')?.touched && registerForm.get('email')?.hasError('required')) {
+          <small class="error">El email es obligatorio</small>
+        }
+        @if(registerForm.get('email')?.touched && registerForm.get('email')?.hasError('email')) {
+          <small class="error">El email no es válido</small>
+        }
+      </div>
+
+      <!-- Contraseña -->
+      <div>
+        <label for="password">Contraseña</label><br />
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          placeholder="********"
+        />
+        @if(registerForm.get('password')?.touched && registerForm.get('password')?.invalid) {
+          <small class="error">La contraseña es obligatoria, debe tener más de 6 carácteres</small>
+        }
+      </div>
+
+      <!-- Repetir contraseña -->
+      <div>
+        <label for="repetir-password">Repetir contraseña</label><br />
+        <input
+          type="password"
+          id="repetir-password"
+          formControlName="repetirPassword"
+          placeholder="********"
+        />
+        @if(registerForm.hasError('passwordMismatch') && registerForm.get('repetirPassword')?.touched) {
+          <small class="error">Las contraseñas no coinciden</small>
+        }
+      </div>
+
+      <!-- Términos -->
+      <div class="checkbox-terminos">
+        <label>
+          <input type="checkbox" formControlName="terminos" />
+          <span>Acepto los <a href="#">términos y condiciones</a></span>
+        </label>
+        @if(registerForm.get('terminos')?.touched && registerForm.get('terminos')?.invalid) {
+          <small class="error">Debes aceptar los términos</small>
+        }
+      </div>
+
+      <!-- Botón -->
+      <div>
+        <button
+          type="submit"
+          class="btn primario"
+          [disabled]="registerForm.invalid">
+          Registrarme
+        </button>
+      </div>
+
+      <!-- Link Login -->
+      <div class="login-link">
+        <p>¿Tienes una cuenta? <a routerLink="/login">Inicia sesión</a></p>
+      </div>
+    </form>
   </section>
+</main>
+
 
   <!-- Pie de página -->
   <app-footer></app-footer>
