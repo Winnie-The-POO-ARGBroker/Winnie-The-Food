@@ -8,9 +8,17 @@
   <app-menu></app-menu>
 
   <!-- Contenido de la página -->
-
   <section class="container">
-    <h1>Contenido</h1>
+    <h1>Todas las Recetas</h1>
+    <app-featured [recipes]="featuredRecipesArray"></app-featured>
+
+    <!-- Botón Ver Más con clases personalizadas -->
+    <div class="boton-container">
+      <button class="btn-ver-mas" (click)="verMasRecetas()">
+        Ver Más Recetas
+        <i class="fas fa-arrow-right"></i> <!-- Icono opcional -->
+      </button>
+    </div>
   </section>
 
   <!-- Pie de página -->
