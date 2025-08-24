@@ -1,19 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-  <app-menu></app-menu>
 
-  <!-- Contenido de la página -->
+<!-- Contenido de la página -->
+<section class="container">
+    <header>
+        <div class="header-text">
+            <h1>Sobre nosotros</h1>
+            <p>Conoce un poco más del proyecto y de sus desarrolladores</p>
+        </div>
+    </header>
+    <section class="descripcion">
+        <p>
+            Winnie The Food es un proyecto desarrollado como parte de la certificación Full Stack del Instituto Superior
+            Politécnico Córdoba (ISPC), con el objetivo de aplicar los conocimientos adquiridos en clases.
+        </p>
+        <p>
+            Esta idea nace de una necesidad personal en quienes disfrutamos de la cocina y desean explorar nuevos
+            sabores de manera creativa, saludable y práctica. Winnie The Food busca ser una herramienta que conecte
+            ingredientes disponibles en casa con recetas posibles y deliciosas.
+        </p>
+        <p>
+            Más allá de presentar recetas, el proyecto busca impulsar el conocimiento sobre los beneficios de los
+            ingredientes, la digitalización de hábitos saludables, el aprendizaje tecnológico y el trabajo colaborativo
+            en equipo. Es un ejemplo de cómo la tecnología puede combinarse con la creatividad y el bienestar personal.
+        </p>
+        <p>
+            Gracias por visitar Winnie The Food. ¡Esperamos que cocines, disfrutes y aprendas tanto como nosotros al
+            crearlo!
+        </p>
+    </section>
 
-  <section class="container">
-    <h1>Contenido</h1>
-  </section>
+<!-- Sección Desarrolladores -->
+    <section class="desarrolladores">
+        <h2 class="h2-color-1 subrayado-naranja">Desarrolladores</h2>
+        <div class="grid-desarrolladores">
+                <app-card-dev
+                *ngFor="let d of developers; trackBy: trackByNombre"
+                [nombre]="d.nombre"
+                [rol]="d.rol"
+                [imagen]="d.imagen">
+                </app-card-dev>
+        </div>
+    </section>
+</section>
 
-  <!-- Pie de página -->
-  <app-footer></app-footer>
-</body>
-</html>
