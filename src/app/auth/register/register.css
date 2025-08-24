@@ -1,8 +1,4 @@
 .card-registro {
-  width: 100%;
-  max-width: 500px;
-  margin: 100px auto;
-  margin-top: 150px;
   padding: 2rem;
   background-color: #ffffff;
   border-radius: 1rem;
@@ -22,7 +18,7 @@
 
 
 .card-registro p {
-  margin-bottom: 1.5rem;
+  margin: 1.5rem;
   font-size: 1rem;
   color: #555;
 }
@@ -48,7 +44,6 @@
   border-radius: 0.5em;
 }
 
-
 .checkbox-terminos {
   display: flex;
   align-items: center;
@@ -64,9 +59,22 @@
 }
 
 
+.checkbox-terminos a {
+  color: #e4883d;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+
 .login-link {
   text-align: center;
   margin-top: 1rem;
+}
+
+.login-link a {
+  color: #e4883d;
+  font-weight: 700;
+  text-decoration: none;
 }
 
 .error {

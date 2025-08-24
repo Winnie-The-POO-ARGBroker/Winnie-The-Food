@@ -14,25 +14,6 @@
 .primario { background-color: #E9883A !important; color: #FFFFFF; }
 .secundario { background-color: #CFC6AE; color: #1A3C34; }
 
-/* ===== Título principal (responsive por breakpoints) ===== */
-.titulo-nueva-receta {
-  font-weight: 700;
-  color: #1A3C34;
-  text-align: center;
-  margin-bottom: 24px;
-  position: relative;
-  font-size: 1.5rem;             /* base: <640 */
-}
-.titulo-nueva-receta::after {
-  content: "";
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 5px;
-  background-color: #E9883A;
-}
 /* sm: 640px */
 @media (min-width: 640px) { .titulo-nueva-receta { font-size: 1.75rem; } }
 /* md: 768px */
@@ -176,21 +157,4 @@
   flex-wrap:wrap;
 }
 
-/* ===== Utilidades ===== */
-.mt-10{ margin-top:2.5rem; }
-.p-8{ padding:2rem; }
-.px-2{ padding-left:.5rem; padding-right:.5rem; }
-.py-3{ padding-top:1rem; padding-bottom:1rem; }
-.fs-2{ font-size:2rem; }
-.text-start{ text-align:left; }
-.text-decoration-none{ text-decoration:none; }
-.text-body-secondary{ color:#6c757d; }
-.flex-column{ flex-direction:column; }
-.flex-wrap{ flex-wrap:wrap; }
-.d-none{ display:none !important; }
-.d-md-flex{ display:flex !important; }
-.d-xs-flex{ display:flex !important; }
-.pages{ gap:24px; }
-.navbar-content{ display:flex; align-items:center; gap:12px; }
-.nav-texto{ color:#1A3C34; font-weight:600; text-decoration:none; }
-.nav-texto:hover{ text-decoration:underline; }
+
