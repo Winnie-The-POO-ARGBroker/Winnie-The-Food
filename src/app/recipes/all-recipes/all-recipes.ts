@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Menu } from '../../shared/components/menu/menu';
-import { Footer } from '../../shared/components/footer/footer';
-import { Featured } from '../../shared/components/featured/featured'; // 👈 importa tu componente
+import { Component} from '@angular/core';
+import { Featured } from '../../shared/components/featured/featured';
+
 @Component({
   selector: 'app-all-recipes',
   standalone: true,
-  imports: [ Menu, Footer, Featured ],
+  imports: [ Featured ],
   templateUrl: './all-recipes.html',
   styleUrl: './all-recipes.css'
 })

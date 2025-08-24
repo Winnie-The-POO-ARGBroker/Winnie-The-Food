@@ -1,7 +1,4 @@
 .card-login {
-  width: 100%;
-  max-width: 500px;
-  margin: 100px auto;
   padding: 2rem;
   background-color: #ffffff;
   border-radius: 1rem;
@@ -18,7 +15,7 @@
 }
 
 .card-login p {
-  margin-bottom: 1.5rem;
+  margin: 1.5rem;
   font-size: 1rem;
   color: #555;
 }
@@ -51,6 +48,12 @@
 .registro-link {
   text-align: center;
   margin-top: 1rem;
+}
+
+.registro-link a {
+  color: #e4883d;
+  font-weight: 700;
+  text-decoration: none;
 }
 
 .error {

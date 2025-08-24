@@ -1,27 +1,19 @@
-.h2-color-1 { color: #1A3C34; }
-
-.subrayado-naranja {
-  border-bottom: 4px solid #E9883A;
-  display: inline-block;
-  padding-bottom: 4px;
-}
-
-/* --- Hero text dentro del header --- */
-/* Header normal, sin superposición */
 header {
-  background: #f7efde;              /* opcional */
-  padding: 32px 16px;
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background: linear-gradient(rgba(0,0,0,.10), rgba(0,0,0,.10)), url('/img-header.webp');
+    background-size: cover;
+    background-position: center;
 }
 
 header .header-text {
-  position: static;                  /* <<< quita el absolute */
-  transform: none;
-  left: auto;
-  top: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
-  color: #1A3C34;
-  max-width: 900px;
-  margin: 0 auto;
+  color: white;
 }
 
 header .header-text h1 {
@@ -31,36 +23,43 @@ header .header-text h1 {
 }
 
 header .header-text p {
-  text-shadow: none;
-  color: #6b6b6b;
-  font-size: clamp(14px, 2.2vw, 18px);
-  margin: 0;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+  font-size: 20px;
+  margin: 20px 0;
 }
-
 
 /* --- Descripción --- */
 .descripcion {
-  max-width: 900px;
+  width: 100%;
   margin: 40px auto;
   padding: 0 20px;
   font-size: 1em;
   line-height: 1.6;
   color: #333;
   text-align: center;
+  font-weight: 500;
 }
 
 /* --- Sección Desarrolladores --- */
 .desarrolladores {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 20px;
   text-align: center;
   padding: 40px 20px;
   background-color: #FDF6E3;
 }
+
 .desarrolladores h2 {
   font-size: 2em;
   margin-bottom: 30px;
 }
 
 .grid-desarrolladores {
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 20px;
