@@ -1,0 +1,29 @@
+<header>
+    <div class="header-text">
+        <h1>Descubre el placer de cocinar</h1>
+        <p>Miles de recetas deliciosas para todos los gustos y ocasiones</p>
+        <a href="/all-recipes" class="btn-personalizado primario">Explorar Recetas</a>
+    </div>
+</header>
+
+<section class="container flex gap-16 flex-column m-10">
+  <section class="categorias">
+    <div>
+      <h2 class="titulo-seccion">Categorías</h2>
+      <p>Explora nuestras recetas por categoría y encuentra la inspiración que necesitas para tu próxima comida</p>
+    </div>
+    <div class="categorias-contenedor">
+      <app-categories [categories]="categoriesArray"></app-categories>
+    </div>
+  </section>
+
+  <section id="destacadas" class="destacadas">
+    <div>
+      <h2 class="titulo-seccion">Recetas destacadas</h2>
+      <p>Nuestras recetas más populares y mejor valoradas por la comunidad</p>
+    </div>
+    <app-featured [recipes]="featuredRecipesArray"></app-featured>
+  </section>
+
+</section>
+

@@ -1,1 +1,139 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+:root {
+  background-color: #FDF6E3;
+  font-family: 'Poppins', sans-serif;
+
+
+  /* TODO: === Estilos para container global *NO TOCAR!* ========================= */
+
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;   /* 16px */
+    padding-right: 1rem;  /* 16px */
+  }
+
+  /* TODO: === Estilos para botones *NO TOCAR!* ================================ */
+
+  .btn-personalizado {
+    font-weight: 700;
+    text-decoration: none;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  .primario {
+    background-color: #FF8B66 !important;
+    color: #FFFFFF;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(255, 139, 102, 0.3);
+  }
+
+  .primario:hover {
+    background-color: #E6774D; /* Un tono más oscuro del naranja */
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(255, 139, 102, 0.4);
+  }
+
+  .primario:active {
+    transform: translateY(0);
+  }
+
+  .secundario {
+    background-color: #CFC6AE;
+    color: #1A3C34;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(207, 198, 174, 0.3);
+  }
+
+  .secundario:hover {
+    background-color: #B7AFA0; /* Un tono más oscuro del beige */
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(207, 198, 174, 0.4);
+  }
+
+  .secundario:active {
+    transform: translateY(0);
+  }
+
+  .titulo-seccion {
+    font-weight: 700;
+    color: #1A3C34;
+    text-align: center;
+    margin-bottom: 24px;
+    position: relative;
+    font-size: 1.5rem;             /* base: <640 */
+  }
+
+  .titulo-seccion::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 5px;
+    background-color: #E9883A;
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: #ccc;
+  }
+
+  /* sm: 640px */
+  @media (min-width: 640px) {
+    .container {
+      max-width: 640px;
+      padding-left: 1.5rem;  /* 24px */
+      padding-right: 1.5rem;
+    }
+
+    .titulo-seccion { font-size: 1.75rem; }
+
+
+  }
+
+  /* md: 768px */
+  @media (min-width: 768px) {
+    .container {
+      max-width: 768px;
+    }
+
+    .titulo-seccion { font-size: 2rem; }
+  }
+
+  /* lg: 1024px */
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 1024px;
+    }
+
+    .titulo-seccion { font-size: 2.25rem; }
+  }
+
+  /* xl: 1280px */
+  @media (min-width: 1280px) {
+    .container {
+      max-width: 1280px;
+    }
+
+    .titulo-seccion { font-size: 2.5rem; }
+  }
+
+  /* 2xl: 1536px */
+  @media (min-width: 1536px) {
+    .container {
+      max-width: 1536px;
+    }
+
+    .titulo-seccion { font-size: 2.5rem; }
+  }
+
+}
+
