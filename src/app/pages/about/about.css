@@ -1,0 +1,68 @@
+.h2-color-1 { color: #1A3C34; }
+
+.subrayado-naranja {
+  border-bottom: 4px solid #E9883A;
+  display: inline-block;
+  padding-bottom: 4px;
+}
+
+/* --- Hero text dentro del header --- */
+/* Header normal, sin superposición */
+header {
+  background: #f7efde;              /* opcional */
+  padding: 32px 16px;
+}
+
+header .header-text {
+  position: static;                  /* <<< quita el absolute */
+  transform: none;
+  left: auto;
+  top: auto;
+  text-align: center;
+  color: #1A3C34;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+header .header-text h1 {
+  text-shadow: none;
+  font-size: clamp(28px, 4.5vw, 44px);
+  margin: 0 0 8px;
+}
+
+header .header-text p {
+  text-shadow: none;
+  color: #6b6b6b;
+  font-size: clamp(14px, 2.2vw, 18px);
+  margin: 0;
+}
+
+
+/* --- Descripción --- */
+.descripcion {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-size: 1em;
+  line-height: 1.6;
+  color: #333;
+  text-align: center;
+}
+
+/* --- Sección Desarrolladores --- */
+.desarrolladores {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #FDF6E3;
+}
+.desarrolladores h2 {
+  font-size: 2em;
+  margin-bottom: 30px;
+}
+
+.grid-desarrolladores {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
