@@ -12,16 +12,16 @@ export interface Developer {
 
 @Component({
   selector: 'app-card-dev',
-  standalone: true,                // ✅ standalone
+  standalone: true,
   templateUrl: './card-dev.html',
-  styleUrls: ['./card-dev.css'],   // ✅ plural
+  styleUrls: ['./card-dev.css'],
 })
 export class CardDev {
   @Input() nombre = '';
   @Input() rol = '';
   @Input() imagen = '';
-  @Input() href = '';                           // opcional
-  @Input() target: '_self' | '_blank' = '_self';
+  @Input() href?: string | null;
+  @Input() target?: '_self' | '_blank';
   @Input() alt = '';
 }
 
