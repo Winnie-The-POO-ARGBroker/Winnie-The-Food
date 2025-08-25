@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio | Gisele Lavisse</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="text-white text-center py-5 bg-dark bg-opacity-75">
+    <h1>Gisele Stefania Lavisse</h1>
+    <p>Desarrolladora de Software</p>
+    <div class="social-links mt-3">
+      <a href="https://github.com/gigilvsarg" target="_blank" title="GitHub" class="text-white mx-2"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/gisele-lavisse-934540246/" target="_blank" title="LinkedIn" class="text-white mx-2"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </header>
+
+  <main class="container my-5 p-4 bg-white bg-opacity-75 rounded">
+    <section class="mb-5">
+      <h2 class="text-center mb-3">Sobre mí</h2>
+      <p>Soy Gisele Lavisse, estudiante de la Tecnicatura Superior en Desarrollo de Software en el ISPC. Me apasiona el desarrollo de soluciones digitales eficientes y accesibles, combinando programación, diseño web y tecnología IoT. Me destaco por ser organizada, proactiva y tener una actitud de aprendizaje constante.</p>
+    </section>
+
+    <section class="mb-5">
+      <h2 class="text-center mb-3">Habilidades Técnicas</h2>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Lenguajes de programación: C, Java, JavaScript, HTML, CSS</li>
+        <li class="list-group-item">Desarrollo web: Responsive Design, Web Components</li>
+        <li class="list-group-item">IoT: ESP32, MQTT, LoRa, sensores</li>
+        <li class="list-group-item">Bases de datos: MySQL</li>
+        <li class="list-group-item">Herramientas: Git, GitHub, Visual Studio Code, Grafana, Node-RED</li>
+      </ul>
+    </section>
+
+    <section class="mb-5">
+      <h2 class="text-center mb-4">Proyectos en GitHub</h2>
+      <div class="row" id="project-list">
+        <!-- Proyectos cargados por JavaScript -->
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-center mb-3">Contacto</h2>
+      <div class="text-center">
+        <p>Podés contactarme directamente por correo electrónico:</p>
+        <a href="mailto:gigilavisse@gmail.com" class="btn btn-primary">
+          <i class="fas fa-envelope me-2"></i> Enviar email
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-dark bg-opacity-75 text-white text-center py-3">
+    <p>&copy; 2025 Gisele Stefania Lavisse · <a href="https://www.linkedin.com/in/gisele-lavisse-934540246/" class="text-info">LinkedIn</a></p>
+  </footer>
+
+  <script>
+    const githubUsername = "gigilvsarg";
+    const container = document.getElementById("project-list");
+
+    const proyectosPersonalizados = {
+      "ispc-year-I": {
+        nombre: "ISPC Año I",
+        descripcion: "Proyectos realizados durante el primer año de la Tecnicatura en Desarrollo de Software en ISPC, incluyendo trabajos prácticos en C, Java, HTML y más."
+      },
+      "moispc2024": {
+        nombre: "MOISPC 2024",
+        descripcion: "Proyecto final integrador del Módulo de Mundo del Trabajo, que documenta y presenta el desarrollo de una solución IoT con visualización en dashboard."
+      }
+    };
+
+    fetch(`https://api.github.com/users/${githubUsername}/repos?sort=updated`)
+      .then(res => res.json())
+      .then(repos => {
+        repos
+          .filter(repo => Object.keys(proyectosPersonalizados).includes(repo.name))
+          .forEach(repo => {
+            const info = proyectosPersonalizados[repo.name];
+            const col = document.createElement("div");
+            col.className = "col-md-6 mb-4";
+            col.innerHTML = `
+              <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                  <h5 class="card-title">${info.nombre}</h5>
+                  <p class="card-text">${info.descripcion}</p>
+                  <a href="${repo.html_url}" target="_blank" class="btn btn-outline-primary">Ver en GitHub</a>
+                </div>
+              </div>
+            `;
+            container.appendChild(col);
+          });
+      })
+      .catch(err => {
+        container.innerHTML = "<p>No se pudieron cargar los proyectos.</p>";
+      });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -43,10 +43,12 @@
         <h2 class="titulo-seccion">Desarrolladores</h2>
         <div class="grid-desarrolladores">
                 <app-card-dev
-                *ngFor="let d of developers; trackBy: trackByNombre"
-                [nombre]="d.nombre"
-                [rol]="d.rol"
-                [imagen]="d.imagen">
+                  *ngFor="let d of developers; trackBy: trackByNombre"
+                  [nombre]="d.nombre"
+                  [rol]="d.rol"
+                  [imagen]="d.imagen"
+                  [href]="d.href"
+                  [target]="d.target">
                 </app-card-dev>
         </div>
     </section>
