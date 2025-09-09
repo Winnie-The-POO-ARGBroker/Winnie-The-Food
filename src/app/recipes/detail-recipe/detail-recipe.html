@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <!-- Cabeza -->
+  <app-menu></app-menu>
+
+  <!-- Contenido de la página -->
+
+  <!-- Dejá navbar/footer globales en tus layouts. Este componente solo maneja el contenido principal -->
+  <main class="flex-column page container">
+
+    <h2 class="h2-color-1">{{ recipe().title }}</h2>
+
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;">
+      <span>{{ recipe().time }}</span>
+      <span>{{ recipe().servings }}</span>
+      <div class="nivel-dificultad">
+        <div class="circulo" [class.medio]="recipe().difficulty === 'medio'"
+                            [class.facil]="recipe().difficulty === 'facil'"
+                            [class.dificil]="recipe().difficulty === 'dificil'"></div>
+        Dificultad {{ recipe().difficulty | titlecase }}
+      </div>
+    </div>
+
+    <div class="categorias-tags">
+      @for (t of recipe().tags; track t) {
+        <div class="categoria-tag">{{ t }}</div>
+      }
+    </div>
+
+    <div class="imagen-receta">
+      <img [src]="recipe().imageUrl" [alt]="recipe().title" style="width:100%;border-radius:1rem;">
+    </div>
+
+    <div class="seccion-superior">
+      <div>
+        <section class="modulo-detalle" style="margin-bottom:2rem;">
+          <h3 class="h2-color-1 subrayado-naranja">Ingredientes</h3>
+          <ul>
+            @for (ing of recipe().ingredients; track ing) {
+              <li>{{ ing }}</li>
+            }
+          </ul>
+        </section>
+
+        <section class="modulo-detalle">
+          <h3 class="h2-color-1 subrayado-naranja">Información nutricional</h3>
+          <div class="nutricional-boxes">
+            @for (n of recipe().nutrition; track n.label) {
+              <div class="nutricional-box"><strong>{{ n.value }}</strong><br>{{ n.label }}</div>
+            }
+          </div>
+        </section>
+      </div>
+
+      <div>
+        <section class="modulo-detalle">
+          <h3 class="h2-color-1 subrayado-naranja">Preparación</h3>
+          <ol class="lista-pasos">
+            @for (p of recipe().steps; track p) {
+              <li>{{ p }}</li>
+            }
+          </ol>
+
+          <div class="consejos-verde">
+            <h3 class="h2-color-1">💡 Consejos Útiles</h3>
+            @for (c of recipe().tips; track c) {
+              <div class="consejo-verde">
+                <div class="check-verde">✓</div>{{ c }}
+              </div>
+            }
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:center;margin:2rem 0;">
+      <button class="btn primario" (click)="onAddToFavorites()">Agregar a favoritos</button>
+    </div>
+
+    <section class="modulo-detalle">
+      <h3 class="h2-color-1 subrayado-naranja">Recetas Relacionadas</h3>
+      <div class="recetas-contenedor">
+        @for (r of recipe().related; track r.title) {
+          <article class="receta">
+            <img [src]="r.imageUrl" [alt]="r.title">
+            <h3>{{ r.title }}</h3>
+            <div class="receta-info">
+              <span>{{ r.time }}</span>
+              <div class="nivel-dificultad">
+                <div class="circulo" [class.medio]="r.difficulty === 'medio'"
+                                    [class.facil]="r.difficulty === 'facil'"
+                                    [class.dificil]="r.difficulty === 'dificil'"></div>
+                {{ r.difficulty | titlecase }}
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+    </section>
+  </main>
+
+  <!-- Toast/Notificación -->
+  <div class="custom-notification" [class.show]="toastVisible()">
+    <div class="notification-icon">!</div>
+    <div class="notification-text">¡Receta agregada a favoritos!</div>
+  </div>
+
+
+  <!-- Pie de página -->
+  <app-footer></app-footer>
+</body>
+</html>
