@@ -1,0 +1,44 @@
+<nav>
+  <div class="container navbar py-3">
+
+      <!-- IZQUIERDA -->
+      <div class="navbar-content">
+          <img src="/logo.webp" alt="Logo" width="40" height="40">
+          <span class="nav-texto">Winnie The Food</span>
+      </div>
+
+      <!-- PAGINAS -->
+      <div class="d-none d-lg-flex navbar-content pages">
+          <a href="/" class="nav-texto">Inicio</a>
+          <a href="/all-recipes" class="nav-texto">Recetas</a>
+          <a href="/about" class="nav-texto">Sobre Nosotros</a>
+      </div>
+
+      <!-- DERECHA -->
+      <div class="d-none d-lg-flex navbar-content">
+          <a href="/register" class="btn-personalizado secundario">Registrarme</a>
+          <a href="/login" class="btn-personalizado primario">Iniciar sesión</a>
+      </div>
+
+      <!-- BOTÓN HAMBURGUESA -->
+      <button class="btn d-lg-none d-xs-flex ms-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarMenu" aria-controls="navbarMenu">
+          <i class="bi bi-list fs-2"></i>
+      </button>
+
+      <!-- MENÚ LATERAL -->
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarMenu" aria-labelledby="offcanvasNavbarLabel">
+          <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+          </div>
+          <div class="offcanvas-body d-flex p-8 flex-column">
+              <a href="/" class="nav-texto mb-2">Inicio</a>
+              <a href="/all-recipes" class="nav-texto mb-2">Recetas</a>
+              <a href="/about" class="nav-texto mb-2">Sobre Nosotros</a>
+              <a href="/register" class="btn-personalizado secundario mb-2">Registrarme</a>
+              <a href="/login" class="btn-personalizado primario">Iniciar sesión</a>
+          </div>
+      </div>
+
+  </div>
+</nav>
