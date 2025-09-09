@@ -7,14 +7,12 @@ import {
   AbstractControl,
   ValidationErrors
 } from '@angular/forms';
-import { Menu } from '../../shared/components/menu/menu';
-import { Footer } from '../../shared/components/footer/footer';
-import { RouterLink } from '@angular/router'; 
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, Menu, Footer],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './register.html',
   styleUrls: ['./register.css']
 })

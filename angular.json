@@ -22,7 +22,8 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
+              },
+              { "glob": "**/*", "input": "src/portfolios", "output": "/portfolios" }
             ],
             "styles": [
               "src/styles.css",

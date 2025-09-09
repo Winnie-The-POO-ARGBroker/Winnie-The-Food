@@ -1,59 +1,71 @@
-# Myapp
+<img src="./assets//header.png" width='100%'>
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.6.
+<h2 align='center' >🐻 Winnie the Food 🍯</h2>
+<br>
+El proyecto Winnie The Food nace como respuesta a una problemática cotidiana: <b>el desperdicio de alimentos y la falta de planificación alimentaria.</b> A través del desarrollo de una aplicación web, se busca facilitar la organización de comidas saludables, optimizar la compra de ingredientes y generar conciencia sobre el consumo responsable. 
 
-## Development server
+<br>
 
-To start a local development server, run:
+Este proyecto permite aplicar los conocimientos adquiridos en el módulo FullStack I, integrando desarrollo frontend y backend, y promoviendo soluciones tecnológicas con impacto en la vida diaria.
 
-```bash
-ng serve
-```
+<br>
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+<h2 align='center' >🎯 Objetivo general</h2>
 
-## Code scaffolding
+<br>
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Desarrollar una aplicación web que permita al usuario planificar comidas, acceder a recetas saludables y generar listas de compras automáticas, con el fin de mejorar sus hábitos alimenticios y reducir el desperdicio de alimentos.
 
-```bash
-ng generate component component-name
-```
+<br>
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+<h2 align='center' >🎯 Objetivos específicos</h2>
 
-```bash
-ng generate --help
-```
+- Diseñar una interfaz amigable que permita seleccionar y visualizar recetas.
 
-## Building
 
-To build the project run:
+- Implementar una funcionalidad que genere listas de compras automáticas según las recetas elegidas.
 
-```bash
-ng build
-```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- Visualizar estadísticas de ingredientes más usados y estimaciones de ahorro.
 
-## Running unit tests
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- Permitir al usuario registrar recetas propias.
 
-```bash
-ng test
-```
 
-## Running end-to-end tests
+- Optimizar la experiencia móvil para facilitar su uso en supermercados y cocinas.
 
-For end-to-end (e2e) testing, run:
+<br>
 
-```bash
-ng e2e
-```
+<h2 align='center' >💻 Tecnologías Aplicadas</h2>
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+[![HTML](https://img.shields.io/badge/HTML-%23E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://www.w3.org/html/)&nbsp;&nbsp;&nbsp;
+[![CSS](https://img.shields.io/badge/CSS-%231572B6?style=for-the-badge&logo=css3&logoColor=white)](https://www.w3.org/Style/CSS/)&nbsp;&nbsp;&nbsp;
+[![Angular](https://img.shields.io/badge/Angular-%23DD0031?style=for-the-badge&logo=angular&logoColor=white)](https://angular.io/)&nbsp;&nbsp;&nbsp;
+[![TypeScript](https://img.shields.io/badge/TypeScript-%233178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)&nbsp;&nbsp;&nbsp;
+[![SQL](https://img.shields.io/badge/SQL-%2300758F?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)&nbsp;&nbsp;&nbsp;
+[![Django](https://img.shields.io/badge/Django-%23092620?style=for-the-badge&logo=django&logoColor=white)](https://www.djangoproject.com/)
 
-## Additional Resources
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+
+<h2 align='center' >👤 Desarrolladores</h2>
+
+<div align="center">
+
+|Participantes|Rol|Perfil|
+|:---:|:---:|:---:|
+|**Rodrigo Valdez**|![Rol](https://img.shields.io/badge/Scrum%20Master-red?style=for-the-badge&logo=angular&logoColor=white&color=735D3E) <br> ![Rol](https://img.shields.io/badge/Dev-red?style=for-the-badge&logo=angular&logoColor=white&color=735D3E)| [![GitHub](https://img.shields.io/badge/GitHub-black?style=for-the-badge&logo=github&logoColor=white)](https://github.com/MrForii)|
+|**Franco Arce**|![Rol](https://img.shields.io/badge/Dev-red?style=for-the-badge&logo=angular&logoColor=white&color=735D3E)| [![GitHub](https://img.shields.io/badge/GitHub-black?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Franco-Arce)|
+|**Magali Bechis**|![Rol](https://img.shields.io/badge/Dev-red?style=for-the-badge&logo=angular&logoColor=white&color=735D3E)| [![GitHub](https://img.shields.io/badge/GitHub-black?style=for-the-badge&logo=github&logoColor=white)](https://github.com/MagaBechis)|
+|**Eliana Di Lorenzo**|![Rol](https://img.shields.io/badge/Dev-red?style=for-the-badge&logo=angular&logoColor=white&color=735D3E)| [![GitHub](https://img.shields.io/badge/GitHub-black?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ElianaDLV)|
+|**Jimena Gallegillo**|![Rol](https://img.shields.io/badge/Dev-red?style=for-the-badge&logo=angular&logoColor=white&color=735D3E)| [![GitHub](https://img.shields.io/badge/GitHub-black?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Jimenna)|
+|**Gianna Giavarini**|![Rol](https://img.shields.io/badge/Dev-red?style=for-the-badge&logo=angular&logoColor=white&color=735D3E)| [![GitHub](https://img.shields.io/badge/GitHub-black?style=for-the-badge&logo=github&logoColor=white)](https://github.com/giannagiava)|
+|**Gisele Lavisse**|![Rol](https://img.shields.io/badge/Dev-red?style=for-the-badge&logo=angular&logoColor=white&color=735D3E)| [![GitHub](https://img.shields.io/badge/GitHub-black?style=for-the-badge&logo=github&logoColor=white)](https://github.com/gigilvsarg)|
+
+</div>
+
+<br>
+
+<h2 align='center' >🎯 Nuestra Wiki</h2>
+
+<h3 align='center' >🍯 <a href="https://github.com/Winnie-The-POO-ARGBroker/WinnieTheFood-Angular/wiki" align='center'>Link a Wiki </a></h3>

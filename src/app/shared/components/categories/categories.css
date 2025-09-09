@@ -1,13 +1,11 @@
-
-
 .categoria {
-    text-decoration: none; 
+    text-decoration: none;
     width: 150px;
-    text-align: center; 
-    color: inherit; 
+    text-align: center;
+    color: inherit;
     display: flex;
-    flex-direction: column; 
-    align-items: center; 
+    flex-direction: column;
+    align-items: center;
 }
 
 .categoria img {
@@ -15,16 +13,15 @@
     height: 120px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 8px; /* espacio entre imagen y texto */
+    margin-bottom: 8px;
+    border : 2px solid #1A3C34;
 }
 
 .categoria span {
     color: #1A3C34;
     font-size: 1rem;
-     font-family: 'Poppins', sans-serif;
+    font-weight: 600;
 }
-
-
 
 .categorias {
     text-align: center;
