@@ -1,0 +1,80 @@
+
+/* Colores de tipografía */
+.h2-color-1 { color: #1A3C34; }
+.subrayado-naranja { border-bottom: 4px solid #E9883A; display: inline-block; padding-bottom: 4px; }
+
+/* Dificultad */
+.circulo { border-radius: 50%; width: 15px; height: 15px; display:flex; align-items:center; justify-content:center; }
+.circulo.facil { background-color: #19BC2C; }
+.circulo.medio { background-color: #D49643; }
+.circulo.dificil { background-color: #AF2E17; }
+.nivel-dificultad { display:flex; align-items:center; gap:6px; margin:8px 0; }
+
+/* Chips de categorías */
+.categorias-tags { display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:1rem; }
+.categoria-tag { background:#E1C7A4; color:#5C3C16; padding:.3rem .75rem; border-radius:2rem; font-weight:500; font-size:.875rem; }
+
+/* Imagen principal */
+.imagen-receta { width:100%; border:1px dashed #CACACA; border-radius:1rem; margin-bottom:2rem; display:flex; align-items:center; justify-content:center; gap:.5rem; }
+
+/* Módulos */
+.modulo-detalle { background:#fff; padding:1.5rem; border-radius:1rem; box-shadow:0 0 10px rgba(0,0,0,.05); margin-bottom:2rem; width:100%; }
+.modulo-detalle + .modulo-detalle { margin-top:2rem; }
+
+/* Ingredientes (bullets visibles y en naranja) */
+.modulo-detalle ul { list-style: disc; padding-left: 1.5rem; }
+.modulo-detalle ul li { font-size: 1.25rem; font-weight: 400; }
+.modulo-detalle ul li::marker { color: #E9883A; }
+
+/* Pasos numerados */
+.lista-pasos { counter-reset: paso; list-style:none; padding-left:0; }
+.lista-pasos li { counter-increment: paso; position:relative; padding-left:3rem; margin-bottom:1rem; }
+.lista-pasos li::before {
+  content: counter(paso); position:absolute; left:0; top:0; width:2rem; height:2rem;
+  background:#E9883A; color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;
+}
+
+/* Tips */
+.consejos-verde { background:#EAF8EB; padding:1rem; border-radius:.75rem; margin-top:1.5rem; }
+.consejo-verde { display:flex; align-items:flex-start; gap:.5rem; color:#0B8F2F; font-weight:500; margin-bottom:.5rem; }
+.check-verde { min-width:20px; height:20px; background:#0B8F2F; color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.875rem; font-weight:bold; }
+
+/* Nutrición (responsive y estable con zoom) */
+.nutricional-boxes { display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; }
+.nutricional-box {
+  background:#FDF6E3;
+  padding:.8rem;
+  border-radius:.5rem;
+  text-align:center;
+  flex: 1 1 120px;   /* mínimo 120px, se adapta */
+  max-width: 180px;  /* tope para no estirarse de más */
+}
+
+/* Relacionadas */
+.recetas-contenedor {
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+
+/* Layout superior y responsive */
+.seccion-superior { display:flex; flex-wrap:wrap; flex-direction:column; gap:2rem; margin-top:2rem; }
+@media (min-width: 768px) {
+  .seccion-superior { flex-direction:row; align-items:flex-start; }
+  .seccion-superior > div { flex:1; min-width:300px; }
+}
+
+/* Toast/Notificación */
+.custom-notification {
+  position:fixed; top:50%; left:50%; transform:translate(-50%, -50%);
+  background:#f8d7da; color:#721c24; border:1px solid #f5c6cb; padding:1rem 1.5rem;
+  border-radius:.5rem; box-shadow:0 .5rem 1rem rgba(0,0,0,.15); display:flex; align-items:center; gap:.75rem;
+  z-index:2000; opacity:0; visibility:hidden; transition:opacity .3s ease-in-out, visibility .3s ease-in-out;
+}
+.custom-notification.show { opacity:1; visibility:visible; }
+.notification-icon { font-size:1.5rem; font-weight:bold; color:#dc3545; background:#fff; border-radius:50%; width:30px; height:30px; display:flex; align-items:center; justify-content:center; border:1px solid #dc3545; }
+.notification-text { font-size:1rem; font-weight:500; }
+
