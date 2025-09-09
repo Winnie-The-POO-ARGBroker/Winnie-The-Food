@@ -1,0 +1,29 @@
+:root {
+    --font-outfit: 'Outfit', sans-serif;
+    --font-ovo: 'Ovo', serif;
+  }
+
+.font-outfit {
+    font-family: var(--font-outfit);
+}
+
+.font-ovo {
+    font-family: var(--font-ovo);
+}
+
+body {
+    font-family: var(--font-outfit);
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-slow {
+  animation: spin 6s linear infinite;
+}
