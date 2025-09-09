@@ -1,0 +1,160 @@
+/* ===== Tipografías / colores base ===== */
+.h2-color-1 { color: #1A3C34; }
+
+/* ===== Botones ===== */
+.btn-personalizado {
+  font-weight: 700;
+  font-size: 1.25rem;
+  padding: 0.7rem 1rem;
+  border-radius: 0.25rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+.primario { background-color: #E9883A !important; color: #FFFFFF; }
+.secundario { background-color: #CFC6AE; color: #1A3C34; }
+
+/* sm: 640px */
+@media (min-width: 640px) { .titulo-nueva-receta { font-size: 1.75rem; } }
+/* md: 768px */
+@media (min-width: 768px) { .titulo-nueva-receta { font-size: 2rem; } }
+/* lg: 1024px */
+@media (min-width: 1024px){ .titulo-nueva-receta { font-size: 2.25rem; } }
+/* xl: 1280px */
+@media (min-width: 1280px){ .titulo-nueva-receta { font-size: 2.5rem; } }
+/* 2xl: 1536px */
+@media (min-width: 1536px){ .titulo-nueva-receta { font-size: 2.75rem; } }
+
+/* ===== PROGRESO: centrado, responsive y priorizando los círculos ===== */
+.container-paso{
+  --accent:#E9883A;
+  --accent-soft: rgba(233,136,58,.18);
+  --muted:#E7E1D7;
+
+  /* tamaño de los círculos: mínimo/ideal/máximo */
+  --dot: clamp(28px, 5vw, 52px);
+
+  /* grosor de línea adaptable */
+  --line-thickness: clamp(1px, .4vw, 2px);
+
+  display:flex; align-items:center; justify-content:center;
+  gap: clamp(6px, 2.5vw, 24px);
+  width:100%;
+  max-width:1000px;
+  margin:0 auto 24px auto;
+}
+
+.item-paso{
+  flex: 0 0 auto;                 /* no se encoge (prioridad) */
+  width: var(--dot);
+  height: var(--dot);
+  min-width: var(--dot);
+  min-height: var(--dot);
+  aspect-ratio: 1 / 1;            /* garantiza círculo perfecto */
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  background:#fff;
+  color:var(--accent);
+  font-weight:700;
+  font-size: calc(var(--dot)*0.45);
+  display:flex; align-items:center; justify-content:center;
+  transition: box-shadow .2s ease, background .2s ease, color .2s ease;
+}
+.item-paso p{ margin:0; }
+.item-paso.activo{ background:var(--accent); color:#fff; }     /* pasos completados */
+.item-paso.actual{ box-shadow:0 0 0 4px var(--accent-soft); }  /* paso actual resaltado */
+
+.linea-paso{
+  flex: 1 1 10vw;                         /* se encoge primero antes que los círculos */
+  min-width: clamp(4px, 8vw, 160px);
+  max-width: 220px;
+  height: var(--line-thickness);
+  background: var(--muted);
+  border-radius: 2px;
+  transition: background .2s ease, width .2s ease;
+}
+.linea-paso.activo{ background: var(--accent); }
+
+@media (max-width: 480px){
+  .container-paso{ gap: clamp(4px, 2vw, 12px); }
+  .linea-paso{ min-width: clamp(2px, 7vw, 80px); }
+}
+@media (max-width: 360px){
+  .container-paso{ gap: 4px; }
+  .linea-paso{ min-width: clamp(2px, 6vw, 60px); }
+  .item-paso{ font-size: calc(var(--dot)*0.42); }
+}
+
+/* ===== Card contenedora del paso ===== */
+.container-nueva-receta{
+  width:100%;
+  padding:1rem 2rem;
+  background-color:#fff;
+  border-radius:16px;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+  margin:24px auto;
+}
+
+/* ===== Dropzone imagen ===== */
+.imagen-receta{
+  width:100%;
+  height:260px;
+  border:2px dashed #CFC6AE;
+  border-radius:16px;
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:24px;
+  background-color:#FAF7F2;
+}
+.detalles-imagen{ text-align:center; }
+.detalles-imagen p{ margin:4px 0; }
+
+/* ===== Grillas e inputs (mobile-first) ===== */
+.receta-inputs{ margin-bottom:16px; }
+
+/* 1 columna por defecto; desde md (≥768px) → 2 columnas */
+.dual-inputs{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap:12px;
+}
+@media (min-width: 768px){
+  .dual-inputs{ grid-template-columns: 1fr 1fr; }
+}
+
+.ingrediente-container{ margin-bottom:8px; }
+
+.input-container label{
+  display:block;
+  font-weight:600;
+  margin-bottom:4px;
+  color:#1A3C34;
+}
+.input-container input,
+.input-container select,
+.input-container textarea{
+  width:100%;
+  padding:10px 12px;
+  border-radius:8px;
+  border:1px solid #CFC6AE;
+  outline:none;
+  background:#fff;
+}
+.input-container textarea{ resize:vertical; }
+
+/* ===== Separador ===== */
+.linea-dashed{
+  border-top: 2px dashed #cacaca;
+  height:0;
+  width:100%;
+  margin:20px 0;
+}
+
+/* ===== Navegación inferior ===== */
+.receta-btn-avance{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+

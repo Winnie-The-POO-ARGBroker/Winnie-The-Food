@@ -1,0 +1,10 @@
+<section class="container m-10 flex flex-column gap-6">
+  <h2 class="titulo-seccion">Todas las Recetas</h2>
+  <app-featured [recipes]="featuredRecipesArray"></app-featured>
+
+  <div class="boton-container">
+    <button class="btn-personalizado primario" (click)="verMasRecetas()">
+      Ver Más Recetas
+    </button>
+  </div>
+</section>

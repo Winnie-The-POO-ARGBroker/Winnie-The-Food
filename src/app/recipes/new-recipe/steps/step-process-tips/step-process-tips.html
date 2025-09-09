@@ -1,0 +1,50 @@
+<div class="container-nueva-receta">
+  <h4 class="h2-color-1">Pasos</h4>
+
+  <ng-container *ngFor="let s of store.steps(); let i = index">
+    <div class="receta-inputs ingrediente-container">
+      <div class="receta-inputs">
+        <div class="input-container">
+          <label>Nombre del paso</label>
+          <input type="text" [value]="s.title" (input)="editStep(i, { title: $any($event.target).value })">
+        </div>
+        <div class="input-container">
+          <label>Descripcion del paso</label>
+          <textarea rows="3" placeholder="Describe tu paso"
+            [value]="s.description" (input)="editStep(i, { description: $any($event.target).value })"></textarea>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <button class="btn-personalizado primario" type="button" (click)="addStep()">Agregar paso</button>
+
+  <div class="linea-dashed"></div>
+
+  <h4 class="h2-color-1">Consejos utiles</h4>
+
+  <ng-container *ngFor="let t of store.tips(); let i = index">
+    <div class="receta-inputs ingrediente-container">
+      <div class="receta-inputs">
+        <div class="input-container">
+          <label>Nombre del consejo</label>
+          <input type="text" [value]="t.title" (input)="editTip(i, { title: $any($event.target).value })">
+        </div>
+        <div class="input-container">
+          <label>Descripcion del consejo</label>
+          <textarea rows="3" placeholder="Describe tu consejo"
+            [value]="t.description" (input)="editTip(i, { description: $any($event.target).value })"></textarea>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <button class="btn-personalizado primario" type="button" (click)="addTip()">Agregar consejo</button>
+
+  <div class="linea-dashed"></div>
+
+  <div class="receta-btn-avance">
+    <a routerLink="../step-2" class="btn-personalizado secundario">Anterior</a>
+    <a routerLink="/detail-recipe" class="btn-personalizado primario">Siguiente</a>
+  </div>
+</div>
