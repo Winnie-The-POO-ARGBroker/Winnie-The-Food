@@ -1,18 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-  <app-menu></app-menu>
-
-  <!-- Contenido de la página -->
-
-<main class="container">
-  <section class="card-registro">
-    <h2 class="h2-color-1">Winnie The Food</h2>
-    <p>Creá tu cuenta</p>
+<main class="container min-h-dvh flex items-center justify-center px-4 m-10">
+  <section class="card-registro w-full max-w-[600px] min-w-[300px] border-[#eca66c9a] shadow-md border-4">
+    <h2 class="titulo-seccion">Winnie The Food</h2>
+    <p class="font-bold">Creá tu cuenta</p>
 
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <!-- Nombre -->
@@ -92,7 +81,7 @@
       <div class="checkbox-terminos">
         <label>
           <input type="checkbox" formControlName="terminos" />
-          <span>Acepto los <a href="#">términos y condiciones</a></span>
+          <span>Acepto los <a href="#"  class="font-bold text-[#eca66c] ">términos y condiciones</a></span>
         </label>
         @if(registerForm.get('terminos')?.touched && registerForm.get('terminos')?.invalid) {
           <small class="error">Debes aceptar los términos</small>
@@ -103,7 +92,7 @@
       <div>
         <button
           type="submit"
-          class="btn primario"
+          class="btn-personalizado primario"
           [disabled]="registerForm.invalid">
           Registrarme
         </button>
@@ -116,10 +105,3 @@
     </form>
   </section>
 </main>
-
-
-  <!-- Pie de página -->
-  <app-footer></app-footer>
-</body>
-</html>
-

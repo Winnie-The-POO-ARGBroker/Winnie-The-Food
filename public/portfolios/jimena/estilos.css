@@ -1,0 +1,105 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f6fafd;
+  color: #444;
+  margin: 0;
+  padding: 0;
+}
+
+.encabezado {
+  background-color: #e9f4fb;
+  border-bottom: 1px solid #d4eaf7;
+}
+
+.foto-perfil {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #d4eaf7;
+}
+
+.titulo-principal {
+  font-size: 2.4rem;
+  color: #3388aa;
+  font-weight: bold;
+}
+
+.subtitulo {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.titulo-seccion {
+  font-size: 1.8rem;
+  color: #3388aa;
+  font-weight: 600;
+}
+
+.texto-seccion {
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 1rem;
+}
+
+.tarjeta-proyecto {
+  border-radius: 1rem;
+  background-color: #ffffff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tarjeta-proyecto:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.pie-de-pagina {
+  background-color: #eaf4fa;
+  color: #777;
+  font-size: 0.9rem;
+}
+
+.lista-educacion {
+  list-style: none;
+  padding: 0;
+  font-size: 1.05rem;
+  color: #555;
+}
+
+.lista-educacion li {
+  margin-bottom: 10px;
+}
+
+/* Contacto */
+.boton-contacto {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px;
+  font-size: 1rem;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  min-width: 260px;
+  font-weight: 500;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.boton-contacto.email {
+  background-color: #ffffff;
+  color: #3388aa;
+  border-color: #3388aa;
+}
+
+.boton-contacto.github {
+  background-color: #3388aa;
+  color: #ffffff;
+  border-color: #3388aa;
+}
+
+.boton-contacto:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+  opacity: 0.95;
+}

@@ -1,9 +1,7 @@
-<app-menu></app-menu>
-
-<main class="container">
-  <section class="card-login">
-    <h2 class="h2-color-1">Winnie The Food</h2>
-    <p>Bienvenido de nuevo</p>
+<main class="container min-h-dvh flex items-center justify-center px-4 m-10">
+  <section class="card-login w-full max-w-[600px] min-w-[300px] border-[#eca66c9a] shadow-md border-4">
+    <h2 class="titulo-seccion">Winnie The Food</h2>
+    <p class="font-bold">Bienvenido de nuevo</p>
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <!-- Email -->
@@ -50,7 +48,7 @@
 
       <!-- Botón -->
       <div>
-        <button type="submit" class="btn primario" [disabled]="loginForm.invalid">
+        <button type="submit" class="btn-personalizado primario" [disabled]="loginForm.invalid">
           Iniciar Sesión
         </button>
       </div>
@@ -62,5 +60,3 @@
     </form>
   </section>
 </main>
-
-<app-footer></app-footer>
