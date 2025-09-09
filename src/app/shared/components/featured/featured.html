@@ -1,0 +1,20 @@
+
+  <div class="recetas-contenedor">
+    <a *ngFor="let recipe of recipes"
+       [href]="recipe.enlace"
+       class="card receta text-decoration-none">
+
+      <img [src]="recipe.imagen" class="card-img-top" [alt]="recipe.titulo">
+
+      <div class="tiempo-receta">{{ recipe.tiempo }}</div>
+
+      <div class="card-body">
+        <h3 class="h2-color-1">{{ recipe.titulo }}</h3>
+        <p>{{ recipe.descripcion }}</p>
+        <div class="nivel-dificultad">
+          <div class="circulo" [ngClass]="recipe.dificultad"></div>
+          <span>{{ recipe.dificultad | titlecase }}</span>
+        </div>
+      </div>
+    </a>
+  </div>

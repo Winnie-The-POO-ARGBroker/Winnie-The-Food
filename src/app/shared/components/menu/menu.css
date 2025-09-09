@@ -1,0 +1,41 @@
+/* Estilos generales para navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 0;
+    width: 100%;
+}
+
+.navbar-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.navbar-content.pages{
+    display: flex;
+    padding: 0 1rem;
+    gap: 1rem;
+}
+
+/* Barra de navegación fija */
+nav {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: #FDF6E3;
+    /* Fondo claro */
+}
+
+/* Estilos del texto en la navbar */
+.nav-texto {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #403019;
+    text-decoration: none;
+    /* Color oscuro para los enlaces */
+}

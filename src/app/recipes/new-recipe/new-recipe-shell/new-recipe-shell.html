@@ -1,0 +1,22 @@
+<app-menu></app-menu>
+<main class="container gap-2 flex flex-column mt-10">
+  <h2 class="h2-color-1 titulo-nueva-receta">Cargar nueva receta</h2>
+
+  <div class="container container-paso">
+    <div class="item-paso" [class.activo]="activeStep >= 1" [class.actual]="activeStep === 1"><p>1</p></div>
+    <div class="linea-paso"  [class.activo]="activeStep >= 2"></div>
+
+    <div class="item-paso" [class.activo]="activeStep >= 2" [class.actual]="activeStep === 2"><p>2</p></div>
+    <div class="linea-paso"  [class.activo]="activeStep >= 3"></div>
+
+    <div class="item-paso" [class.activo]="activeStep >= 3" [class.actual]="activeStep === 3"><p>3</p></div>
+    <div class="linea-paso"  [class.activo]="activeStep >= 4"></div>
+
+    <div class="item-paso" [class.activo]="activeStep >= 4" [class.actual]="activeStep === 4"><p>4</p></div>
+  </div>
+
+
+
+  <router-outlet></router-outlet>
+</main>
+<app-footer></app-footer>
