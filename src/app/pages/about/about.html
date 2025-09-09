@@ -1,0 +1,56 @@
+<header>
+    <div class="header-text">
+        <h1>Sobre nosotros</h1>
+        <p>Conoce un poco más del proyecto y de sus desarrolladores</p>
+    </div>
+</header>
+<section class="container">
+    <section class="descripcion">
+        <p>
+          Winnie The Food es un proyecto desarrollado como parte de la certificación Full Stack del Instituto Superior
+          Politécnico Córdoba (ISPC), con el objetivo de aplicar los conocimientos adquiridos en clases y transformarlos en
+          una solución real.
+        </p>
+        <p>
+          A lo largo de la cursada en el ISPC trabajamos sobre fundamentos sólidos de programación, estructuras de datos,
+          desarrollo web front-end y back-end, bases de datos, control de versiones con Git, diseño UX/UI, accesibilidad,
+          pruebas y metodologías ágiles. Este proyecto es el espacio donde integramos todo: desde la maquetación y los
+          componentes (Angular), hasta el consumo de APIs, la organización del código, la documentación y la puesta en
+          producción.
+        </p>
+        <p>
+          La idea nace de una necesidad concreta de quienes disfrutamos cocinar y queremos explorar nuevos sabores de forma
+          creativa, saludable y práctica. Winnie The Food busca conectar los ingredientes que tenemos en casa con recetas
+          posibles y deliciosas, pero también convertirse en un laboratorio de aprendizaje: diseñamos interfaces pensando en
+          el usuario, probamos distintos modelos de datos y practicamos buenas prácticas como componentización, manejo de
+          estado, patrones de diseño y testing.
+        </p>
+        <p>
+          Más allá de presentar recetas, el proyecto potencia nuestro aprendizaje colaborativo. Trabajamos con
+          <em>issues</em>, ramas y <em>pull requests</em>; planificamos con tableros y sprints; hacemos revisiones de código y
+          retrospectivas para mejorar continuamente. Cada iteración nos obliga a investigar, resolver problemas, cuidar la
+          calidad, escribir documentación clara y comunicar decisiones técnicas, habilidades clave para nuestro desarrollo
+          profesional.
+        </p>
+        <p>
+          Gracias por visitar Winnie The Food. Este proyecto es el resultado del recorrido formativo del ISPC y de muchas
+          horas de práctica en equipo. ¡Esperamos que cocines, disfrutes y aprendas tanto como nosotros al crearlo!
+        </p>
+    </section>
+
+<!-- Sección Desarrolladores -->
+    <section class="desarrolladores">
+        <h2 class="titulo-seccion">Desarrolladores</h2>
+        <div class="grid-desarrolladores">
+                <app-card-dev
+                  *ngFor="let d of developers; trackBy: trackByNombre"
+                  [nombre]="d.nombre"
+                  [rol]="d.rol"
+                  [imagen]="d.imagen"
+                  [href]="d.href"
+                  [target]="d.target">
+                </app-card-dev>
+        </div>
+    </section>
+</section>
+
