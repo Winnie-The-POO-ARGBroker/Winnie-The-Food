@@ -1,13 +1,13 @@
 import { Component, signal } from '@angular/core';
-import { Menu } from '../../shared/components/menu/menu';
-import { Footer } from '../../shared/components/footer/footer';
 import { TitleCasePipe } from '@angular/common';
+import { Featured } from '../../shared/components/featured/featured';
+
 
 type Difficulty = 'facil' | 'medio' | 'dificil';
 
-interface Nutrition { label: string; value: number | string; }
-interface RelatedRecipe { title: string; time: string; difficulty: Difficulty; imageUrl: string; }
-interface Recipe {
+export interface Nutrition { label: string; value: number | string; }
+export interface RelatedRecipe { titulo: string; descripcion: string; tiempo: string; dificultad: Difficulty; imagen: string; }
+export interface Recipe {
   title: string;
   time: string;
   servings: string;
@@ -24,7 +24,7 @@ interface Recipe {
 @Component({
   selector: 'app-detail-recipe',
   standalone: true,
-  imports: [TitleCasePipe, Menu, Footer],
+  imports: [TitleCasePipe, Featured],
   styleUrl: './detail-recipe.css',
   templateUrl: './detail-recipe.html',
 })
@@ -72,9 +72,9 @@ export class DetailRecipe {
       'Ideal para freezar en porciones.',
     ],
     related: [
-      { title: 'Tarta de calabaza', time: '⏱ 45 min', difficulty: 'medio', imageUrl: '/img-recipe.webp' },
-      { title: 'Tarta de calabaza', time: '⏱ 45 min', difficulty: 'medio', imageUrl: '/img-recipe.webp' },
-      { title: 'Tarta de calabaza', time: '⏱ 45 min', difficulty: 'medio', imageUrl: '/img-recipe.webp' },
+      { titulo: 'Quiche Lorraine', tiempo: '40 min', dificultad: 'medio', imagen: '/img-recipe-1.webp', descripcion: 'Tarta salada francesa con panceta y queso.' },
+      { titulo: 'Tarta de Jamón y Queso', tiempo: '35 min', dificultad: 'facil', imagen: '/img-recipe-2.webp', descripcion: 'Tarta salada francesa con panceta y queso.' },
+      { titulo: 'Tarta de Cebolla Caramelizada', tiempo: '50 min', dificultad: 'dificil', imagen: '/img-recipe-3.webp', descripcion: 'Tarta salada francesa con panceta y queso.' },
     ],
   });
 

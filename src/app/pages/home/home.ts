@@ -1,14 +1,12 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Menu } from '../../shared/components/menu/menu';
-import { Footer } from '../../shared/components/footer/footer';
 import { Categories } from '../../shared/components/categories/categories';
 import { Featured } from '../../shared/components/featured/featured';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ Menu, Footer, Categories, CommonModule, Featured],
+  imports: [ Categories, CommonModule, Featured],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
