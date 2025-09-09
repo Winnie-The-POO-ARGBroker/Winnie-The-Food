@@ -566,6 +566,8 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
 }
 
 .titulo-nueva-receta::after {
@@ -610,10 +612,14 @@ footer {
     height: 50px;
     border-radius: 50%;
     display: flex;
-    align-items: center;
+    align-items: end;
     justify-content: center;
     background-color: #E1C7A4;
     color: #ffffff;
+}
+
+.item-paso p {
+    margin: auto;
 }
 
 .item-paso.activo {
@@ -629,6 +635,7 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: .5rem;
 }
 
 .detalles-imagen {
@@ -1159,6 +1166,7 @@ select {
     color: white;
     flex: 1;
     text-align: center;
+    text-decoration: none;
 }
 
 .btn-editar {
@@ -1225,14 +1233,15 @@ select {
     border: 1px solid #ddd;
     border-radius: 10px;
     width: 150px;
-    height: 200px;
+    height: 250px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     padding: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
+    text-decoration: none;
 }
 
 .card-dev img {

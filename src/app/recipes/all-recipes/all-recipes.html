@@ -1,19 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-  <app-menu></app-menu>
+<section class="container m-10 flex flex-column gap-6">
+  <h2 class="titulo-seccion">Todas las Recetas</h2>
+  <app-featured [recipes]="featuredRecipesArray"></app-featured>
 
-  <!-- Contenido de la página -->
-
-  <section class="container">
-    <h1>Contenido</h1>
-  </section>
-
-  <!-- Pie de página -->
-  <app-footer></app-footer>
-</body>
-</html>
+  <div class="boton-container">
+    <button class="btn-personalizado primario" (click)="verMasRecetas()">
+      Ver Más Recetas
+    </button>
+  </div>
+</section>
