@@ -10,6 +10,7 @@ import { NewRecipeShell } from './recipes/new-recipe/new-recipe-shell/new-recipe
 import { StepBasicInfo } from './recipes/new-recipe/steps/step-basic-info/step-basic-info';
 import { StepIngredients } from './recipes/new-recipe/steps/step-ingredients/step-ingredients';
 import { StepProcessTips } from './recipes/new-recipe/steps/step-process-tips/step-process-tips';
+import { EmptyState } from './shared/components/empty-state/empty-state.js';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -18,7 +19,10 @@ export const routes: Routes = [
   { path: 'register', component: Register },
   { path: 'all-recipes', component: AllRecipes },
   { path: 'dashboard-recipes', component: DashboardRecipes },
-  { path: 'detail-recipe', component: DetailRecipe },
+
+
+  { path: 'detail-recipe/:id', component: DetailRecipe },
+
   {
     path: 'new-recipe',
     component: NewRecipeShell,
@@ -28,6 +32,8 @@ export const routes: Routes = [
       { path: 'step-2', component: StepIngredients, title: 'Nueva receta · Paso 2' },
       { path: 'step-3', component: StepProcessTips, title: 'Nueva receta · Paso 3' }
     ]
-  }
-];
+  },
 
+  // Ruta comodín para manejar rutas no definidas (404) Que tengan un mensaje usando empty-state
+  { path: '**', component: EmptyState, title: 'Página no encontrada' }
+];
