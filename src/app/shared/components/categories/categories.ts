@@ -1,13 +1,15 @@
 import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { Categoria } from '../../../models/catergories-models';
+import { EmptyState } from '../empty-state/empty-state';
 
 @Component({
   selector: 'app-categories',
   standalone: true,
-  imports: [CommonModule],
+  imports: [RouterLink, EmptyState],
   templateUrl: './categories.html',
   styleUrls: ['./categories.css']
 })
 export class Categories {
-   @Input() categories: any[] = [];
+  @Input({ required: true }) categories: Categoria[] = [];
 }
