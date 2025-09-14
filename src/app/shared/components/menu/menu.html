@@ -1,44 +1,72 @@
 <nav>
   <div class="container navbar py-3">
 
-      <!-- IZQUIERDA -->
-      <div class="navbar-content">
-          <img src="/logo.webp" alt="Logo" width="40" height="40">
-          <span class="nav-texto">Winnie The Food</span>
+    <!-- IZQUIERDA -->
+    <div class="navbar-content">
+      <img src="/logo.webp" alt="Logo" width="40" height="40">
+      <span class="nav-texto">Winnie The Food</span>
+    </div>
+
+    <!-- PÁGINAS (DESKTOP) -->
+    <div class="d-none d-lg-flex navbar-content pages">
+      <a routerLink="/" class="nav-texto">Inicio</a>
+      <a routerLink="/all-recipes" class="nav-texto">Recetas</a>
+      <a routerLink="/about" class="nav-texto">Sobre Nosotros</a>
+    </div>
+
+    <!-- DERECHA (DESKTOP) -->
+    <div class="d-none d-lg-flex navbar-content">
+      @if (!isLoggedIn()) {
+        <a routerLink="/register" class="btn-personalizado secundario">Registrarme</a>
+        <a routerLink="/login" class="btn-personalizado primario">Iniciar sesión</a>
+      } @else {
+        <span class="nav-texto me-3">Hola, {{ userName() }}</span>
+        <a routerLink="/dashboard-recipes" class="btn-personalizado secundario me-2">Dashboard</a>
+        <button class="btn-personalizado primario" (click)="logout()">Cerrar sesión</button>
+      }
+    </div>
+
+    <!-- BOTÓN HAMBURGUESA (MÓVIL) -->
+    <button
+      class="btn d-lg-none d-xs-flex ms-auto"
+      type="button"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#navbarMenu"
+      aria-controls="navbarMenu">
+      <i class="bi bi-list fs-2"></i>
+    </button>
+
+    <!-- MENÚ LATERAL (MÓVIL) -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarMenu" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
       </div>
 
-      <!-- PAGINAS -->
-      <div class="d-none d-lg-flex navbar-content pages">
-          <a href="/" class="nav-texto">Inicio</a>
-          <a href="/all-recipes" class="nav-texto">Recetas</a>
-          <a href="/about" class="nav-texto">Sobre Nosotros</a>
-      </div>
+      <div class="offcanvas-body d-flex p-8 flex-column">
+        <!-- Links comunes -->
+        <a routerLink="/" class="nav-texto mb-2" data-bs-dismiss="offcanvas">Inicio</a>
+        <a routerLink="/all-recipes" class="nav-texto mb-2" data-bs-dismiss="offcanvas">Recetas</a>
+        <a routerLink="/about" class="nav-texto mb-2" data-bs-dismiss="offcanvas">Sobre Nosotros</a>
 
-      <!-- DERECHA -->
-      <div class="d-none d-lg-flex navbar-content">
-          <a href="/register" class="btn-personalizado secundario">Registrarme</a>
-          <a href="/login" class="btn-personalizado primario">Iniciar sesión</a>
+        <!-- Acciones según sesión -->
+        @if (!isLoggedIn()) {
+          <a routerLink="/register" class="btn-personalizado secundario mb-2" data-bs-dismiss="offcanvas">
+            Registrarme
+          </a>
+          <a routerLink="/login" class="btn-personalizado primario" data-bs-dismiss="offcanvas">
+            Iniciar sesión
+          </a>
+        } @else {
+          <a routerLink="/dashboard-recipes" class="btn-personalizado secundario mb-2 text-center">
+            Dashboard
+          </a>
+          <button class="btn-personalizado primario" data-bs-dismiss="offcanvas" (click)="logout()">
+            Cerrar sesión
+          </button>
+        }
       </div>
-
-      <!-- BOTÓN HAMBURGUESA -->
-      <button class="btn d-lg-none d-xs-flex ms-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarMenu" aria-controls="navbarMenu">
-          <i class="bi bi-list fs-2"></i>
-      </button>
-
-      <!-- MENÚ LATERAL -->
-      <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarMenu" aria-labelledby="offcanvasNavbarLabel">
-          <div class="offcanvas-header">
-              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
-          </div>
-          <div class="offcanvas-body d-flex p-8 flex-column">
-              <a href="/" class="nav-texto mb-2">Inicio</a>
-              <a href="/all-recipes" class="nav-texto mb-2">Recetas</a>
-              <a href="/about" class="nav-texto mb-2">Sobre Nosotros</a>
-              <a href="/register" class="btn-personalizado secundario mb-2">Registrarme</a>
-              <a href="/login" class="btn-personalizado primario">Iniciar sesión</a>
-          </div>
-      </div>
+    </div>
 
   </div>
 </nav>

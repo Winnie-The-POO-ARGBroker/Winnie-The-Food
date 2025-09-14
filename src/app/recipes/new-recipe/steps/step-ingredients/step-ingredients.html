@@ -1,31 +1,50 @@
 <div class="container-nueva-receta">
   <h4 class="h2-color-1">Ingredientes</h4>
 
-  <ng-container *ngFor="let ing of store.ingredients(); let i = index">
+  <ng-container *ngFor="let ing of store.ingredients(); let i = index; trackBy: trackByIng">
     <div class="receta-inputs ingrediente-container">
       <div class="input-container">
-        <label>Ingrediente</label>
-        <input type="text" [value]="ing.name" (input)="edit(i, { name: $any($event.target).value })">
+        <input
+          type="text"
+          placeholder="Ingrediente"
+          [value]="ing.name"
+          (input)="editIngName(i, $event)">
       </div>
+
       <div class="dual-inputs">
         <div class="input-container">
-          <label>Cantidad</label>
-          <input type="text" [value]="ing.qty" (input)="edit(i, { qty: $any($event.target).value })">
+          <input
+            type="text"
+            placeholder="Cantidad"
+            [value]="ing.qty"
+            (input)="editIngQty(i, $event)">
         </div>
+
         <div class="input-container">
-          <label>Unidad</label>
-          <select [value]="ing.unit" (change)="edit(i, { unit: $any($event.target).value })">
-            <option value="">—</option>
+          <select
+            [value]="ing.unit"
+            (change)="editIngUnit(i, $event)">
+            <option value="">Unidad</option>
             <option value="g">g</option>
             <option value="kg">kg</option>
             <option value="ml">ml</option>
+            <option value="l">l</option>
+            <option value="cda">cda</option>
+            <option value="cdta">cdta</option>
+            <option value="u">u</option>
           </select>
         </div>
       </div>
+
+      <button type="button" class="btn-personalizado secundario btn-remove" (click)="remove(i)">
+        Quitar
+      </button>
     </div>
   </ng-container>
 
-  <button class="btn-personalizado primario" type="button" (click)="add()">Agregar ingrediente</button>
+  <button class="btn-personalizado secundario" type="button" (click)="add()">
+    + Agregar ingrediente
+  </button>
 
   <div class="linea-dashed"></div>
 

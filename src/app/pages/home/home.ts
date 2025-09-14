@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { RecipesService, FeaturedCard } from '../../services/recipes.service';
-import { Categoria } from '../../models/catergories-models';
+import { Categoria } from '../../models/categories-models';
 
 import { Featured } from '../../shared/components/featured/featured';
 import { Categories } from '../../shared/components/categories/categories';

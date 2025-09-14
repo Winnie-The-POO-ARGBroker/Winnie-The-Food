@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Categoria } from '../../../models/catergories-models';
+import { Categoria } from '../../../models/categories-models';
 import { EmptyState } from '../empty-state/empty-state';
 
 @Component({
