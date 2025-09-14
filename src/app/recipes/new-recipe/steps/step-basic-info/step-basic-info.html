@@ -1,26 +1,31 @@
 <div class="container-nueva-receta">
   <h4 class="h2-color-1">Informacion basica</h4>
 
+
   <div class="imagen-receta">
-    <div class="detalles-imagen">
-      <p>Deja una foto de tu receta</p>
-      <p>o</p>
-      <label class="btn-personalizado secundario">
-        Cargar imagen
-        <input type="file" accept="image/png,image/jpeg" (change)="onFile($event)" hidden>
-      </label>
-      <p>PNG, JPG o JPEG (Max 5MB)</p>
-    </div>
+    @if (store.imageDataUrl()) {
+      <img
+        [src]="store.imageDataUrl()"
+        alt="Previsualización"
+        style="max-width:100%; max-height:100%; object-fit:cover; border-radius:12px;"
+      />
+    } @else {
+      <div class="detalles-imagen">
+        <p>Deja una foto de tu receta</p>
+        <p>o</p>
+        <label class="btn-personalizado secundario">
+          Cargar imagen
+          <input type="file" accept="image/png,image/jpeg" (change)="onFile($event)" hidden>
+        </label>
+        <p>PNG, JPG o JPEG (Max 5MB)</p>
+      </div>
+    }
   </div>
 
   <div class="receta-inputs">
     <div class="input-container">
       <label for="nombre-receta">Nombre de la receta</label>
-      <input
-        id="nombre-receta"
-        type="text"
-        [value]="store.name()"
-        (input)="updateName($event)">
+      <input id="nombre-receta" type="text" [value]="store.name()" (input)="updateName($event)">
     </div>
 
     <div class="input-container">
@@ -37,27 +42,19 @@
   <div class="receta-inputs dual-inputs">
     <div class="input-container">
       <label for="categoria">Categoria</label>
-      <select
-        id="categoria"
-        [value]="store.category()"
-        (change)="updateCategory($event)">
-        <option value="desayuno">Desayuno</option>
-        <option value="almuerzo">Almuerzo</option>
-        <option value="cena">Cena</option>
+      <select id="categoria" [value]="store.category()" (change)="updateCategory($event)">
+        <option value="entrada">Entrada</option>
+        <option value="plato principal">Plato principal</option>
         <option value="postre">Postre</option>
-        <option value="snack">Snack</option>
         <option value="bebida">Bebida</option>
+        <option value="vegetariano">Vegetariano</option>
         <option value="otros">Otros</option>
       </select>
     </div>
 
     <div class="input-container">
       <label for="dificultad">Dificultad</label>
-      <select
-        id="dificultad"
-        [value]="store.difficulty()
-        "
-        (change)="updateDifficulty($event)">
+      <select id="dificultad" [value]="store.difficulty()" (change)="updateDifficulty($event)">
         <option value="facil">Facil</option>
         <option value="media">Media</option>
         <option value="dificil">Dificil</option>
@@ -68,45 +65,67 @@
   <div class="receta-inputs dual-inputs">
     <div class="input-container">
       <label for="tiempo-preparacion">Tiempo de preparacion (en min)</label>
-      <input
-        id="tiempo-preparacion"
-        type="text"
-        [value]="store.prepMinutes()"
-        (input)="updatePrepMinutes($event)">
+      <input id="tiempo-preparacion" type="text" [value]="store.prepMinutes()" (input)="updatePrepMinutes($event)">
     </div>
     <div class="input-container">
       <label for="tiempo-coccion">Tiempo de coccion (en min)</label>
-      <input
-        id="tiempo-coccion"
-        type="text"
-        [value]="store.cookMinutes()"
-        (input)="updateCookMinutes($event)">
+      <input id="tiempo-coccion" type="text" [value]="store.cookMinutes()" (input)="updateCookMinutes($event)">
     </div>
   </div>
 
   <div class="receta-inputs dual-inputs">
     <div class="input-container">
       <label for="porciones">Porciones</label>
-      <input
-        id="porciones"
-        type="number"
-        [value]="store.servings() ?? ''"
-        (input)="updateServings($event)">
+      <input id="porciones" type="number" [value]="store.servings() ?? ''" (input)="updateServings($event)">
     </div>
     <div class="input-container">
-      <label for="etiquetas">Etiquetas</label>
-      <input
-        id="etiquetas"
-        type="text"
-        [value]="store.tags()"
-        (input)="updateTags($event)">
+      <label for="etiquetas">Etiquetas (separadas por coma)</label>
+      <input id="etiquetas" type="text" [value]="store.tags()" (input)="updateTags($event)">
     </div>
   </div>
 
+  <!-- ================== NUTRICIÓN EN STEP-1 ================== -->
   <div class="linea-dashed"></div>
+  <h4 class="h2-color-1">Información nutricional</h4>
 
+  <!-- Encabezados (solo en md+) -->
+  <div class="nutri-head">
+    <div>Nombre</div>
+    <div>Cantidad</div>
+    <div>Unidad</div>
+    <div class="nutri-head-actions">Acciones</div>
+  </div>
+
+  <div class="nutri-grid">
+    @for (n of store.nutritionItems(); track n.id; let i = $index) {
+      <div class="nutri-row">
+        <div class="nutri-name">
+          <input type="text" placeholder="Calorías, Proteína, etc." [value]="n.label" (input)="editNutLabel(i, $event)">
+        </div>
+
+        <div class="nutri-amount">
+          <input type="text" inputmode="decimal" placeholder="Ej: 200" [value]="n.value" (input)="editNutValue(i, $event)">
+        </div>
+
+        <div class="nutri-unit">
+          <input type="text" placeholder="kcal, g, mg..." [value]="n.unit" (input)="editNutUnit(i, $event)">
+        </div>
+
+        <div class="nutri-actions">
+          <button class="btn-personalizado secundario btn-compacto" type="button" (click)="removeNutrition(i)">Quitar</button>
+        </div>
+      </div>
+    }
+  </div>
+
+  <button class="btn-personalizado secundario nutri-add" type="button" (click)="addNutrition()">
+    + Agregar valor nutricional
+  </button>
+
+  <!-- ================== NAV ================== -->
+  <div class="linea-dashed"></div>
   <div class="receta-btn-avance">
     <a routerLink="/" class="btn-personalizado secundario">Cancelar</a>
-    <a routerLink="../step-2" class="btn-personalizado primario">Siguiente</a>
+    <a routerLink="../step-2" class="btn-personalizado primario" (click)="store.persistDraft()">Siguiente</a>
   </div>
 </div>
