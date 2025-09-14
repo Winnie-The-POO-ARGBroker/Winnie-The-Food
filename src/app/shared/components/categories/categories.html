@@ -1,6 +1,12 @@
 <div class="categorias-contenedor">
-  <a *ngFor="let cat of categories" [href]="cat.enlace" class="categoria">
-    <img [src]="cat.imagen" [alt]="cat.nombre">
-    <span>{{ cat.nombre }}</span>
-  </a>
+  @for (cat of categories; track cat.id) {
+    <a class="categoria text-decoration-none"
+       [routerLink]="['/all-recipes']"
+       [queryParams]="{ categoria: cat.nombre }">
+      <img [src]="cat.imagen" [alt]="cat.nombre">
+      <span>{{ cat.nombre }}</span>
+    </a>
+  } @empty {
+    <app-empty-state message="No hay categorÃas disponibles en este momento."></app-empty-state>
+  }
 </div>
