@@ -29,7 +29,7 @@ export class DashboardRecipes {
 
   private toCard(r: Receta): FeaturedCard {
     return {
-      id: r.id,
+      id: String(r.id), // id como string para poder manejar 'ls-...'
       titulo: r.nombre,
       descripcion: r.descripcion,
       imagen: r.imageUrl,
@@ -53,16 +53,18 @@ export class DashboardRecipes {
     });
   }
 
-  editar(id?: number) {
-    if (!id) return;
-    this.router.navigate(['/new-recipe'], { queryParams: { edit: id } });
+  editar(id?: string | number) {
+    if (id == null) return;
+    this.router.navigate(['/new-recipe'], { queryParams: { edit: String(id) } });
   }
 
-  eliminar(id?: number) {
-    if (!id) return;
-    if (!confirm('Â¿Eliminar esta receta?')) return;
-    this.recipes.deleteReceta(id).subscribe({
-      next: () => this.cards.update(arr => arr.filter(c => c.id !== id)),
+  eliminar(id?: string | number) {
+    if (id == null) return;
+    if (!confirm('¿Eliminar esta receta?')) return;
+
+    const sid = String(id); // <- convertir a string
+    this.recipes.deleteReceta(sid).subscribe({
+      next: () => this.cards.update(arr => arr.filter(c => String(c.id) !== sid)),
       error: e => { console.error(e); alert('No se pudo eliminar la receta.'); }
     });
   }

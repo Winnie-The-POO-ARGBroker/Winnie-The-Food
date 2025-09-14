@@ -11,6 +11,7 @@ import { StepBasicInfo } from './recipes/new-recipe/steps/step-basic-info/step-b
 import { StepIngredients } from './recipes/new-recipe/steps/step-ingredients/step-ingredients';
 import { StepProcessTips } from './recipes/new-recipe/steps/step-process-tips/step-process-tips';
 import { EmptyState } from './shared/components/empty-state/empty-state.js';
+import { authGuard } from './auth/auth.guard.js';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -28,9 +29,9 @@ export const routes: Routes = [
     component: NewRecipeShell,
     children: [
       { path: '', redirectTo: 'step-1', pathMatch: 'full' },
-      { path: 'step-1', component: StepBasicInfo, title: 'Nueva receta · Paso 1' },
-      { path: 'step-2', component: StepIngredients, title: 'Nueva receta · Paso 2' },
-      { path: 'step-3', component: StepProcessTips, title: 'Nueva receta · Paso 3' }
+      { path: 'step-1', component: StepBasicInfo, canActivate: [authGuard], title: 'Nueva receta · Paso 1' },
+      { path: 'step-2', component: StepIngredients, canActivate: [authGuard], title: 'Nueva receta · Paso 2' },
+      { path: 'step-3', component: StepProcessTips, canActivate: [authGuard], title: 'Nueva receta · Paso 3' }
     ]
   },
 
