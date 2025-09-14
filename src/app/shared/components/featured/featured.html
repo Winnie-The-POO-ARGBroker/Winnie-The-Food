@@ -1,19 +1,95 @@
 <div class="recetas-contenedor">
-  <a *ngFor="let recipe of recipes"
-      [href]="recipe.enlace"
-      class="card receta text-decoration-none">
+  @for (recipe of recipes; track recipe.titulo) {
 
-    <img [src]="recipe.imagen" class="card-img-top" [alt]="recipe.titulo">
+    @if (actionsTemplate) {
 
-    <div class="tiempo-receta">{{ recipe.tiempo }}</div>
+      <div class="featured-item">
+        @if (recipe.id || (recipe.enlace && recipe.enlace !== '#')) {
+          <a class="card receta text-decoration-none"
+             [routerLink]="recipe.id ? ['/detail-recipe', recipe.id] : recipe.enlace">
+            <img [src]="recipe.imagen" class="card-img-top" [alt]="recipe.titulo">
 
-    <div class="card-body">
-      <h3 class="h2-color-1">{{ recipe.titulo }}</h3>
-      <p>{{ recipe.descripcion }}</p>
-      <div class="nivel-dificultad">
-        <div class="circulo" [ngClass]="recipe.dificultad"></div>
-        <span>{{ recipe.dificultad | titlecase }}</span>
+            <div class="tiempo-receta">{{ recipe.tiempo }}</div>
+
+            <div class="card-body">
+              <h3 class="h2-color-1">{{ recipe.titulo }}</h3>
+              <p>{{ recipe.descripcion }}</p>
+              <div class="nivel-dificultad">
+                <div class="circulo"
+                     [class.facil]="recipe.dificultad==='facil'"
+                     [class.medio]="recipe.dificultad==='medio'"
+                     [class.dificil]="recipe.dificultad==='dificil'"></div>
+                <span>{{ recipe.dificultad }}</span>
+              </div>
+            </div>
+          </a>
+        } @else {
+          <div class="card receta text-decoration-none">
+            <img [src]="recipe.imagen" class="card-img-top" [alt]="recipe.titulo">
+            <div class="tiempo-receta">{{ recipe.tiempo }}</div>
+            <div class="card-body">
+              <h3 class="h2-color-1">{{ recipe.titulo }}</h3>
+              <p>{{ recipe.descripcion }}</p>
+              <div class="nivel-dificultad">
+                <div class="circulo"
+                     [class.facil]="recipe.dificultad==='facil'"
+                     [class.medio]="recipe.dificultad==='medio'"
+                     [class.dificil]="recipe.dificultad==='dificil'"></div>
+                <span>{{ recipe.dificultad }}</span>
+              </div>
+            </div>
+          </div>
+        }
+
+        <!-- Barra beige con 2 botones iguales -->
+        <div class="featured-actions-bar">
+          <ng-container
+            [ngTemplateOutlet]="actionsTemplate!"
+            [ngTemplateOutletContext]="{ $implicit: recipe }">
+          </ng-container>
+        </div>
       </div>
-    </div>
-  </a>
+
+    } @else {
+      <!-- HOME / ALL: TU CÓDIGO ORIGINAL TAL CUAL -->
+      @if (recipe.id || (recipe.enlace && recipe.enlace !== '#')) {
+        <a class="card receta text-decoration-none"
+           [routerLink]="recipe.id ? ['/detail-recipe', recipe.id] : recipe.enlace">
+          <img [src]="recipe.imagen" class="card-img-top" [alt]="recipe.titulo">
+
+          <div class="tiempo-receta">{{ recipe.tiempo }}</div>
+
+          <div class="card-body">
+            <h3 class="h2-color-1">{{ recipe.titulo }}</h3>
+            <p>{{ recipe.descripcion }}</p>
+            <div class="nivel-dificultad">
+              <div class="circulo"
+                   [class.facil]="recipe.dificultad==='facil'"
+                   [class.medio]="recipe.dificultad==='medio'"
+                   [class.dificil]="recipe.dificultad==='dificil'"></div>
+              <span>{{ recipe.dificultad }}</span>
+            </div>
+          </div>
+        </a>
+      } @else {
+        <div class="card receta text-decoration-none">
+          <img [src]="recipe.imagen" class="card-img-top" [alt]="recipe.titulo">
+          <div class="tiempo-receta">{{ recipe.tiempo }}</div>
+          <div class="card-body">
+            <h3 class="h2-color-1">{{ recipe.titulo }}</h3>
+            <p>{{ recipe.descripcion }}</p>
+            <div class="nivel-dificultad">
+              <div class="circulo"
+                   [class.facil]="recipe.dificultad==='facil'"
+                   [class.medio]="recipe.dificultad==='medio'"
+                   [class.dificil]="recipe.dificultad==='dificil'"></div>
+              <span>{{ recipe.dificultad }}</span>
+            </div>
+          </div>
+        </div>
+      }
+    }
+  } @empty {
+    <app-empty-state message="No hay recetas para mostrar."></app-empty-state>
+  }
 </div>
