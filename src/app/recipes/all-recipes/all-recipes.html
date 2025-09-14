@@ -1,10 +1,26 @@
 <section class="container m-10 flex flex-column gap-6">
   <h2 class="titulo-seccion">Todas las Recetas</h2>
-  <app-featured [recipes]="featuredRecipesArray"></app-featured>
 
-  <div class="boton-container">
-    <button class="btn-personalizado primario" (click)="verMasRecetas()">
-      Ver Más Recetas
-    </button>
-  </div>
+  @if (categoriaActual) {
+    <div class="flex items-center gap-3">
+      <span class="categoria-tag">Categoría: <strong>{{ categoriaActual }}</strong></span>
+      <a class="btn-personalizado secundario" (click)="limpiarFiltro()">Quitar filtro</a>
+    </div>
+  }
+
+  @if (loading) {
+    <p>Cargando recetas…</p>
+  } @else if (errorMsg) {
+    <p class="error">{{ errorMsg }}</p>
+  } @else {
+    @if (featuredRecipesArray.length) {
+      <app-featured [recipes]="featuredRecipesArray"></app-featured>
+    } @else {
+      <app-empty-state message="No hay datos para mostrar"></app-empty-state>
+    }
+
+    <div class="boton-container">
+      <a class="btn-personalizado primario" routerLink="/all-recipes">Ver Más Recetas</a>
+    </div>
+  }
 </section>

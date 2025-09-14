@@ -3,6 +3,10 @@
     <h2 class="titulo-seccion">Winnie The Food</h2>
     <p class="font-bold">Creá tu cuenta</p>
 
+    @if (errorMsg()) {
+      <p class="error" style="margin: 8px 0 0 0;">{{ errorMsg() }}</p>
+    }
+
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <!-- Nombre -->
       <div>
@@ -93,8 +97,8 @@
         <button
           type="submit"
           class="btn-personalizado primario"
-          [disabled]="registerForm.invalid">
-          Registrarme
+          [disabled]="registerForm.invalid || loading()">
+          @if (loading()) { Registrando… } @else { Registrarme }
         </button>
       </div>
 
