@@ -1,19 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-  <app-menu></app-menu>
+<section class="container m-10 flex flex-column gap-6">
+  <div class="title-actions">
+    <h2 class="titulo-seccion">Mis Recetas</h2>
+    <a routerLink="/new-recipe" class="btn-personalizado primario">Crear receta</a>
+  </div>
 
-  <!-- Contenido de la página -->
+  @if (loading()) {
+    <p>Cargando recetas…</p>
+  } @else if (errorMsg()) {
+    <p class="error">{{ errorMsg() }}</p>
+  } @else {
+    @if (cards().length) {
+      <app-featured
+        [recipes]="cards()"
+        [actionsTemplate]="actionsTpl">
+      </app-featured>
 
-  <section class="container">
-    <h1>Contenido</h1>
-  </section>
-
-  <!-- Pie de página -->
-  <app-footer></app-footer>
-</body>
-</html>
+      <ng-template #actionsTpl let-card>
+        <button class="btn-personalizado secundario" (click)="editar(card.id)">EDITAR</button>
+        <button class="btn-personalizado primario" (click)="eliminar(card.id)">ELIMINAR</button>
+      </ng-template>
+    } @else {
+      <app-empty-state message="Aún no tienes recetas creadas. ¡Empieza creando una!"></app-empty-state>
+    }
+  }
+</section>
