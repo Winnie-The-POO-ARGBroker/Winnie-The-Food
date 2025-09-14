@@ -4,7 +4,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { EmptyState } from '../empty-state/empty-state';
 
 export interface FeaturedCard {
-  id?: number;
+  id?: string | number;
   titulo: string;
   descripcion: string;
   imagen: string;
@@ -22,6 +22,5 @@ export interface FeaturedCard {
 })
 export class Featured {
   @Input() recipes: FeaturedCard[] = [];
-
   @Input() actionsTemplate: TemplateRef<{ $implicit: FeaturedCard }> | null = null;
 }
