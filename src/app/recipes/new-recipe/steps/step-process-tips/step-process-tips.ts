@@ -1,86 +1,110 @@
-import { Component } from '@angular/core';
-import { RouterModule, Router } from '@angular/router';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NewRecipeStore } from '../../new-recipe.js';
-import { Receta } from '../../../../models/receta-model.js';
+import { Router, RouterLink } from '@angular/router';
+import { NewRecipeStore } from '../../new-recipe.store';
+import { Receta } from '../../../../models/receta-model';
+import { AuthService } from '../../../../services/auth.service';
+import { RecipesService } from '../../../../services/recipes.service';
 
 @Component({
   selector: 'app-step-process-tips',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './step-process-tips.html',
-  styleUrls: ['../../new-recipe.css', './step-process-tips.css'],
+  styleUrl: './step-process-tips.css'
 })
 export class StepProcessTips {
-  constructor(public store: NewRecipeStore, private router: Router) {}
+  store = inject(NewRecipeStore);
+  private router = inject(Router);
+  private auth   = inject(AuthService);
+  private recipesSvc = inject(RecipesService);
 
-  trackById = (_: number, item: { id: number }) => item.id;
+  private readonly LOCAL_KEY = 'recipes_local';
+  trackById = (_: number, item: { id: string }) => item.id;
 
-  addStep(){ this.store.steps.update(list => [...list, { id: Date.now()+Math.random(), title:'', description:'' }]); }
-  removeStep(i:number){ this.store.steps.update(list => list.filter((_,idx)=>idx!==i)); }
-  editStepTitle(i:number, e:Event){
-    this.store.steps.update(list => { const next=[...list]; next[i].title=(e.target as HTMLInputElement).value; return next; });
+  // --- handlers ---
+  editStepDesc(i: number, ev: Event) { this.store.updateStep(i, (ev.target as HTMLTextAreaElement).value); }
+  addStep() { this.store.addStep(); }
+  editTipDesc(i: number, ev: Event) { this.store.updateTip(i, (ev.target as HTMLTextAreaElement).value); }
+  addTip() { this.store.addTip(); }
+
+  // --- helpers ---
+  private normalizeDifficulty(v: string): 'facil'|'medio'|'dificil' {
+    return v === 'media' ? 'medio' : (v as any);
   }
-  editStepDesc(i:number, e:Event){
-    this.store.steps.update(list => { const next=[...list]; next[i].description=(e.target as HTMLTextAreaElement).value; return next; });
+  private ingredientsAsStrings(): string[] {
+    return (this.store.ingredients() ?? [])
+      .filter(i => i?.name?.trim())
+      .map(i => {
+        const qty = i?.qty?.toString().trim() || '';
+        const unit = i?.unit?.trim() || '';
+        const name = i?.name?.trim() || '';
+        const left = [qty, unit].filter(Boolean).join(' ');
+        return left ? `${left} ${name}` : name;
+      });
+  }
+  private stepsAsStrings(): string[] {
+    return (this.store.steps() ?? []).map(s => (s?.description ?? '').trim()).filter(Boolean);
+  }
+  private tipsAsStrings(): string[] {
+    return (this.store.tips() ?? []).map(t => (t?.description ?? '').trim()).filter(Boolean);
+  }
+  private nutritionAsLabelValue(): {label: string; value: string}[] {
+    return (this.store.nutritionItems() ?? [])
+      .filter(n => n?.label)
+      .map(n => ({
+        label: n.label.trim(),
+        value: n.unit ? `${n.value ?? ''} ${n.unit}` : String(n.value ?? '')
+      }));
   }
 
-  addTip(){ this.store.tips.update(list => [...list, { id: Date.now()+Math.random(), title:'', description:'' }]); }
-  removeTip(i:number){ this.store.tips.update(list => list.filter((_,idx)=>idx!==i)); }
-  editTipTitle(i:number, e:Event){
-    this.store.tips.update(list => { const next=[...list]; next[i].title=(e.target as HTMLInputElement).value; return next; });
-  }
-  editTipDesc(i:number, e:Event){
-    this.store.tips.update(list => { const next=[...list]; next[i].description=(e.target as HTMLTextAreaElement).value; return next; });
-  }
+  finalizarYVer() {
+    const userId = this.auth.currentUser()?.id ?? 0; // <-- autor logueado
 
-  finalizarYVer(): void {
-    const id = Date.now();
-
-    const rawDiff = this.store.difficulty();
-    const dificultad = (rawDiff === 'media' ? 'medio' : rawDiff) || 'facil';
-
-    const receta: Receta = {
-      id,
-      autor_id: 0,
-      nombre: this.store.name() || 'Receta sin nombre',
-      descripcion: this.store.description() || '',
-      porciones: this.store.servings() ?? 0,
-      tiempoPrep: Number(this.store.prepMinutes()) || 0,
-      tiempoCoc: Number(this.store.cookMinutes()) || 0,
-      categoria: this.store.category() || 'Otros',
-      dificultad: dificultad as any,
-      tipo_comida: 'Casera',
+    // payload para el server (sin id → json-server lo crea)
+    const serverPayload: Omit<Receta, 'id'> = {
+      autor_id: userId as any,
+      nombre: (this.store.name() ?? '').trim(),
+      descripcion: (this.store.description() ?? '').trim(),
+      porciones: Number(this.store.servings() ?? 0) || 0,
+      tiempoPrep: Number(this.store.prepMinutes() ?? 0) || 0,
+      tiempoCoc: Number(this.store.cookMinutes() ?? 0) || 0,
+      categoria: (this.store.category() ?? '').trim(),
+      dificultad: this.normalizeDifficulty(this.store.difficulty() ?? 'facil'),
+      tipo_comida: 'Otros',
       publicada: true,
-      imageUrl: this.store.imageDataUrl() || '/assets/placeholder-recipe.webp',
-      tags: (this.store.tags() || '').split(',').map(s => s.trim()).filter(Boolean),
-
-      ingredients: this.store.ingredients().map(i =>
-        [i.name, `${i.qty ?? ''}${i.unit ? ' ' + i.unit : ''}`.trim()]
-          .filter(Boolean).join(' ')
-      ),
-
-      nutrition: this.store.nutritionItems()
-        .filter(n => n.label && n.value)
-        .map(n => ({ label: n.label, value: n.value, unit: n.unit })),
-
-      steps: this.store.steps().map(s =>
-        s.title ? `${s.title}: ${s.description ?? ''}` : (s.description ?? '')
-      ),
-      tips: this.store.tips().map(t =>
-        t.title ? `${t.title}: ${t.description ?? ''}` : (t.description ?? '')
-      ),
-
+      imageUrl: this.store.imageDataUrl() || 'https://via.placeholder.com/300x200?text=Sin+imagen',
+      tags: (this.store.tags() ?? '').split(',').map(t => t.trim()).filter(Boolean),
+      ingredients: this.ingredientsAsStrings(),
+      nutrition: this.nutritionAsLabelValue(),
+      steps: this.stepsAsStrings(),
+      tips: this.tipsAsStrings(),
       related: [],
-      enlace: `/detail-recipe/${id}`
+      enlace: ''
     };
 
-    const KEY = 'newRecipe.collection.v1';
-    const current = JSON.parse(localStorage.getItem(KEY) || '[]');
-    const next = [receta, ...current.filter((r: any) => String(r?.id) !== String(id))];
-    localStorage.setItem(KEY, JSON.stringify(next));
+    // 1) Intentar publicar en el server
+    this.recipesSvc.createReceta(serverPayload).subscribe({
+      next: (created) => {
 
-    localStorage.removeItem('newRecipe.draft.v1');
-    this.router.navigate(['/detail-recipe', id], { queryParams: { local: 1 }, replaceUrl: true });
+        this.store.persistDraft?.();
+        this.router.navigate(['/detail-recipe', created.id]);
+      },
+      error: (e) => {
+        console.error('[createReceta] falló, guardo en LocalStorage', e);
+
+        // 2) Fallback: guardar local para no perder el trabajo
+        const localId = `ls-${Date.now()}`;
+        const localReceta: Receta = {
+          id: localId as any,
+          ...serverPayload,
+          enlace: `/detail-recipe/${localId}`
+        };
+        this.recipesSvc.saveLocal(localReceta);
+
+        this.store.persistDraft?.();
+        this.router.navigate(['/detail-recipe', localId]);
+      }
+    });
   }
 }

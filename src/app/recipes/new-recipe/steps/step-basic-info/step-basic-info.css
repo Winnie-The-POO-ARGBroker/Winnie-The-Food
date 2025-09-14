@@ -64,3 +64,5 @@
 .nutri-add {
   margin-top: 10px;
 }
+
+@import '../../new-recipe.css';

@@ -1,3 +1,4 @@
 /* Apoya el layout general ya definido en ../../new-recipe.css */
 .ingrediente-container { display: grid; gap: 12px; }
 .btn-remove { align-self: start; }
+@import '../../new-recipe.css';
