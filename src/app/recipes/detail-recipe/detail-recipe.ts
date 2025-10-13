@@ -1,93 +1,56 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { TitleCasePipe } from '@angular/common';
+import { RecipesService } from '../../services/recipes.service';
+import { Receta } from '../../models/receta-model';
 import { Featured } from '../../shared/components/featured/featured';
-
-
-type Difficulty = 'facil' | 'medio' | 'dificil';
-
-export interface Nutrition { label: string; value: number | string; }
-export interface RelatedRecipe { titulo: string; descripcion: string; tiempo: string; dificultad: Difficulty; imagen: string; }
-export interface Recipe {
-  title: string;
-  time: string;
-  servings: string;
-  difficulty: Difficulty;
-  tags: string[];
-  imageUrl: string;
-  ingredients: string[];
-  nutrition: Nutrition[];
-  steps: string[];
-  tips: string[];
-  related: RelatedRecipe[];
-}
+import { EmptyState } from '../../shared/components/empty-state/empty-state';
 
 @Component({
   selector: 'app-detail-recipe',
   standalone: true,
-  imports: [TitleCasePipe, Featured],
-  styleUrl: './detail-recipe.css',
+
+  imports: [TitleCasePipe, Featured, EmptyState],
   templateUrl: './detail-recipe.html',
+  styleUrl: './detail-recipe.css'
 })
 export class DetailRecipe {
-  // En una integración real, esto viene por id desde un service + ActivatedRoute
-  recipe = signal<Recipe>({
-    title: 'Tarta de espinaca',
-    time: '🕓 45 min de preparación',
-    servings: '👥 6-8 porciones',
-    difficulty: 'medio',
-    tags: ['Vegetariano', 'Hornear', 'Tartas', 'Verduras'],
-    imageUrl: '/img-tarta.webp',
-    ingredients: [
-      '1 masa para tarta (casera o comprada)',
-      '500g de espinaca fresca',
-      '200g de queso cremoso',
-      '150g de queso mozzarella rallado',
-      '3 huevos',
-      '1 cebolla mediana',
-      '2 dientes de ajo',
-      '200ml de crema de leche',
-      'Sal y pimienta a gusto',
-      'Nuez moscada (opcional)',
-      '2 cucharadas de aceite de oliva',
-    ],
-    nutrition: [
-      { label: 'Calorías', value: 16 },
-      { label: 'Colesterol', value: 16 },
-      { label: 'Proteínas', value: 16 },
-      { label: 'Grasas', value: 16 },
-    ],
-    steps: [
-      'Precalentar el horno a 180°C y colocar la masa en un molde.',
-      'Lavar y escurrir bien las espinacas. Picar groseramente.',
-      'Sofreír cebolla y ajo en aceite de oliva.',
-      'Agregar espinaca al sartén, condimentar.',
-      'Mezclar huevos, crema, queso y unir con espinaca.',
-      'Verter sobre la masa y espolvorear mozzarella.',
-      'Hornear 30-35 min.',
-    ],
-    tips: [
-      'Usar espinaca congelada si no hay fresca.',
-      'Agregar parmesano arriba para gratinar.',
-      'Podés reemplazar crema por leche evaporada.',
-      'Ideal para freezar en porciones.',
-    ],
-    related: [
-      { titulo: 'Quiche Lorraine', tiempo: '40 min', dificultad: 'medio', imagen: '/img-recipe-1.webp', descripcion: 'Tarta salada francesa con panceta y queso.' },
-      { titulo: 'Tarta de Jamón y Queso', tiempo: '35 min', dificultad: 'facil', imagen: '/img-recipe-2.webp', descripcion: 'Tarta salada francesa con panceta y queso.' },
-      { titulo: 'Tarta de Cebolla Caramelizada', tiempo: '50 min', dificultad: 'dificil', imagen: '/img-recipe-3.webp', descripcion: 'Tarta salada francesa con panceta y queso.' },
-    ],
+  private route = inject(ActivatedRoute);
+  private recipes = inject(RecipesService);
+
+  loading = signal(true);
+  errorMsg = signal<string | null>(null);
+  receta   = signal<Receta | null>(null);
+
+  constructor() {
+    effect(() => {
+      const id = this.route.snapshot.paramMap.get('id');
+      if (!id) { this.errorMsg.set('ID de receta inválido'); this.loading.set(false); return; }
+      this.loading.set(true); this.errorMsg.set(null);
+      this.recipes.getRecetaById(String(id)).subscribe({
+        next: r => { this.receta.set(r); this.loading.set(false); },
+        error: e => { this.errorMsg.set(e?.message || 'Receta no encontrada'); this.loading.set(false); }
+      });
+    });
+  }
+
+  totalTime = computed(() => {
+    const r = this.receta(); if (!r) return '—';
+    const tot = (r.tiempoPrep ?? 0) + (r.tiempoCoc ?? 0);
+    return tot > 0 ? `${tot} min` : '—';
   });
 
-  toastVisible = signal(false);
-
-  onAddToFavorites() {
-    this.toastVisible.set(true);
-    setTimeout(() => this.toastVisible.set(false), 3000);
+  relatedForFeatured() {
+    const r = this.receta(); if (!r) return [];
+    return (r.related ?? []).map(x => ({
+      titulo: x.titulo,
+      descripcion: x.descripcion,
+      imagen: x.imagen,
+      enlace: x.enlace ?? '#',
+      tiempo: x.tiempo,
+      dificultad: x.dificultad as 'facil'|'medio'|'dificil'
+    }));
   }
 
-  // helper para clase de dificultad
-  difficultyClass(d: Difficulty) {
-    return d; // 'facil' | 'medio' | 'dificil' → se usa junto a .circulo
-  }
+  onAddToFavorites() { alert('¡Agregado a favoritos!'); }
 }
-

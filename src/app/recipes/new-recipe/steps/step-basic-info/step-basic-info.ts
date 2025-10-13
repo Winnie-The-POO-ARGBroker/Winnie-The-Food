@@ -1,68 +1,53 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { NewRecipeStore, type Difficulty } from '../../new-recipe.js';
+import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { NewRecipeStore } from '../../new-recipe.store';
 
 @Component({
   selector: 'app-step-basic-info',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [RouterLink],
   templateUrl: './step-basic-info.html',
-  styleUrls: ['../../new-recipe.css', './step-basic-info.css'],
+  styleUrl: './step-basic-info.css'
 })
 export class StepBasicInfo {
-  constructor(public store: NewRecipeStore) {}
+  store = inject(NewRecipeStore);
 
-  // Imagen
-  onFile(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    const file = input.files?.[0] ?? null;
-    this.store.imageFile.set(file);
+  async onFile(ev: Event) {
+    const input = ev.target as HTMLInputElement;
+    const file = input.files?.[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) { alert('Máx 5MB'); return; }
+    const dataUrl = await fileToDataUrl(file);
+    this.store.setImageDataUrl(dataUrl);
   }
 
-  // Campos de texto
-  updateName(event: Event): void {
-    const value = (event.target as HTMLInputElement).value;
-    this.store.name.set(value);
-  }
+  updateName(ev: Event)        { this.store.setName((ev.target as HTMLInputElement).value); }
+  updateDescription(ev: Event) { this.store.setDescription((ev.target as HTMLTextAreaElement).value); }
+  updateCategory(ev: Event)    { this.store.setCategory((ev.target as HTMLSelectElement).value); }
+  updateDifficulty(ev: Event)  { this.store.setDifficulty((ev.target as HTMLSelectElement).value); }
+  updatePrepMinutes(ev: Event) { this.store.setPrepMinutes(toNumber((ev.target as HTMLInputElement).value)); }
+  updateCookMinutes(ev: Event) { this.store.setCookMinutes(toNumber((ev.target as HTMLInputElement).value)); }
+  updateServings(ev: Event)    { this.store.setServings(toNumber((ev.target as HTMLInputElement).value)); }
+  updateTags(ev: Event)        { this.store.setTags((ev.target as HTMLInputElement).value); }
 
-  updateDescription(event: Event): void {
-    const value = (event.target as HTMLTextAreaElement).value;
-    this.store.description.set(value);
-  }
+  addNutrition()                   { this.store.addNutrition(); }
+  removeNutrition(i: number)       { this.store.removeNutrition(i); }
+  editNutLabel(i: number, e: Event){ this.store.updateNutLabel(i, (e.target as HTMLInputElement).value); }
+  editNutValue(i: number, e: Event){ this.store.updateNutValue(i, (e.target as HTMLInputElement).value); }
+  editNutUnit (i: number, e: Event){ this.store.updateNutUnit(i, (e.target as HTMLInputElement).value); }
 
-  // Selects
-  updateCategory(event: Event): void {
-    const value = (event.target as HTMLSelectElement).value;
-    this.store.category.set(value);
-  }
+  persistDraft() { this.store.persistDraft(); }
+}
 
-  updateDifficulty(event: Event): void {
-    const value = (event.target as HTMLSelectElement).value as Difficulty;
-    this.store.difficulty.set(value);
-  }
-
-  // Tiempos (texto por ahora, visual)
-  updatePrepMinutes(event: Event): void {
-    const value = (event.target as HTMLInputElement).value;
-    this.store.prepMinutes.set(value);
-  }
-
-  updateCookMinutes(event: Event): void {
-    const value = (event.target as HTMLInputElement).value;
-    this.store.cookMinutes.set(value);
-  }
-
-  // Porciones (number | null)
-  updateServings(event: Event): void {
-    const raw = (event.target as HTMLInputElement).value.trim();
-    const n = raw === '' ? null : Number(raw);
-    this.store.servings.set(Number.isFinite(n as number) ? (n as number) : null);
-  }
-
-  // Etiquetas
-  updateTags(event: Event): void {
-    const value = (event.target as HTMLInputElement).value;
-    this.store.tags.set(value);
-  }
+function toNumber(v: string): number | null {
+  const n = Number((v ?? '').toString().trim());
+  return Number.isFinite(n) ? n : null;
+}
+function fileToDataUrl(file: File) {
+  return new Promise<string>((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(String(r.result));
+    r.onerror = rej;
+    r.readAsDataURL(file);
+  });
 }

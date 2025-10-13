@@ -1,16 +1,4 @@
-.receta h3 {
-  color: #1A3C34;
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin: 0 0 8px 0;
-}
 
-.destacadas {
-    text-align: center;
-    padding: 40px;
-}
-
-/* Mobile-first: 1 card por fila */
 .recetas-contenedor {
   width: 100%;
   display: grid;
@@ -21,74 +9,69 @@
   align-items: stretch;
 }
 
-/* (opcional) limita el ancho de cada card para que no estire demasiado */
-.recetas-contenedor > * {
+
+.recetas-contenedor > .featured-item {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 0;
+}
+
+/* Card consistente */
+.receta {
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(0,0,0,.28);
+  height: 100%;
   width: 100%;
   max-width: 380px;
 }
 
-/* sm ≥ 640px: seguimos con 1 columna (puedes omitir si no cambia) */
-@media (min-width: 640px) {
-  .recetas-contenedor { grid-template-columns: 1fr; }
-}
-
-/* md ≥ 768px: 2 columnas */
-@media (min-width: 768px) {
-  .recetas-contenedor { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
-/* lg ≥ 1024px: 3 columnas */
-@media (min-width: 1024px) {
-  .recetas-contenedor { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-}
-
-/* xl y 2xl: mantenemos 3 columnas (puedes ampliar si quieres 4+) */
-@media (min-width: 1280px) {
-  .recetas-contenedor { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-}
-@media (min-width: 1536px) {
-  .recetas-contenedor { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-}
-
-
-.receta {
-    position: relative;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    overflow: hidden;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
-    height: 100%;
-}
-
 .card-img-top {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
 }
 
 .card-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 15px 20px;
-    flex: 1;
-    text-align: left;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 15px 20px;
+  text-align: left;
+  min-height: 160px;
 }
 
+
 .tiempo-receta {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: white;
-    color: #D49643;
-    font-weight: bold;
-    padding: 5px 12px;
-    border-radius: 50px;
-    font-size: 14px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #fff;
+  color: #D49643;
+  font-weight: bold;
+  padding: 5px 12px;
+  border-radius: 50px;
+  font-size: 14px;
+  box-shadow: 0 2px 5px rgba(0,0,0,.2);
+}
+
+
+.receta h3 {
+  color: #1A3C34;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .receta p {
@@ -99,36 +82,49 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
-}
-/* Circulo */
-
-.circulo {
-    border-radius: 50%;
-    width: 15px;
-    height: 15px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-.circulo.facil {
-    background-color: #19BC2C;
+
+.circulo { border-radius: 50%; width: 15px; height: 15px; display: inline-flex; }
+.circulo.facil { background-color: #19BC2C; }
+.circulo.medio { background-color: #D49643; }
+.circulo.dificil { background-color: #AF2E17; }
+.nivel-dificultad { display: flex; align-items: center; gap: 6px; margin: 8px 0; font-family: 'Poppins', sans-serif; }
+
+.featured-item .card.receta { margin-bottom: 10px; }
+
+.featured-actions-bar {
+  position: static;
+  width: 100%;
+  background: #efe6d6;
+  border-radius: 18px;
+  padding: 12px 14px;
+  box-shadow: 0 6px 14px rgba(0,0,0,.06);
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: center;
+
+  max-width: 380px;
 }
 
-.circulo.medio {
-    background-color: #D49643;
+.featured-actions-bar .btn-personalizado {
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
 }
 
-.circulo.dificil {
-    background-color: #AF2E17;
-}
 
-.nivel-dificultad {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin: 8px 0;
-    font-family: 'Poppins', sans-serif;
+@media (min-width: 768px) {
+  .recetas-contenedor { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px) {
+  .recetas-contenedor { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 1280px) {
+  .recetas-contenedor { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 1536px) {
+  .recetas-contenedor { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }

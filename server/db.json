@@ -1,0 +1,631 @@
+{
+  "usuarios": [
+    {
+      "id": "1",
+      "nombre": "Admin",
+      "apellido": "Admin",
+      "email": "admin@example.com",
+      "password": "admin123",
+      "role": "admin"
+    },
+    {
+      "id": "2",
+      "nombre": "María",
+      "apellido": "Pérez",
+      "email": "maria@example.com",
+      "password": "maria123",
+      "role": "user"
+    },
+    {
+      "id": "3",
+      "nombre": "Juan",
+      "apellido": "Pérez",
+      "email": "juan@example.com",
+      "password": "juan123",
+      "role": "user"
+    }
+  ],
+  "sesiones": [],
+  "categorias": [
+    {
+      "id": "1",
+      "nombre": "Entrada",
+      "imagen": "https://www.recetasnestle.com.mx/sites/default/files/styles/cropped_recipe_card_new/public/srh_recipes/46bdda0dbf686c91ca88af0a14a956c4.jpg.webp?itok=nbb7v7vQ"
+    },
+    {
+      "id": "2",
+      "nombre": "Plato principal",
+      "imagen": "https://www.recetasnestle.cl/sites/default/files/styles/cropped_recipe_card_new/public/srh_recipes/57d2453074b608263f3a814302cc7864.jpg.webp?itok=ZTNS93BL"
+    },
+    {
+      "id": "3",
+      "nombre": "Postre",
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPYtWBVhF8IyWX1lUJS37W-9uHFxYJuwzT8w&s"
+    },
+    {
+      "id": "4",
+      "nombre": "Bebida",
+      "imagen": "https://img.freepik.com/foto-gratis/gente-bebiendo-cocteles_23-2150168872.jpg?semt=ais_hybrid&w=740&q=80"
+    },
+    {
+      "id": "5",
+      "nombre": "Vegetariano",
+      "imagen": "https://www.fithappysisters.com/Portals/FitHappySister/Mercadillo/files/Receta-Vegetariana_-Budha-bowl-Horizontal.jpg"
+    }
+  ],
+  "dificultades": [
+    {
+      "id": "1",
+      "nombre": "facil"
+    },
+    {
+      "id": "2",
+      "nombre": "medio"
+    },
+    {
+      "id": "3",
+      "nombre": "dificil"
+    }
+  ],
+  "tipos": [
+    {
+      "id": "1",
+      "nombre": "Carnes"
+    },
+    {
+      "id": "2",
+      "nombre": "Vegetariana"
+    },
+    {
+      "id": "3",
+      "nombre": "Vegana"
+    },
+    {
+      "id": "4",
+      "nombre": "Mariscos"
+    },
+    {
+      "id": "5",
+      "nombre": "Pastas"
+    },
+    {
+      "id": "6",
+      "nombre": "Pollo"
+    },
+    {
+      "id": "7",
+      "nombre": "Postres"
+    }
+  ],
+  "unidades": [
+    {
+      "id": "1",
+      "nombre": "gramo",
+      "abreviatura": "g"
+    },
+    {
+      "id": "2",
+      "nombre": "kilogramo",
+      "abreviatura": "kg"
+    },
+    {
+      "id": "3",
+      "nombre": "mililitro",
+      "abreviatura": "ml"
+    },
+    {
+      "id": "4",
+      "nombre": "litro",
+      "abreviatura": "l"
+    },
+    {
+      "id": "5",
+      "nombre": "unidad",
+      "abreviatura": "u"
+    },
+    {
+      "id": "6",
+      "nombre": "taza",
+      "abreviatura": "taza"
+    }
+  ],
+  "favoritos": [],
+  "recetas": [
+    {
+      "id": "1",
+      "autor_id": 1,
+      "nombre": "Ensalada César",
+      "descripcion": "Clásica ensalada con lechuga romana, crutones y aderezo con parmesano.",
+      "porciones": 2,
+      "tiempoPrep": 10,
+      "tiempoCoc": 0,
+      "categoria": "Entrada",
+      "dificultad": "facil",
+      "tipo_comida": "Vegetariana",
+      "publicada": true,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Ensalada_Cesar.jpg/960px-Ensalada_Cesar.jpg?20070318135147",
+      "tags": [
+        "Ensalada",
+        "Rápida",
+        "Fresca"
+      ],
+      "ingredients": [
+        "200 g lechuga romana",
+        "30 g queso parmesano",
+        "60 g crutones",
+        "5 g ajo",
+        "60 g mayonesa",
+        "15 ml jugo de limón",
+        "15 ml aceite de oliva",
+        "Sal y pimienta a gusto"
+      ],
+      "nutrition": [
+        {
+          "label": "Calorías",
+          "value": 320
+        },
+        {
+          "label": "Proteínas",
+          "value": 10
+        },
+        {
+          "label": "Grasas",
+          "value": 22
+        },
+        {
+          "label": "Carbohidratos",
+          "value": 18
+        }
+      ],
+      "steps": [
+        "Preparar aderezo con mayonesa, ajo, limón y aceite.",
+        "Tostar crutones.",
+        "Mezclar lechuga, aderezo, crutones y parmesano."
+      ],
+      "tips": [
+        "Sumá anchoas si querés un sabor más clásico.",
+        "Serví bien fría."
+      ],
+      "related": [
+        {
+          "titulo": "Ensalada Caprese",
+          "descripcion": "Tomate, mozzarella, albahaca.",
+          "tiempo": "10 min",
+          "dificultad": "facil",
+          "imagen": "/img-recipe-1.webp"
+        }
+      ],
+      "enlace": "/detail-recipe/1"
+    },
+    {
+      "id": "2",
+      "autor_id": 2,
+      "nombre": "Tacos de pollo a la plancha",
+      "descripcion": "Tortillas con pollo marinado, cebolla y cilantro; servir con lima.",
+      "porciones": 4,
+      "tiempoPrep": 20,
+      "tiempoCoc": 10,
+      "categoria": "Plato principal",
+      "dificultad": "facil",
+      "tipo_comida": "Pollo",
+      "publicada": true,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Grilled_chicken_tacos.jpg/960px-Grilled_chicken_tacos.jpg?20131006155121",
+      "tags": [
+        "Mexicana",
+        "Rápida"
+      ],
+      "ingredients": [
+        "400 g pechuga de pollo",
+        "8 u tortillas de maíz",
+        "80 g cebolla blanca",
+        "10 g cilantro",
+        "2 u limas",
+        "10 ml aceite de oliva",
+        "Sal a gusto"
+      ],
+      "nutrition": [
+        {
+          "label": "Calorías",
+          "value": 520
+        },
+        {
+          "label": "Proteínas",
+          "value": 36
+        },
+        {
+          "label": "Grasas",
+          "value": 18
+        },
+        {
+          "label": "Carbohidratos",
+          "value": 54
+        }
+      ],
+      "steps": [
+        "Marinar pollo con sal y aceite.",
+        "Plancha fuerte 10 min, filetear.",
+        "Servir en tortillas con cebolla y cilantro; lima a gusto."
+      ],
+      "tips": [
+        "Sumá palta y salsa picante."
+      ],
+      "related": [],
+      "enlace": "/detail-recipe/2"
+    },
+    {
+      "id": "3",
+      "autor_id": 3,
+      "nombre": "Sushi maki vegetariano",
+      "descripcion": "Rolls con palta y pepino.",
+      "porciones": 2,
+      "tiempoPrep": 25,
+      "tiempoCoc": 0,
+      "categoria": "Vegetariano",
+      "dificultad": "medio",
+      "tipo_comida": "Vegetariana",
+      "publicada": true,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Vegetarian_Sushi_Maki_roll.jpg/500px-Vegetarian_Sushi_Maki_roll.jpg?20210923230557",
+      "tags": [
+        "Japonés",
+        "Frío"
+      ],
+      "ingredients": [
+        "200 g arroz sushi",
+        "20 ml vinagre de arroz",
+        "2 u nori",
+        "1 u palta",
+        "1 u pepino",
+        "Sal a gusto"
+      ],
+      "nutrition": [
+        {
+          "label": "Calorías",
+          "value": 420
+        },
+        {
+          "label": "Proteínas",
+          "value": 8
+        },
+        {
+          "label": "Grasas",
+          "value": 10
+        },
+        {
+          "label": "Carbohidratos",
+          "value": 72
+        }
+      ],
+      "steps": [
+        "Cocinar y avinagrar arroz.",
+        "Armar rolls.",
+        "Cortar y servir."
+      ],
+      "tips": [
+        "Usá esterilla para enrollar."
+      ],
+      "related": [],
+      "enlace": "/detail-recipe/3"
+    },
+    {
+      "id": "4",
+      "autor_id": 1,
+      "nombre": "Empanadas de jamón y queso",
+      "descripcion": "Empanadas al horno con jamón y queso.",
+      "porciones": 6,
+      "tiempoPrep": 25,
+      "tiempoCoc": 20,
+      "categoria": "Plato principal",
+      "dificultad": "facil",
+      "tipo_comida": "Carnes",
+      "publicada": true,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Empanadas_argentinas_de_jam%C3%B3n_y_queso_con_or%C3%A9gano_y_tomate%2C_pinceladas_con_huevo_batido.jpg/960px-Empanadas_argentinas_de_jam%C3%B3n_y_queso_con_or%C3%A9gano_y_tomate%2C_pinceladas_con_huevo_batido.jpg?20250417185335",
+      "tags": [
+        "Horno",
+        "Criolla"
+      ],
+      "ingredients": [
+        "12 u tapas de empanada",
+        "200 g jamón cocido",
+        "200 g mozzarella",
+        "1 u huevo",
+        "Orégano a gusto"
+      ],
+      "nutrition": [
+        {
+          "label": "Calorías",
+          "value": 780
+        },
+        {
+          "label": "Proteínas",
+          "value": 38
+        },
+        {
+          "label": "Grasas",
+          "value": 42
+        },
+        {
+          "label": "Carbohidratos",
+          "value": 58
+        }
+      ],
+      "steps": [
+        "Rellenar y cerrar.",
+        "Pincelar huevo.",
+        "Hornear 20 min."
+      ],
+      "tips": [
+        "Sellá con repulgue firme."
+      ],
+      "related": [],
+      "enlace": "/detail-recipe/4"
+    },
+    {
+      "id": "5",
+      "autor_id": 2,
+      "nombre": "Milanesa napolitana",
+      "descripcion": "Clásico con salsa de tomate, jamón y mozzarella.",
+      "porciones": 2,
+      "tiempoPrep": 15,
+      "tiempoCoc": 20,
+      "categoria": "Plato principal",
+      "dificultad": "medio",
+      "tipo_comida": "Carnes",
+      "publicada": true,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Milanesa_napolitana.jpg/960px-Milanesa_napolitana.jpg?20130213142134",
+      "tags": [
+        "Horno",
+        "Frita"
+      ],
+      "ingredients": [
+        "300 g nalga para milanesa",
+        "1 u huevo",
+        "100 g pan rallado",
+        "120 ml salsa de tomate",
+        "80 g jamón cocido",
+        "120 g mozzarella",
+        "Sal a gusto"
+      ],
+      "nutrition": [
+        {
+          "label": "Calorías",
+          "value": 920
+        },
+        {
+          "label": "Proteínas",
+          "value": 55
+        },
+        {
+          "label": "Grasas",
+          "value": 52
+        },
+        {
+          "label": "Carbohidratos",
+          "value": 52
+        }
+      ],
+      "steps": [
+        "Empanar y dorar.",
+        "Cubrir con salsa, jamón y queso.",
+        "Gratinar."
+      ],
+      "tips": [
+        "Queda genial con papas al horno."
+      ],
+      "related": [],
+      "enlace": "/detail-recipe/5"
+    },
+    {
+      "id": "6",
+      "autor_id": 3,
+      "nombre": "Ñoquis de papa con salsa arrabbiata",
+      "descripcion": "Ñoquis caseros con salsa picante de tomate y berenjena.",
+      "porciones": 3,
+      "tiempoPrep": 30,
+      "tiempoCoc": 10,
+      "categoria": "Plato principal",
+      "dificultad": "medio",
+      "tipo_comida": "Pastas",
+      "publicada": true,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Potato_gnocchi%2C_aubergine_arrabiata.jpg/960px-Potato_gnocchi%2C_aubergine_arrabiata.jpg?20220724035806",
+      "tags": [
+        "Pasta",
+        "Picante"
+      ],
+      "ingredients": [
+        "600 g papa",
+        "180 g harina 0000",
+        "250 ml salsa arrabbiata",
+        "150 g berenjena",
+        "Sal a gusto"
+      ],
+      "nutrition": [
+        {
+          "label": "Calorías",
+          "value": 640
+        },
+        {
+          "label": "Proteínas",
+          "value": 14
+        },
+        {
+          "label": "Grasas",
+          "value": 14
+        },
+        {
+          "label": "Carbohidratos",
+          "value": 110
+        }
+      ],
+      "steps": [
+        "Hervir y pisar papa.",
+        "Formar ñoquis y hervir.",
+        "Mezclar con salsa y berenjena."
+      ],
+      "tips": [
+        "Si se pega, sumá harina de a poco."
+      ],
+      "related": [],
+      "enlace": "/detail-recipe/6"
+    },
+    {
+      "id": "7",
+      "autor_id": 1,
+      "nombre": "Ceviche clásico peruano",
+      "descripcion": "Pescado blanco en lima con cebolla morada y cilantro.",
+      "porciones": 2,
+      "tiempoPrep": 20,
+      "tiempoCoc": 0,
+      "categoria": "Plato principal",
+      "dificultad": "medio",
+      "tipo_comida": "Mariscos",
+      "publicada": true,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Ceviche_Peruvian_dish.jpg/500px-Ceviche_Peruvian_dish.jpg?20200219195301",
+      "tags": [
+        "Peruano",
+        "Fresco"
+      ],
+      "ingredients": [
+        "300 g pescado blanco",
+        "4 u limas",
+        "120 g cebolla morada",
+        "10 g cilantro",
+        "Sal a gusto"
+      ],
+      "nutrition": [
+        {
+          "label": "Calorías",
+          "value": 300
+        },
+        {
+          "label": "Proteínas",
+          "value": 34
+        },
+        {
+          "label": "Grasas",
+          "value": 6
+        },
+        {
+          "label": "Carbohidratos",
+          "value": 16
+        }
+      ],
+      "steps": [
+        "Cubetear pescado y salar.",
+        "Agregar lima, cebolla y cilantro.",
+        "Reposar y servir."
+      ],
+      "tips": [
+        "Usá lima fresca, no embotellada."
+      ],
+      "related": [],
+      "enlace": "/detail-recipe/7"
+    },
+    {
+      "id": "8",
+      "autor_id": 2,
+      "nombre": "Asado argentino a la parrilla",
+      "descripcion": "Cortes a las brasas; cocción lenta.",
+      "porciones": 4,
+      "tiempoPrep": 15,
+      "tiempoCoc": 60,
+      "categoria": "Plato principal",
+      "dificultad": "medio",
+      "tipo_comida": "Carnes",
+      "publicada": true,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Asado_argentino.jpg/960px-Asado_argentino.jpg?20060601193028",
+      "tags": [
+        "Parrilla",
+        "Clásico"
+      ],
+      "ingredients": [
+        "1500 g carne de asado",
+        "4 u chorizos",
+        "Sal gruesa a gusto"
+      ],
+      "nutrition": [
+        {
+          "label": "Calorías",
+          "value": 1200
+        },
+        {
+          "label": "Proteínas",
+          "value": 90
+        },
+        {
+          "label": "Grasas",
+          "value": 84
+        },
+        {
+          "label": "Carbohidratos",
+          "value": 6
+        }
+      ],
+      "steps": [
+        "Prender el fuego.",
+        "Cocinar lento, girando.",
+        "Reposar y servir."
+      ],
+      "tips": [
+        "No pinches la carne para no perder jugos."
+      ],
+      "related": [],
+      "enlace": "/detail-recipe/8"
+    },
+    {
+      "id": "9",
+      "autor_id": 3,
+      "nombre": "Tarta de chocolate con crème anglaise",
+      "descripcion": "Tarta cremosa de chocolate con salsa inglesa.",
+      "porciones": 8,
+      "tiempoPrep": 20,
+      "tiempoCoc": 30,
+      "categoria": "Postre",
+      "dificultad": "medio",
+      "tipo_comida": "Postres",
+      "publicada": true,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Chocolate_tart%2C_Paris.jpg/960px-Chocolate_tart%2C_Paris.jpg?20221204154610",
+      "tags": [
+        "Postre",
+        "Chocolate"
+      ],
+      "ingredients": [
+        "200 g chocolate amargo",
+        "120 g manteca",
+        "120 g azúcar",
+        "180 g harina",
+        "3 u huevos",
+        "250 ml leche",
+        "100 ml crema",
+        "3 u yemas"
+      ],
+      "nutrition": [
+        {
+          "label": "Calorías",
+          "value": 480
+        },
+        {
+          "label": "Proteínas",
+          "value": 7
+        },
+        {
+          "label": "Grasas",
+          "value": 28
+        },
+        {
+          "label": "Carbohidratos",
+          "value": 50
+        }
+      ],
+      "steps": [
+        "Derretir chocolate y manteca.",
+        "Mezclar con huevos, azúcar y harina.",
+        "Hornear y acompañar con crème anglaise."
+      ],
+      "tips": [
+        "Usá cacao en polvo para espolvorear."
+      ],
+      "related": [],
+      "enlace": "/detail-recipe/9"
+    }
+  ]
+}

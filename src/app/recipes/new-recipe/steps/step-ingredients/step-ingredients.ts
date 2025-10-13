@@ -1,27 +1,22 @@
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NewRecipeStore } from '../../new-recipe.js';
+import { RouterLink } from '@angular/router';
+import { NewRecipeStore } from '../../new-recipe.store';
 
 @Component({
   selector: 'app-step-ingredients',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './step-ingredients.html',
-  styleUrls: ['../../new-recipe.css', './step-ingredients.css'],
+  styleUrl: './step-ingredients.css'
 })
 export class StepIngredients {
-  constructor(public store: NewRecipeStore) {}
+  store = inject(NewRecipeStore);
+  trackByIng = (i: number) => i;
 
-  add() {
-    this.store.ingredients.update(list => [...list, { name:'', qty:'', unit:'' }]);
-  }
-
-  edit(i: number, patch: Partial<ReturnType<NewRecipeStore['ingredients']>[number]>) {
-    this.store.ingredients.update(list => {
-      const next = [...list];
-      next[i] = { ...next[i], ...patch };
-      return next;
-    });
-  }
+  add() { this.store.addIngredient(); }
+  remove(i: number) { this.store.removeIngredient(i); }
+  editIngName(i: number, ev: Event) { this.store.updateIngName(i, (ev.target as HTMLInputElement).value); }
+  editIngQty (i: number, ev: Event) { this.store.updateIngQty(i,  (ev.target as HTMLInputElement).value); }
+  editIngUnit(i: number, ev: Event) { this.store.updateIngUnit(i, (ev.target as HTMLSelectElement).value); }
 }
