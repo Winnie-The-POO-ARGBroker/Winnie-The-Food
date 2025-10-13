@@ -2,9 +2,10 @@ import { Injectable, signal, computed, inject } from '@angular/core';
 import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { map, switchMap, throwError, catchError, of } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export type Role = 'user' | 'admin';
-export interface AuthUser { id: number; nombre: string; apellido: string; email: string; role: Role; }
+export interface AuthUser { id: string | number; nombre: string; apellido: string; email: string; role: Role; }
 export interface RegisterPayload { nombre: string; apellido: string; email: string; password: string; }
 type ApiUser = AuthUser & { password: string };
 
@@ -13,7 +14,7 @@ export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
 
-    private baseUrl = 'http://localhost:3001';
+  private baseUrl = environment.apiBase;
   private USERS_COLLECTION = 'usuarios';
 
   private USER_KEY  = 'auth.user';
