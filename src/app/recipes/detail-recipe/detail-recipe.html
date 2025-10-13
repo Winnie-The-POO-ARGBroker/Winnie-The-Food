@@ -1,8 +1,6 @@
 <main class="m-10 container">
-  @if (loading()) {
-    <p>Cargando receta…</p>
-  } @else if (errorMsg()) {
-    <app-empty-state message="{{ errorMsg() }}"></app-empty-state>
+  @if (errorMsg()) {
+    <app-empty-state [message]="errorMsg()!"></app-empty-state>
   } @else if (receta()) {
 
     <h2 class="h2-color-1 font-black">{{ receta()?.nombre }}</h2>
@@ -10,17 +8,20 @@
     <div class="flex items-center flex-wrap gap-4 mb-4">
       <span>🕐 {{ totalTime() }}</span>
       <span>🍽️ {{ receta()?.porciones }} porciones</span>
+
       <div class="nivel-dificultad">
         <div class="circulo"
-             [class.facil]="receta()?.dificultad === 'facil'"
-             [class.medio]="receta()?.dificultad === 'medio'"
-             [class.dificil]="receta()?.dificultad === 'dificil'"></div>
-        Dificultad {{ receta()?.dificultad | titlecase }}
+             [class.facil]="dificultadStr()==='facil'"
+             [class.medio]="dificultadStr()==='medio'"
+             [class.dificil]="dificultadStr()==='dificil'"></div>
+        Dificultad {{ dificultadStr() | titlecase }}
       </div>
     </div>
 
     <div class="categorias-tags">
-      @for (t of (receta()?.tags ?? []); track t) { <div class="categoria-tag">{{ t }}</div> }
+      @for (t of (receta()?.tags ?? []); track $index) {
+        <div class="categoria-tag">{{ t }}</div>
+      }
     </div>
 
     <div class="imagen-receta">
@@ -29,34 +30,59 @@
 
     <div class="seccion-superior">
       <div>
+        <!-- INGREDIENTES -->
         <section class="modulo-detalle" style="margin-bottom:2rem;">
           <h3 class="h2-color-1 subrayado-naranja">Ingredientes</h3>
           <ul>
-            @for (ing of (receta()?.ingredients ?? []); track ing) { <li>{{ ing }}</li> }
+            @for (ing of (receta()?.ingredients ?? []); track ing.orden) {
+              <li>{{ ing.texto }}</li>
+            } @empty {
+              <li>—</li>
+            }
           </ul>
         </section>
 
+        <!-- INFORMACIÓN NUTRICIONAL -->
         <section class="modulo-detalle">
           <h3 class="h2-color-1 subrayado-naranja">Información nutricional</h3>
           <div class="nutricional-boxes">
             @for (n of (receta()?.nutrition ?? []); track n.label) {
-              <div class="nutricional-box"><strong>{{ n.value }}</strong><br>{{ n.label }}</div>
+              <div class="nutricional-box">
+                <strong>{{ n.valueNum ?? '—' }}</strong><br>
+                {{ n.label }}
+              </div>
+            } @empty {
+              <div class="muted">Sin datos.</div>
             }
           </div>
         </section>
       </div>
 
       <div>
+        <!-- PREPARACIÓN + TIPS -->
         <section class="modulo-detalle">
           <h3 class="h2-color-1 subrayado-naranja">Preparación</h3>
+
           <ol class="lista-pasos">
-            @for (p of (receta()?.steps ?? []); track p) { <li>{{ p }}</li> }
+            @for (p of (receta()?.steps ?? []); track p.orden) {
+              <li>
+                <span class="badge">{{ p.orden }}</span>
+                <span>{{ p.texto }}</span>
+              </li>
+            } @empty {
+              <li>—</li>
+            }
           </ol>
 
           <div class="consejos-verde">
             <h3 class="h2-color-1">💡 Consejos Útiles</h3>
-            @for (c of (receta()?.tips ?? []); track c) {
-              <div class="consejo-verde"><div class="check-verde">✓</div>{{ c }}</div>
+            @for (c of (receta()?.tips ?? []); track c.orden) {
+              <div class="consejo-verde">
+                <div class="check-verde">✓</div>
+                {{ c.texto }}
+              </div>
+            } @empty {
+              <div class="muted">Sin consejos.</div>
             }
           </div>
         </section>
