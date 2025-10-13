@@ -1,47 +1,48 @@
+<!-- src/app/shared/components/featured/featured.html -->
 <div class="recetas-contenedor">
-  @for (recipe of recipes; track recipe.titulo) {
+  @for (recipe of cardsList; track recipe.id) {
 
     @if (actionsTemplate) {
-
+      <!-- DASHBOARD: con barra de acciones -->
       <div class="featured-item">
-        @if (recipe.id || (recipe.enlace && recipe.enlace !== '#')) {
-          <a class="card receta text-decoration-none"
-             [routerLink]="recipe.id ? ['/detail-recipe', recipe.id] : recipe.enlace">
-            <img [src]="recipe.imagen" class="card-img-top" [alt]="recipe.titulo">
-
+        @if (recipe.enlace && recipe.enlace !== '#') {
+          <a class="card receta text-decoration-none" [routerLink]="recipe.enlace">
+            <img [src]="imgSrc(recipe)" class="card-img-top" [attr.alt]="recipe.titulo">
             <div class="tiempo-receta">{{ recipe.tiempo }}</div>
 
             <div class="card-body">
               <h3 class="h2-color-1">{{ recipe.titulo }}</h3>
               <p>{{ recipe.descripcion }}</p>
+
               <div class="nivel-dificultad">
                 <div class="circulo"
                      [class.facil]="recipe.dificultad==='facil'"
                      [class.medio]="recipe.dificultad==='medio'"
                      [class.dificil]="recipe.dificultad==='dificil'"></div>
-                <span>{{ recipe.dificultad }}</span>
+                <span>{{ recipe.dificultad | dificultadNombre }}</span>
               </div>
             </div>
           </a>
         } @else {
           <div class="card receta text-decoration-none">
-            <img [src]="recipe.imagen" class="card-img-top" [alt]="recipe.titulo">
+            <img [src]="imgSrc(recipe)" class="card-img-top" [attr.alt]="recipe.titulo">
             <div class="tiempo-receta">{{ recipe.tiempo }}</div>
+
             <div class="card-body">
               <h3 class="h2-color-1">{{ recipe.titulo }}</h3>
               <p>{{ recipe.descripcion }}</p>
+
               <div class="nivel-dificultad">
                 <div class="circulo"
                      [class.facil]="recipe.dificultad==='facil'"
                      [class.medio]="recipe.dificultad==='medio'"
                      [class.dificil]="recipe.dificultad==='dificil'"></div>
-                <span>{{ recipe.dificultad }}</span>
+                <span>{{ recipe.dificultad | dificultadNombre }}</span>
               </div>
             </div>
           </div>
         }
 
-        <!-- Barra beige con 2 botones iguales -->
         <div class="featured-actions-bar">
           <ng-container
             [ngTemplateOutlet]="actionsTemplate!"
@@ -51,39 +52,40 @@
       </div>
 
     } @else {
-      <!-- HOME / ALL: TU CÓDIGO ORIGINAL TAL CUAL -->
-      @if (recipe.id || (recipe.enlace && recipe.enlace !== '#')) {
-        <a class="card receta text-decoration-none"
-           [routerLink]="recipe.id ? ['/detail-recipe', recipe.id] : recipe.enlace">
-          <img [src]="recipe.imagen" class="card-img-top" [alt]="recipe.titulo">
-
+      <!-- HOME / ALL: sin acciones -->
+      @if (recipe.enlace && recipe.enlace !== '#') {
+        <a class="card receta text-decoration-none" [routerLink]="recipe.enlace">
+          <img [src]="imgSrc(recipe)" class="card-img-top" [attr.alt]="recipe.titulo">
           <div class="tiempo-receta">{{ recipe.tiempo }}</div>
 
           <div class="card-body">
             <h3 class="h2-color-1">{{ recipe.titulo }}</h3>
             <p>{{ recipe.descripcion }}</p>
+
             <div class="nivel-dificultad">
               <div class="circulo"
                    [class.facil]="recipe.dificultad==='facil'"
                    [class.medio]="recipe.dificultad==='medio'"
                    [class.dificil]="recipe.dificultad==='dificil'"></div>
-              <span>{{ recipe.dificultad }}</span>
+              <span>{{ recipe.dificultad | dificultadNombre }}</span>
             </div>
           </div>
         </a>
       } @else {
         <div class="card receta text-decoration-none">
-          <img [src]="recipe.imagen" class="card-img-top" [alt]="recipe.titulo">
+          <img [src]="imgSrc(recipe)" class="card-img-top" [attr.alt]="recipe.titulo">
           <div class="tiempo-receta">{{ recipe.tiempo }}</div>
+
           <div class="card-body">
             <h3 class="h2-color-1">{{ recipe.titulo }}</h3>
             <p>{{ recipe.descripcion }}</p>
+
             <div class="nivel-dificultad">
               <div class="circulo"
                    [class.facil]="recipe.dificultad==='facil'"
                    [class.medio]="recipe.dificultad==='medio'"
                    [class.dificil]="recipe.dificultad==='dificil'"></div>
-              <span>{{ recipe.dificultad }}</span>
+              <span>{{ recipe.dificultad | dificultadNombre }}</span>
             </div>
           </div>
         </div>
