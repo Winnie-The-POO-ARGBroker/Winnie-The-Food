@@ -1,6 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NewRecipeStore } from '../../new-recipe.store';
+import { RecipesService } from '../../../../services/recipes.service';
+import { Categoria } from '../../../../models/categories-models';
 
 @Component({
   selector: 'app-step-basic-info',
@@ -11,14 +13,15 @@ import { NewRecipeStore } from '../../new-recipe.store';
 })
 export class StepBasicInfo {
   store = inject(NewRecipeStore);
+  private svc = inject(RecipesService);
 
-  async onFile(ev: Event) {
-    const input = ev.target as HTMLInputElement;
-    const file = input.files?.[0];
-    if (!file) return;
-    if (file.size > 5 * 1024 * 1024) { alert('Máx 5MB'); return; }
-    const dataUrl = await fileToDataUrl(file);
-    this.store.setImageDataUrl(dataUrl);
+  categorias = signal<Categoria[]>([]);
+
+  constructor() {
+    this.svc.getCategorias().subscribe({
+      next: cats => this.categorias.set(cats),
+      error: e => console.error('[categorias]', e)
+    });
   }
 
   updateName(ev: Event)        { this.store.setName((ev.target as HTMLInputElement).value); }
@@ -29,12 +32,12 @@ export class StepBasicInfo {
   updateCookMinutes(ev: Event) { this.store.setCookMinutes(toNumber((ev.target as HTMLInputElement).value)); }
   updateServings(ev: Event)    { this.store.setServings(toNumber((ev.target as HTMLInputElement).value)); }
   updateTags(ev: Event)        { this.store.setTags((ev.target as HTMLInputElement).value); }
+  updateImageUrl(ev: Event)    { this.store.setImageUrl((ev.target as HTMLInputElement).value.trim()); }
 
   addNutrition()                   { this.store.addNutrition(); }
   removeNutrition(i: number)       { this.store.removeNutrition(i); }
   editNutLabel(i: number, e: Event){ this.store.updateNutLabel(i, (e.target as HTMLInputElement).value); }
   editNutValue(i: number, e: Event){ this.store.updateNutValue(i, (e.target as HTMLInputElement).value); }
-  editNutUnit (i: number, e: Event){ this.store.updateNutUnit(i, (e.target as HTMLInputElement).value); }
 
   persistDraft() { this.store.persistDraft(); }
 }
@@ -42,12 +45,4 @@ export class StepBasicInfo {
 function toNumber(v: string): number | null {
   const n = Number((v ?? '').toString().trim());
   return Number.isFinite(n) ? n : null;
-}
-function fileToDataUrl(file: File) {
-  return new Promise<string>((res, rej) => {
-    const r = new FileReader();
-    r.onload = () => res(String(r.result));
-    r.onerror = rej;
-    r.readAsDataURL(file);
-  });
 }

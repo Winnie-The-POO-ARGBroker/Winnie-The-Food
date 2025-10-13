@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { NewRecipeStore } from '../../new-recipe.store';
-import { Receta } from '../../../../models/receta-model';
 import { AuthService } from '../../../../services/auth.service';
 import { RecipesService } from '../../../../services/recipes.service';
 
@@ -19,92 +18,96 @@ export class StepProcessTips {
   private auth   = inject(AuthService);
   private recipesSvc = inject(RecipesService);
 
-  private readonly LOCAL_KEY = 'recipes_local';
   trackById = (_: number, item: { id: string }) => item.id;
 
-  // --- handlers ---
+  // handlers de UI
   editStepDesc(i: number, ev: Event) { this.store.updateStep(i, (ev.target as HTMLTextAreaElement).value); }
   addStep() { this.store.addStep(); }
   editTipDesc(i: number, ev: Event) { this.store.updateTip(i, (ev.target as HTMLTextAreaElement).value); }
   addTip() { this.store.addTip(); }
 
-  // --- helpers ---
-  private normalizeDifficulty(v: string): 'facil'|'medio'|'dificil' {
-    return v === 'media' ? 'medio' : (v as any);
-  }
-  private ingredientsAsStrings(): string[] {
+  // ---------- helpers para anidados ----------
+  private ingredientsAsObjects() {
     return (this.store.ingredients() ?? [])
-      .filter(i => i?.name?.trim())
-      .map(i => {
-        const qty = i?.qty?.toString().trim() || '';
-        const unit = i?.unit?.trim() || '';
-        const name = i?.name?.trim() || '';
+      .filter(i => (i?.name ?? '').trim())
+      .map((i, idx) => {
+        const qty  = (i?.qty ?? '').toString().trim();
+        const unit = (i?.unit ?? '').toString().trim();
+        const name = (i?.name ?? '').toString().trim();
         const left = [qty, unit].filter(Boolean).join(' ');
-        return left ? `${left} ${name}` : name;
+        const texto = left ? `${left} ${name}` : name;
+        return { orden: idx + 1, texto };
       });
   }
-  private stepsAsStrings(): string[] {
-    return (this.store.steps() ?? []).map(s => (s?.description ?? '').trim()).filter(Boolean);
+  private stepsAsObjects() {
+    return (this.store.steps() ?? [])
+      .map((s, idx) => ({ orden: idx + 1, texto: (s?.description ?? '').trim() }))
+      .filter(s => s.texto);
   }
-  private tipsAsStrings(): string[] {
-    return (this.store.tips() ?? []).map(t => (t?.description ?? '').trim()).filter(Boolean);
+  private tipsAsObjects() {
+    return (this.store.tips() ?? [])
+      .map((t, idx) => ({ orden: idx + 1, texto: (t?.description ?? '').trim() }))
+      .filter(t => t.texto);
   }
-  private nutritionAsLabelValue(): {label: string; value: string}[] {
+  private nutritionAsObjects(): { label: string; valueNum: number | null }[] {
     return (this.store.nutritionItems() ?? [])
-      .filter(n => n?.label)
+      .filter(n => (n?.label ?? '').trim())
       .map(n => ({
-        label: n.label.trim(),
-        value: n.unit ? `${n.value ?? ''} ${n.unit}` : String(n.value ?? '')
+        label: (n!.label!).trim(),
+        valueNum: n?.value != null && n?.value !== '' ? Number(n.value) : null
       }));
   }
 
   finalizarYVer() {
-    const userId = this.auth.currentUser()?.id ?? 0; // <-- autor logueado
+    const userId = this.auth.currentUser()?.id ?? 0;
+    const editingId = this.store.editingId();
+    const tags = (this.store.tags() ?? '')
+    .split(',').map(t => t.trim()).filter(Boolean);
 
-    // payload para el server (sin id → json-server lo crea)
-    const serverPayload: Omit<Receta, 'id'> = {
-      autor_id: userId as any,
+    const payloadBase = {
+      autor_id: String(userId),
       nombre: (this.store.name() ?? '').trim(),
       descripcion: (this.store.description() ?? '').trim(),
       porciones: Number(this.store.servings() ?? 0) || 0,
       tiempoPrep: Number(this.store.prepMinutes() ?? 0) || 0,
       tiempoCoc: Number(this.store.cookMinutes() ?? 0) || 0,
-      categoria: (this.store.category() ?? '').trim(),
-      dificultad: this.normalizeDifficulty(this.store.difficulty() ?? 'facil'),
-      tipo_comida: 'Otros',
+      categoria: this.store.category() || null,
+      dificultad: (() => {
+        const d = (this.store.difficulty() ?? 'facil').toLowerCase();
+        return d === 'media' ? 'medio' : d;
+      })(),
       publicada: true,
-      imageUrl: this.store.imageDataUrl() || 'https://via.placeholder.com/300x200?text=Sin+imagen',
-      tags: (this.store.tags() ?? '').split(',').map(t => t.trim()).filter(Boolean),
-      ingredients: this.ingredientsAsStrings(),
-      nutrition: this.nutritionAsLabelValue(),
-      steps: this.stepsAsStrings(),
-      tips: this.tipsAsStrings(),
-      related: [],
-      enlace: ''
+      imageUrl: this.store.imageUrl() || 'https://blocks.astratic.com/img/general-img-landscape.png',
+      enlace: null
     };
 
-    // 1) Intentar publicar en el server
-    this.recipesSvc.createReceta(serverPayload).subscribe({
-      next: (created) => {
+    const full = {
+      ...payloadBase,
+      ingredients: this.ingredientsAsObjects(),
+      steps: this.stepsAsObjects(),
+      tips: this.tipsAsObjects(),
+      nutrition: this.nutritionAsObjects(),
+      tags
+    };
 
-        this.store.persistDraft?.();
-        this.router.navigate(['/detail-recipe', created.id]);
-      },
-      error: (e) => {
-        console.error('[createReceta] falló, guardo en LocalStorage', e);
+    const onOk = (r: any) => {
+      this.store.clearDraft?.();
+      this.store.resetAll();
+      this.router.navigate(['/detail-recipe', r.id]);
+    };
 
-        // 2) Fallback: guardar local para no perder el trabajo
-        const localId = `ls-${Date.now()}`;
-        const localReceta: Receta = {
-          id: localId as any,
-          ...serverPayload,
-          enlace: `/detail-recipe/${localId}`
-        };
-        this.recipesSvc.saveLocal(localReceta);
+    if (editingId) {
+      this.recipesSvc.updateReceta(String(editingId), full as any).subscribe({
+        next: onOk,
+        error: (e) => { console.error('[updateReceta]', e); alert('No se pudo actualizar la receta.'); }
+      });
+    } else {
+      const withCreated = { ...full, creado_en: new Date().toISOString() };
+      this.recipesSvc.createReceta(withCreated as any).subscribe({
+        next: onOk,
+        error: (e) => { console.error('[createReceta]', e); alert('No se pudo crear la receta.'); }
+      });
+    }
 
-        this.store.persistDraft?.();
-        this.router.navigate(['/detail-recipe', localId]);
-      }
-    });
   }
 }
