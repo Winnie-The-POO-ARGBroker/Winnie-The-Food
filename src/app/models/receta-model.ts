@@ -1,29 +1,38 @@
 export type Dificultad = 'facil' | 'medio' | 'dificil';
 
-export interface Nutrition {
-  label: string;
-  value: string;
-  unit?: string;
-}
+export interface IngredientItem { orden: number; texto: string; }
+export interface StepItem       { orden: number; texto: string; }
+export interface TipItem        { orden: number; texto: string; }
+export interface NutritionItem  { label: string; valueNum: number | null; }
 
 export interface Receta {
-  id: number;
-  autor_id: number;
+  id: number | string;
+  autor_id: string | number;
   nombre: string;
   descripcion: string;
-  porciones: number;
-  tiempoPrep: number;
-  tiempoCoc: number;
-  categoria: string;
-  dificultad: Dificultad;
-  tipo_comida: string;
+  porciones?: number | null;
+  tiempoPrep?: number | null;
+  tiempoCoc?: number | null;
+  categoria?: number | null | string;
+  dificultad: Dificultad | 1 | 2 | 3;
+  tipo?: number | null | string;
   publicada: boolean;
-  imageUrl: string;
-  tags: string[];
-  ingredients: string[];
-  nutrition: Nutrition[];
-  steps: string[];
-  tips: string[];
-  related: any[];     
-  enlace?: string;
+  imageUrl?: string | null;
+
+  tags?: string[];
+  ingredients?: IngredientItem[];
+  nutrition?: NutritionItem[];
+  steps?: StepItem[];
+  tips?: TipItem[];
+  related?: Array<{
+    titulo: string;
+    descripcion?: string | null;
+    tiempo?: string | null;
+    dificultad?: Dificultad | 1 | 2 | 3;
+    imagen?: string | null;
+    enlace?: string | null;
+  }>;
+
+  enlace?: string | null;
+  creado_en?: string;
 }

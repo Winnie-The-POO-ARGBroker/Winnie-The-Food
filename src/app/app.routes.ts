@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+
+// Componentes
 import { Home } from './pages/home/home.js';
 import { About } from './pages/about/about.js';
 import { Login } from './auth/login/login.js';
@@ -13,20 +15,61 @@ import { StepProcessTips } from './recipes/new-recipe/steps/step-process-tips/st
 import { EmptyState } from './shared/components/empty-state/empty-state.js';
 import { authGuard } from './auth/auth.guard.js';
 
+// Resolvers funcionales
+import { allRecipesResolver } from './core/resolvers/recipes.resolver';
+import { recipeDetailResolver } from './core/resolvers/recipe-detail.resolver';
+import { categoriesResolver } from './core/resolvers/categories.resolver';
+import { myRecipesResolver } from './core/resolvers/dashboard-recipes.resolver';
+
 export const routes: Routes = [
-  { path: '', component: Home },
+  {
+    path: '',
+    component: Home,
+    resolve: {
+      categorias: categoriesResolver,
+      featured: allRecipesResolver,
+    },
+    title: 'Winnie The Food - Recetas caseras fáciles y deliciosas'
+  },
+
   { path: 'about', component: About },
   { path: 'login', component: Login },
   { path: 'register', component: Register },
-  { path: 'all-recipes', component: AllRecipes },
-  { path: 'dashboard-recipes', component: DashboardRecipes },
 
+  {
+    path: 'all-recipes',
+    component: AllRecipes,
+    resolve: {
+      recetas: allRecipesResolver,
+      categorias: categoriesResolver,
+    },
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+    title: 'Todas las recetas'
+  },
 
-  { path: 'detail-recipe/:id', component: DetailRecipe },
+  {
+    path: 'dashboard-recipes',
+    component: DashboardRecipes,
+    resolve: {
+      recetas: myRecipesResolver,
+    },
+    title: 'Mis recetas'
+  },
+
+  {
+    path: 'detail-recipe/:id',
+    component: DetailRecipe,
+    resolve: {
+      receta: recipeDetailResolver,
+    },
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+    title: 'Detalle de la receta'
+  },
 
   {
     path: 'new-recipe',
     component: NewRecipeShell,
+    resolve: { categorias: categoriesResolver },
     children: [
       { path: '', redirectTo: 'step-1', pathMatch: 'full' },
       { path: 'step-1', component: StepBasicInfo, canActivate: [authGuard], title: 'Nueva receta · Paso 1' },
@@ -35,6 +78,5 @@ export const routes: Routes = [
     ]
   },
 
-  // Ruta comodín para manejar rutas no definidas (404) Que tengan un mensaje usando empty-state
   { path: '**', component: EmptyState, title: 'Página no encontrada' }
 ];
