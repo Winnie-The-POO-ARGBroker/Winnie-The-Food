@@ -1,5 +1,8 @@
-<app-preloader></app-preloader>
-
-<app-menu></app-menu>
-<router-outlet />
-<app-footer></app-footer>
+<div>
+  <app-preloader></app-preloader>
+  <div class="app-content"
+      [style.visibility]="loader.active() ? 'hidden' : 'visible'">
+  <app-menu></app-menu>
+  <router-outlet />
+  <app-footer></app-footer>
+</div>
