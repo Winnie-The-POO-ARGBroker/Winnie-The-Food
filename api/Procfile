@@ -1,4 +1,4 @@
-release: python api/manage.py migrate && python api/manage.py collectstatic --noinput
-web: gunicorn api.wsgi:application --chdir api
+release: python manage.py migrate && python manage.py collectstatic --noinput
+web: gunicorn api.wsgi:application --chdir api/api
 
 

@@ -7,10 +7,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-dev')
 
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = [
-    '.cleverapps.io',      # dominio de Clever Cloud
-    'localhost', '127.0.0.1'
-]
+ALLOWED_HOSTS = ['*']
 
 # Aplicaciones
 INSTALLED_APPS = [
@@ -87,4 +84,4 @@ REST_FRAMEWORK = {
 
 # CORS (en producción limitarás esto)
 CORS_ALLOW_ALL_ORIGINS = True
-CSRF_TRUSTED_ORIGINS = ['https://*.cleverapps.io']
+CSRF_TRUSTED_ORIGINS = ['https://*.onrender.com']
