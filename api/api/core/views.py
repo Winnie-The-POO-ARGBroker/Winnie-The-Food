@@ -8,6 +8,7 @@ from .serializers import (
     UsuarioSerializer, UsuarioCreateSerializer,
     RecetaSerializer, RecetaDetailSerializer, CategoriaSerializer
 )
+from hmac import compare_digest
 
 def apply_sorting(qs, request):
     sort = request.query_params.get('_sort')
@@ -31,27 +32,26 @@ class UsuarioViewSet(viewsets.ModelViewSet):
         email = self.request.query_params.get('email')
         if email:
             qs = qs.filter(email__iexact=email)
-        return apply_sorting(qs, self.request)
+        return qs
 
     @action(detail=False, methods=['post'], url_path='login', permission_classes=[AllowAny])
     def login(self, request):
         email = (request.data.get('email') or '').strip().lower()
         password = request.data.get('password') or ''
         if not email or not password:
-            return Response({'code': 'BAD_INPUT', 'detail': 'Email y contraseña son requeridos.'},
+            return Response({'code':'BAD_INPUT','detail':'Email y contraseña son requeridos.'},
                             status=status.HTTP_400_BAD_REQUEST)
         try:
             user = Usuarios.objects.get(email__iexact=email)
         except Usuarios.DoesNotExist:
-            return Response({'code': 'EMAIL_NOT_FOUND', 'detail': 'No existe una cuenta con ese email.'},
+            return Response({'code':'EMAIL_NOT_FOUND','detail':'No existe una cuenta con ese email.'},
                             status=status.HTTP_400_BAD_REQUEST)
 
-        if not user.check_password(password):
-            return Response({'code': 'WRONG_PASSWORD', 'detail': 'La contraseña es incorrecta.'},
+        if not compare_digest(str(user.password or ''), str(password)):
+            return Response({'code':'WRONG_PASSWORD','detail':'La contraseña es incorrecta.'},
                             status=status.HTTP_400_BAD_REQUEST)
 
-        data = UsuarioSerializer(user).data
-        return Response(data, status=status.HTTP_200_OK)
+        return Response(UsuarioSerializer(user).data, status=status.HTTP_200_OK)
 
 class RecetaViewSet(viewsets.ModelViewSet):
     queryset = Recetas.objects.all()

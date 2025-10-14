@@ -56,7 +56,20 @@ export class AuthService {
       password
     };
 
-    return this.http.post<ApiUser>(`${this.usersUrl()}/login/`, body).pipe(
+    const urlNoSlash = `${this.usersUrl()}/login`;
+    const urlSlash   = `${urlNoSlash}/`;
+
+    return this.http.post<ApiUser>(urlNoSlash, body, {
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
+    }).pipe(
+      catchError((err: HttpErrorResponse) => {
+      if (err.status === 404) {
+        return this.http.post<ApiUser>(urlSlash, body, {
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
+        });
+      }
+      return throwError(() => err);
+    }),
       map(user => {
         const authUser = this.toAuthUser(user);
         this.persistUser(authUser, remember ? 'local' : 'session');

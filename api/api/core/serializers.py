@@ -1,4 +1,3 @@
-# core/serializers.py
 from uuid import uuid4
 from django.db import transaction
 from django.db.models import Max
@@ -17,9 +16,8 @@ class UsuarioCreateSerializer(serializers.ModelSerializer):
         extra_kwargs = {'id': {'required': False}}
 
     def create(self, vd):
-        if not vd.get('id'):
-            vd['id'] = uuid4().hex[:12]
         return super().create(vd)
+
 
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
