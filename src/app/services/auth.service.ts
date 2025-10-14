@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
 export type Role = 'user' | 'admin';
 export interface AuthUser { id: string | number; nombre: string; apellido: string; email: string; role: Role; }
 export interface RegisterPayload { nombre: string; apellido: string; email: string; password: string; }
-type ApiUser = AuthUser & { password: string };
+type ApiUser = AuthUser & { password: string; creado_en: string };
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -51,16 +51,32 @@ export class AuthService {
   }
 
   login(email: string, password: string, remember = false) {
-    const params = new HttpParams().set('email', email.trim().toLowerCase()).set('password', password);
-    return this.http.get<ApiUser[]>(this.usersUrl(), { params }).pipe(
-      map(list => {
-        if (!list.length) throw new Error('Credenciales inválidas');
-        const authUser = this.toAuthUser(list[0]);
+    const body = {
+      email: email.trim().toLowerCase(),
+      password
+    };
+
+    return this.http.post<ApiUser>(`${this.usersUrl()}/login/`, body).pipe(
+      map(user => {
+        const authUser = this.toAuthUser(user);
         this.persistUser(authUser, remember ? 'local' : 'session');
         this.currentUser.set(authUser);
         return authUser;
       }),
-      catchError(err => throwError(() => new Error(this.friendlyHttpError(err, 'No se pudo iniciar sesión.'))))
+      catchError((err: HttpErrorResponse) => {
+        const code = err?.error?.code as string | undefined;
+        const detail = err?.error?.detail as string | undefined;
+
+        let msg = 'No se pudo iniciar sesión.';
+        if (code === 'EMAIL_NOT_FOUND')  msg = 'No existe una cuenta con ese email.';
+        else if (code === 'WRONG_PASSWORD') msg = 'La contraseña es incorrecta.';
+        else if (code === 'BAD_INPUT')   msg = 'Email y contraseña son requeridos.';
+        else if (err.status === 0)       msg = 'No hay conexión con el servidor.';
+        else if (err.status >= 500)      msg = 'Servidor no disponible. Intentá más tarde.';
+        else if (detail)                 msg = detail;
+
+        return throwError(() => new Error(msg));
+      })
     );
   }
 
@@ -72,17 +88,19 @@ export class AuthService {
     );
   }
 
-  // ⬇️ AUTLOGIN por defecto + opción de recordar
   register(payload: RegisterPayload, opts?: { autoLogin?: boolean; remember?: boolean }) {
     const autoLogin = opts?.autoLogin ?? true;
     const remember  = opts?.remember ?? false;
+
+    const ahoraISO = new Date().toISOString();
 
     const body: Omit<ApiUser, 'id'> = {
       nombre: payload.nombre.trim(),
       apellido: payload.apellido.trim(),
       email: payload.email.trim().toLowerCase(),
       password: payload.password,
-      role: 'user'
+      role: 'user',
+      creado_en: ahoraISO,
     };
 
     return this.checkEmailExists(body.email).pipe(

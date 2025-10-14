@@ -4,6 +4,9 @@
     <p class="font-bold">Bienvenido de nuevo</p>
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      @if (errorMsg) {
+        <p class="error" style="margin: 8px 0 0 0;">{{ errorMsg }}</p>
+      }
       <!-- Email -->
       <div>
         <label for="email">Correo electrónico</label><br />
