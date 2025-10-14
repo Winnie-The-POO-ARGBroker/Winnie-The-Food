@@ -1,0 +1,11 @@
+# Ignorar el backend Django
+api/
+.venv/
+__pycache__/
+*.pyc
+
+# Ignorar otras cosas innecesarias
+History/
+.vscode/
+.idea/
+node_modules/
