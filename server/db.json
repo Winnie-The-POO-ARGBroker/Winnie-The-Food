@@ -1,7 +1,7 @@
 {
   "usuarios": [
     {
-      "id": 1,
+      "id": "1",
       "nombre": "Admin",
       "apellido": "Admin",
       "email": "admin@example.com",
@@ -9,7 +9,7 @@
       "role": "admin"
     },
     {
-      "id": 2,
+      "id": "2",
       "nombre": "María",
       "apellido": "Pérez",
       "email": "maria@example.com",
@@ -17,42 +17,10 @@
       "role": "user"
     },
     {
-      "id": 3,
+      "id": "3",
       "nombre": "Juan",
       "apellido": "Pérez",
       "email": "juan@example.com",
-      "password": "juan123",
-      "role": "user"
-    },
-    {
-      "id": "9a5e",
-      "nombre": "Luis",
-      "apellido": "Gutierrez",
-      "email": "luis@example.com",
-      "password": "luis123",
-      "role": "user"
-    },
-    {
-      "id": "e2d5",
-      "nombre": "Pablo",
-      "apellido": "Lorenzo",
-      "email": "pablo@example.com",
-      "password": "pablo123",
-      "role": "user"
-    },
-    {
-      "id": "9ef4",
-      "nombre": "Pato",
-      "apellido": "Filliol",
-      "email": "pato@example.com",
-      "password": "pato123",
-      "role": "user"
-    },
-    {
-      "id": "4688",
-      "nombre": "Juanito",
-      "apellido": "Perez",
-      "email": "juanito@example.com",
       "password": "juan123",
       "role": "user"
     }
@@ -60,103 +28,103 @@
   "sesiones": [],
   "categorias": [
     {
-      "id": 1,
+      "id": "1",
       "nombre": "Entrada",
       "imagen": "https://www.recetasnestle.com.mx/sites/default/files/styles/cropped_recipe_card_new/public/srh_recipes/46bdda0dbf686c91ca88af0a14a956c4.jpg.webp?itok=nbb7v7vQ"
     },
     {
-      "id": 2,
+      "id": "2",
       "nombre": "Plato principal",
       "imagen": "https://www.recetasnestle.cl/sites/default/files/styles/cropped_recipe_card_new/public/srh_recipes/57d2453074b608263f3a814302cc7864.jpg.webp?itok=ZTNS93BL"
     },
     {
-      "id": 3,
+      "id": "3",
       "nombre": "Postre",
       "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPYtWBVhF8IyWX1lUJS37W-9uHFxYJuwzT8w&s"
     },
     {
-      "id": 4,
+      "id": "4",
       "nombre": "Bebida",
       "imagen": "https://img.freepik.com/foto-gratis/gente-bebiendo-cocteles_23-2150168872.jpg?semt=ais_hybrid&w=740&q=80"
     },
     {
-      "id": 5,
+      "id": "5",
       "nombre": "Vegetariano",
       "imagen": "https://www.fithappysisters.com/Portals/FitHappySister/Mercadillo/files/Receta-Vegetariana_-Budha-bowl-Horizontal.jpg"
     }
   ],
   "dificultades": [
     {
-      "id": 1,
+      "id": "1",
       "nombre": "facil"
     },
     {
-      "id": 2,
+      "id": "2",
       "nombre": "medio"
     },
     {
-      "id": 3,
+      "id": "3",
       "nombre": "dificil"
     }
   ],
   "tipos": [
     {
-      "id": 1,
+      "id": "1",
       "nombre": "Carnes"
     },
     {
-      "id": 2,
+      "id": "2",
       "nombre": "Vegetariana"
     },
     {
-      "id": 3,
+      "id": "3",
       "nombre": "Vegana"
     },
     {
-      "id": 4,
+      "id": "4",
       "nombre": "Mariscos"
     },
     {
-      "id": 5,
+      "id": "5",
       "nombre": "Pastas"
     },
     {
-      "id": 6,
+      "id": "6",
       "nombre": "Pollo"
     },
     {
-      "id": 7,
+      "id": "7",
       "nombre": "Postres"
     }
   ],
   "unidades": [
     {
-      "id": 1,
+      "id": "1",
       "nombre": "gramo",
       "abreviatura": "g"
     },
     {
-      "id": 2,
+      "id": "2",
       "nombre": "kilogramo",
       "abreviatura": "kg"
     },
     {
-      "id": 3,
+      "id": "3",
       "nombre": "mililitro",
       "abreviatura": "ml"
     },
     {
-      "id": 4,
+      "id": "4",
       "nombre": "litro",
       "abreviatura": "l"
     },
     {
-      "id": 5,
+      "id": "5",
       "nombre": "unidad",
       "abreviatura": "u"
     },
     {
-      "id": 6,
+      "id": "6",
       "nombre": "taza",
       "abreviatura": "taza"
     }
@@ -164,7 +132,7 @@
   "favoritos": [],
   "recetas": [
     {
-      "id": 1,
+      "id": "1",
       "autor_id": 1,
       "nombre": "Ensalada César",
       "descripcion": "Clásica ensalada con lechuga romana, crutones y aderezo con parmesano.",
@@ -230,7 +198,7 @@
       "enlace": "/detail-recipe/1"
     },
     {
-      "id": 2,
+      "id": "2",
       "autor_id": 2,
       "nombre": "Tacos de pollo a la plancha",
       "descripcion": "Tortillas con pollo marinado, cebolla y cilantro; servir con lima.",
@@ -285,7 +253,7 @@
       "enlace": "/detail-recipe/2"
     },
     {
-      "id": 3,
+      "id": "3",
       "autor_id": 3,
       "nombre": "Sushi maki vegetariano",
       "descripcion": "Rolls con palta y pepino.",
@@ -339,7 +307,7 @@
       "enlace": "/detail-recipe/3"
     },
     {
-      "id": 4,
+      "id": "4",
       "autor_id": 1,
       "nombre": "Empanadas de jamón y queso",
       "descripcion": "Empanadas al horno con jamón y queso.",
@@ -392,7 +360,7 @@
       "enlace": "/detail-recipe/4"
     },
     {
-      "id": 5,
+      "id": "5",
       "autor_id": 2,
       "nombre": "Milanesa napolitana",
       "descripcion": "Clásico con salsa de tomate, jamón y mozzarella.",
@@ -447,7 +415,7 @@
       "enlace": "/detail-recipe/5"
     },
     {
-      "id": 6,
+      "id": "6",
       "autor_id": 3,
       "nombre": "Ñoquis de papa con salsa arrabbiata",
       "descripcion": "Ñoquis caseros con salsa picante de tomate y berenjena.",
@@ -500,7 +468,7 @@
       "enlace": "/detail-recipe/6"
     },
     {
-      "id": 7,
+      "id": "7",
       "autor_id": 1,
       "nombre": "Ceviche clásico peruano",
       "descripcion": "Pescado blanco en lima con cebolla morada y cilantro.",
@@ -553,7 +521,7 @@
       "enlace": "/detail-recipe/7"
     },
     {
-      "id": 8,
+      "id": "8",
       "autor_id": 2,
       "nombre": "Asado argentino a la parrilla",
       "descripcion": "Cortes a las brasas; cocción lenta.",
@@ -604,7 +572,7 @@
       "enlace": "/detail-recipe/8"
     },
     {
-      "id": 9,
+      "id": "9",
       "autor_id": 3,
       "nombre": "Tarta de chocolate con crème anglaise",
       "descripcion": "Tarta cremosa de chocolate con salsa inglesa.",

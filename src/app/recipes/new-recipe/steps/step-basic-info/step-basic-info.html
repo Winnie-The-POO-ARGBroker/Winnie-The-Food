@@ -1,25 +1,12 @@
 <div class="container-nueva-receta">
   <h4 class="h2-color-1">Informacion basica</h4>
 
-
-  <div class="imagen-receta">
-    @if (store.imageDataUrl()) {
-      <img
-        [src]="store.imageDataUrl()"
-        alt="Previsualización"
-        style="max-width:100%; max-height:100%; object-fit:cover; border-radius:12px;"
-      />
-    } @else {
-      <div class="detalles-imagen">
-        <p>Deja una foto de tu receta</p>
-        <p>o</p>
-        <label class="btn-personalizado secundario">
-          Cargar imagen
-          <input type="file" accept="image/png,image/jpeg" (change)="onFile($event)" hidden>
-        </label>
-        <p>PNG, JPG o JPEG (Max 5MB)</p>
-      </div>
-    }
+  <div class="input-container">
+    <label>URL de imagen</label>
+    <input type="url"
+           placeholder="https://…/foto.jpg"
+           [value]="store.imageUrl() ?? ''"
+           (input)="updateImageUrl($event)" />
   </div>
 
   <div class="receta-inputs">
@@ -30,12 +17,10 @@
 
     <div class="input-container">
       <label for="descripcion-receta">Descripcion de la receta</label>
-      <textarea
-        id="descripcion-receta"
-        rows="5"
-        placeholder="Describe tu receta"
-        [value]="store.description()"
-        (input)="updateDescription($event)"></textarea>
+      <textarea id="descripcion-receta" rows="5"
+                placeholder="Describe tu receta"
+                [value]="store.description()"
+                (input)="updateDescription($event)"></textarea>
     </div>
   </div>
 
@@ -43,21 +28,19 @@
     <div class="input-container">
       <label for="categoria">Categoria</label>
       <select id="categoria" [value]="store.category()" (change)="updateCategory($event)">
-        <option value="entrada">Entrada</option>
-        <option value="plato principal">Plato principal</option>
-        <option value="postre">Postre</option>
-        <option value="bebida">Bebida</option>
-        <option value="vegetariano">Vegetariano</option>
-        <option value="otros">Otros</option>
+        <option value="" disabled>Elegí una categoría</option>
+        @for (c of categorias(); track c.id) {
+          <option [value]="c.id">{{ c.nombre }}</option>
+        }
       </select>
     </div>
 
     <div class="input-container">
       <label for="dificultad">Dificultad</label>
       <select id="dificultad" [value]="store.difficulty()" (change)="updateDifficulty($event)">
-        <option value="facil">Facil</option>
-        <option value="media">Media</option>
-        <option value="dificil">Dificil</option>
+        <option value="facil">Fácil</option>
+        <option value="medio">Media</option>
+        <option value="dificil">Difícil</option>
       </select>
     </div>
   </div>
@@ -84,48 +67,42 @@
     </div>
   </div>
 
-  <!-- ================== NUTRICIÓN EN STEP-1 ================== -->
   <div class="linea-dashed"></div>
-  <h4 class="h2-color-1">Información nutricional</h4>
+<h4 class="h2-color-1">Información nutricional</h4>
 
-  <!-- Encabezados (solo en md+) -->
-  <div class="nutri-head">
-    <div>Nombre</div>
-    <div>Cantidad</div>
-    <div>Unidad</div>
-    <div class="nutri-head-actions">Acciones</div>
-  </div>
+<!-- Encabezados -->
+<div class="nutri-head">
+  <div>Nombre</div>
+  <div>Cantidad</div>
+  <div class="nutri-head-actions">Acciones</div>
+</div>
 
-  <div class="nutri-grid">
-    @for (n of store.nutritionItems(); track n.id; let i = $index) {
-      <div class="nutri-row">
-        <div class="nutri-name">
-          <input type="text" placeholder="Calorías, Proteína, etc." [value]="n.label" (input)="editNutLabel(i, $event)">
-        </div>
-
-        <div class="nutri-amount">
-          <input type="text" inputmode="decimal" placeholder="Ej: 200" [value]="n.value" (input)="editNutValue(i, $event)">
-        </div>
-
-        <div class="nutri-unit">
-          <input type="text" placeholder="kcal, g, mg..." [value]="n.unit" (input)="editNutUnit(i, $event)">
-        </div>
-
-        <div class="nutri-actions">
-          <button class="btn-personalizado secundario btn-compacto" type="button" (click)="removeNutrition(i)">Quitar</button>
-        </div>
+<div class="nutri-grid">
+  @for (n of store.nutritionItems(); track n.id; let i = $index) {
+    <div class="nutri-row">
+      <div class="nutri-name">
+        <input type="text" placeholder="Calorías, Proteína, etc."
+               [value]="n.label" (input)="editNutLabel(i, $event)">
       </div>
-    }
+      <div class="nutri-amount">
+        <input type="text" inputmode="decimal" placeholder="Ej: 200"
+               [value]="n.value" (input)="editNutValue(i, $event)">
+      </div>
+      <div class="nutri-actions">
+        <button class="btn-personalizado secundario btn-compacto" type="button"
+                (click)="removeNutrition(i)">Quitar</button>
+      </div>
+    </div>
+  }
   </div>
 
   <button class="btn-personalizado secundario nutri-add" type="button" (click)="addNutrition()">
     + Agregar valor nutricional
   </button>
 
-  <!-- ================== NAV ================== -->
   <div class="linea-dashed"></div>
   <div class="receta-btn-avance">
-    <a routerLink="/" class="btn-personalizado secundario">Cancelar</a>
-    <a routerLink="../step-2" class="btn-personalizado primario" (click)="store.persistDraft()">Siguiente</a>
+    <a routerLink="/" class="btn-personalizado secundario" (click)="persistDraft()">Cancelar</a>
+    <a routerLink="../step-2" class="btn-personalizado primario" (click)="persistDraft()">Siguiente</a>
   </div>
 </div>

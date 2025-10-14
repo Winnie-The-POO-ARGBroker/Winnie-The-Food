@@ -1,177 +1,129 @@
-// src/app/recipes/new-recipe/new-recipe.store.ts
-import { Injectable, signal, computed } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
-import type { Receta } from '../../models/receta-model';
+import { Injectable, signal } from '@angular/core';
 
-export type Difficulty = 'facil' | 'medio' | 'dificil';
-type Ing  = { name: string; qty: string; unit: string };
-type Step = { title: string; description: string };
-type Tip  = { title: string; description: string };
+const DRAFT_KEY = 'new_recipe_draft';
 
-const DRAFT_KEY = 'newRecipe.draft.v1';
-const LOCAL_COLLECTION_KEY = 'newRecipe.collection.v1';
+export type StepItem = { id: string; description: string };
+export type TipItem  = { id: string; description: string };
+export type Ingredient = { id: string; name: string; qty?: number | string; unit?: string };
+export type NutritionItem = { id: string; label: string; value?: number | string };
 
 @Injectable({ providedIn: 'root' })
 export class NewRecipeStore {
-  imageFile    = signal<File | null>(null);
-  imageDataUrl = signal<string | null>(null);
+  // ---- básicos ----
+  private _editingId     = signal<string | null>(null);
+  private _name          = signal<string>('');
+  private _description   = signal<string>('');
+  private _imageUrl      = signal<string | null>(null);
 
-  name        = signal('');
-  description = signal('');
-  category    = signal('Entrada');
-  difficulty  = signal<Difficulty>('facil');
+  private _category      = signal<string>('entrada');
+  private _difficulty    = signal<string>('facil'); // “media” → “medio” al enviar
+  private _prepMinutes   = signal<number | null>(null);
+  private _cookMinutes   = signal<number | null>(null);
+  private _servings      = signal<number | null>(null);
+  private _tags          = signal<string>('');
 
-  prepMinutes = signal('');
-  cookMinutes = signal('');
+  // ---- colecciones ----
+  private _nutrition     = signal<NutritionItem[]>([]);
+  private _ingredients   = signal<Ingredient[]>([]);
+  private _steps         = signal<StepItem[]>([]);
+  private _tips          = signal<TipItem[]>([]);
 
-  servings = signal<number | null>(null);
-  tags     = signal('');
+  // getters usados en templates
+  editingId   = () => this._editingId();
+  name        = () => this._name();
+  description = () => this._description();
+  imageUrl    = () => this._imageUrl();
 
-  ingredients = signal<Ing[]>([{ name:'', qty:'', unit:'' }]);
-  steps       = signal<Step[]>([{ title:'', description:'' }]);
-  tips        = signal<Tip[]>([]);
+  category    = () => this._category();
+  difficulty  = () => this._difficulty();
+  prepMinutes = () => this._prepMinutes();
+  cookMinutes = () => this._cookMinutes();
+  servings    = () => this._servings();
+  tags        = () => this._tags();
 
-  totalTime = computed(() => {
-    const p = Number(this.prepMinutes());
-    const c = Number(this.cookMinutes());
-    const sum = (isFinite(p) ? p : 0) + (isFinite(c) ? c : 0);
-    return sum > 0 ? `${sum} min` : '—';
-  });
+  nutritionItems = () => this._nutrition();
+  ingredients    = () => this._ingredients();
+  steps          = () => this._steps();
+  tips           = () => this._tips();
 
-  constructor(private auth: AuthService) { this.restoreDraft(); }
+  // setters básicos
+  setEditingId (v: string | null) { this._editingId.set(v); }
+  setName(v: string)              { this._name.set(v); }
+  setDescription(v: string)       { this._description.set(v); }
+  setImageUrl(url: string | null) { this._imageUrl.set(url); }
 
-  // ----------------- borrador -----------------
-  persistDraft() {
-    const json = JSON.stringify(this.asDraftJson());
-    try {
-      localStorage.setItem(DRAFT_KEY, json);
-    } catch {
-      // Si no entra por tamaño, guardamos sin imagen para no romper el flujo
-      try {
-        const lite = { ...this.asDraftJson(), imageDataUrl: null };
-        localStorage.setItem(DRAFT_KEY, JSON.stringify(lite));
-      } catch { /* no-op */ }
-    }
+  setCategory(v: string)          { this._category.set(v); }
+  setDifficulty(v: string)        { this._difficulty.set(v); }
+  setPrepMinutes(v: number | null){ this._prepMinutes.set(v); }
+  setCookMinutes(v: number | null){ this._cookMinutes.set(v); }
+  setServings(v: number | null)   { this._servings.set(v); }
+  setTags(v: string)              { this._tags.set(v); }
+
+  // ---- reemplazos masivos (para precarga de edición) ----
+  replaceIngredients(list: Ingredient[]) { this._ingredients.set(list ?? []); }
+  replaceSteps(list: StepItem[])         { this._steps.set(list ?? []); }
+  replaceTips(list: TipItem[])           { this._tips.set(list ?? []); }
+  replaceNutrition(list: NutritionItem[]){ this._nutrition.set(list ?? []); }
+
+  // ---- Nutrición fila a fila ----
+  addNutrition() {
+    this._nutrition.update(a => [...a, { id: crypto.randomUUID(), label: '', value: '' }]);
   }
+  removeNutrition(i: number) { this._nutrition.update(a => a.filter((_, idx) => idx !== i)); }
+  updateNutLabel(i: number, v: string)  { this._nutrition.update(a => a.map((n, idx) => idx === i ? { ...n, label: v } : n)); }
+  updateNutValue(i: number, v: string | number) { this._nutrition.update(a => a.map((n, idx) => idx === i ? { ...n, value: v } : n)); }
 
-  restoreDraft() {
-    const raw = localStorage.getItem(DRAFT_KEY);
-    if (!raw) return;
+  // ---- Ingredientes fila a fila ----
+  addIngredient() { this._ingredients.update(a => [...a, { id: crypto.randomUUID(), name: '', qty: '', unit: '' }]); }
+  removeIngredient(i: number) { this._ingredients.update(a => a.filter((_, idx) => idx !== i)); }
+  updateIngName(i: number, v: string) { this._ingredients.update(a => a.map((it, idx) => idx === i ? { ...it, name: v } : it)); }
+  updateIngQty (i: number, v: string | number) { this._ingredients.update(a => a.map((it, idx) => idx === i ? { ...it, qty: v } : it)); }
+  updateIngUnit(i: number, v: string) { this._ingredients.update(a => a.map((it, idx) => idx === i ? { ...it, unit: v } : it)); }
+
+  // ---- Pasos / Tips fila a fila ----
+  addStep()  { this._steps.update(a => [...a, { id: crypto.randomUUID(), description: '' }]); }
+  updateStep(i: number, v: string) { this._steps.update(a => a.map((s, idx) => idx === i ? { ...s, description: v } : s)); }
+
+  addTip() { this._tips.update(a => [...a, { id: crypto.randomUUID(), description: '' }]); }
+  updateTip(i: number, v: string) { this._tips.update(a => a.map((t, idx) => idx === i ? { ...t, description: v } : t)); }
+
+  // ---- Draft opcional ----
+  persistDraft = () => {
+    const draft = {
+      editingId: this._editingId(),
+      name: this._name(), description: this._description(), imageUrl: this._imageUrl(),
+      category: this._category(), difficulty: this._difficulty(),
+      prepMinutes: this._prepMinutes(), cookMinutes: this._cookMinutes(), servings: this._servings(),
+      tags: this._tags(), nutrition: this._nutrition(), ingredients: this._ingredients(),
+      steps: this._steps(), tips: this._tips()
+    };
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+  };
+
+  clearDraft = () => { localStorage.removeItem(DRAFT_KEY); };
+
+  loadDraft = () => {
+    const raw = localStorage.getItem('new_recipe_draft'); if (!raw) return;
     try {
       const d = JSON.parse(raw);
-      this.imageDataUrl.set(d.imageDataUrl ?? null);
-      this.name.set(d.name ?? '');
-      this.description.set(d.description ?? '');
-      this.category.set(d.category ?? 'Entrada');
-      this.difficulty.set((d.difficulty ?? 'facil') as Difficulty);
-      this.prepMinutes.set(d.prepMinutes ?? '');
-      this.cookMinutes.set(d.cookMinutes ?? '');
-      this.servings.set(d.servings ?? null);
-      this.tags.set(d.tags ?? '');
-      this.ingredients.set(Array.isArray(d.ingredients) && d.ingredients.length ? d.ingredients : [{ name:'', qty:'', unit:'' }]);
-      this.steps.set(Array.isArray(d.steps) && d.steps.length ? d.steps : [{ title:'', description:'' }]);
-      this.tips.set(Array.isArray(d.tips) ? d.tips : []);
-    } catch { /* no-op */ }
-  }
+      this._editingId.set(d.editingId ?? null);
+      this._name.set(d.name ?? '');            this._description.set(d.description ?? '');
+      this._imageUrl.set(d.imageUrl ?? null);
+      this._category.set(d.category ?? 'entrada');
+      this._difficulty.set(d.difficulty ?? 'facil');
+      this._prepMinutes.set(d.prepMinutes ?? null); this._cookMinutes.set(d.cookMinutes ?? null);
+      this._servings.set(d.servings ?? null); this._tags.set(d.tags ?? '');
+      this._nutrition.set(d.nutrition ?? []); this._ingredients.set(d.ingredients ?? []);
+      this._steps.set(d.steps ?? []);         this._tips.set(d.tips ?? []);
+    } catch {}
+  };
 
-  clearDraft() { localStorage.removeItem(DRAFT_KEY); }
-
-  // ----------------- finalizar -----------------
-  finalizeAndSave(): number {
-    const localId = Date.now();
-    const col = this.getLocalCollection();
-
-    const receta = this.toReceta(localId);
-
-    
-    try {
-      col.unshift(receta);
-      localStorage.setItem(LOCAL_COLLECTION_KEY, JSON.stringify(col));
-    } catch {
-
-      const lite = { ...receta, imageUrl: '/placeholder-recipe.webp' };
-      try {
-        col.unshift(lite);
-        localStorage.setItem(LOCAL_COLLECTION_KEY, JSON.stringify(col));
-      } catch { /* no-op */ }
-    }
-
-    this.clearDraft();
-    this.reset();
-    return localId;
-  }
-
-  // ----------------- helpers -----------------
-  private asDraftJson() {
-    return {
-      imageDataUrl: this.imageDataUrl(),
-      name: this.name(),
-      description: this.description(),
-      category: this.category(),
-      difficulty: this.difficulty(),
-      prepMinutes: this.prepMinutes(),
-      cookMinutes: this.cookMinutes(),
-      servings: this.servings(),
-      tags: this.tags(),
-      ingredients: this.ingredients(),
-      steps: this.steps(),
-      tips: this.tips()
-    };
-  }
-
-  private getLocalCollection(): Receta[] {
-    const raw = localStorage.getItem(LOCAL_COLLECTION_KEY);
-    if (!raw) return [];
-    try { return JSON.parse(raw) as Receta[]; } catch { return []; }
-  }
-
-  private n(str: string) { const n = Number(str); return isFinite(n) ? n : 0; }
-
-  private toReceta(localId: number): Receta {
-    const user = this.auth.currentUser();
-    const tagsArr = this.tags().split(',').map(s => s.trim()).filter(Boolean);
-    const ingArr  = this.ingredients()
-      .map(i => [i.name, `${i.qty}${i.unit ? ' ' + i.unit : ''}`.trim()].filter(Boolean).join(' '))
-      .filter(Boolean);
-    const steps = this.steps().map(s => s.title ? `${s.title}: ${s.description}` : s.description).filter(Boolean);
-    const tips  = this.tips().map(t => t.title ? `${t.title}: ${t.description}` : t.description).filter(Boolean);
-
-    return {
-      id: localId,
-      autor_id: user?.id ?? 0,
-      nombre: this.name(),
-      descripcion: this.description(),
-      porciones: this.servings() ?? 0,
-      tiempoPrep: this.n(this.prepMinutes()),
-      tiempoCoc:  this.n(this.cookMinutes()),
-      categoria: this.category(),
-      dificultad: this.difficulty(),
-      tipo_comida: 'Casera',
-      publicada: true,
-      imageUrl: this.imageDataUrl() ?? '/placeholder-recipe.webp',
-      tags: tagsArr,
-      ingredients: ingArr,
-      nutrition: [],
-      steps,
-      tips,
-      related: [],
-      enlace: `/detail-recipe/${localId}`
-    };
-  }
-
-  private reset() {
-    this.imageFile.set(null);
-    this.imageDataUrl.set(null);
-    this.name.set('');
-    this.description.set('');
-    this.category.set('Entrada');
-    this.difficulty.set('facil');
-    this.prepMinutes.set('');
-    this.cookMinutes.set('');
-    this.servings.set(null);
-    this.tags.set('');
-    this.ingredients.set([{ name:'', qty:'', unit:'' }]);
-    this.steps.set([{ title:'', description:'' }]);
-    this.tips.set([]);
-  }
+  resetAll = () => {
+    this._editingId.set(null);
+    this._name.set(''); this._description.set(''); this._imageUrl.set(null);
+    this._category.set('entrada'); this._difficulty.set('facil');
+    this._prepMinutes.set(null); this._cookMinutes.set(null); this._servings.set(null);
+    this._tags.set('');
+    this._nutrition.set([]); this._ingredients.set([]); this._steps.set([]); this._tips.set([]);
+  };
 }

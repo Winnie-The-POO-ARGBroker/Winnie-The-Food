@@ -1,86 +1,113 @@
-import { Component } from '@angular/core';
-import { RouterModule, Router } from '@angular/router';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NewRecipeStore } from '../../new-recipe.js';
-import { Receta } from '../../../../models/receta-model.js';
+import { Router, RouterLink } from '@angular/router';
+import { NewRecipeStore } from '../../new-recipe.store';
+import { AuthService } from '../../../../services/auth.service';
+import { RecipesService } from '../../../../services/recipes.service';
 
 @Component({
   selector: 'app-step-process-tips',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './step-process-tips.html',
-  styleUrls: ['../../new-recipe.css', './step-process-tips.css'],
+  styleUrl: './step-process-tips.css'
 })
 export class StepProcessTips {
-  constructor(public store: NewRecipeStore, private router: Router) {}
+  store = inject(NewRecipeStore);
+  private router = inject(Router);
+  private auth   = inject(AuthService);
+  private recipesSvc = inject(RecipesService);
 
-  trackById = (_: number, item: { id: number }) => item.id;
+  trackById = (_: number, item: { id: string }) => item.id;
 
-  addStep(){ this.store.steps.update(list => [...list, { id: Date.now()+Math.random(), title:'', description:'' }]); }
-  removeStep(i:number){ this.store.steps.update(list => list.filter((_,idx)=>idx!==i)); }
-  editStepTitle(i:number, e:Event){
-    this.store.steps.update(list => { const next=[...list]; next[i].title=(e.target as HTMLInputElement).value; return next; });
+  // handlers de UI
+  editStepDesc(i: number, ev: Event) { this.store.updateStep(i, (ev.target as HTMLTextAreaElement).value); }
+  addStep() { this.store.addStep(); }
+  editTipDesc(i: number, ev: Event) { this.store.updateTip(i, (ev.target as HTMLTextAreaElement).value); }
+  addTip() { this.store.addTip(); }
+
+  // ---------- helpers para anidados ----------
+  private ingredientsAsObjects() {
+    return (this.store.ingredients() ?? [])
+      .filter(i => (i?.name ?? '').trim())
+      .map((i, idx) => {
+        const qty  = (i?.qty ?? '').toString().trim();
+        const unit = (i?.unit ?? '').toString().trim();
+        const name = (i?.name ?? '').toString().trim();
+        const left = [qty, unit].filter(Boolean).join(' ');
+        const texto = left ? `${left} ${name}` : name;
+        return { orden: idx + 1, texto };
+      });
   }
-  editStepDesc(i:number, e:Event){
-    this.store.steps.update(list => { const next=[...list]; next[i].description=(e.target as HTMLTextAreaElement).value; return next; });
+  private stepsAsObjects() {
+    return (this.store.steps() ?? [])
+      .map((s, idx) => ({ orden: idx + 1, texto: (s?.description ?? '').trim() }))
+      .filter(s => s.texto);
+  }
+  private tipsAsObjects() {
+    return (this.store.tips() ?? [])
+      .map((t, idx) => ({ orden: idx + 1, texto: (t?.description ?? '').trim() }))
+      .filter(t => t.texto);
+  }
+  private nutritionAsObjects(): { label: string; valueNum: number | null }[] {
+    return (this.store.nutritionItems() ?? [])
+      .filter(n => (n?.label ?? '').trim())
+      .map(n => ({
+        label: (n!.label!).trim(),
+        valueNum: n?.value != null && n?.value !== '' ? Number(n.value) : null
+      }));
   }
 
-  addTip(){ this.store.tips.update(list => [...list, { id: Date.now()+Math.random(), title:'', description:'' }]); }
-  removeTip(i:number){ this.store.tips.update(list => list.filter((_,idx)=>idx!==i)); }
-  editTipTitle(i:number, e:Event){
-    this.store.tips.update(list => { const next=[...list]; next[i].title=(e.target as HTMLInputElement).value; return next; });
-  }
-  editTipDesc(i:number, e:Event){
-    this.store.tips.update(list => { const next=[...list]; next[i].description=(e.target as HTMLTextAreaElement).value; return next; });
-  }
+  finalizarYVer() {
+    const userId = this.auth.currentUser()?.id ?? 0;
+    const editingId = this.store.editingId();
+    const tags = (this.store.tags() ?? '')
+    .split(',').map(t => t.trim()).filter(Boolean);
 
-  finalizarYVer(): void {
-    const id = Date.now();
-
-    const rawDiff = this.store.difficulty();
-    const dificultad = (rawDiff === 'media' ? 'medio' : rawDiff) || 'facil';
-
-    const receta: Receta = {
-      id,
-      autor_id: 0,
-      nombre: this.store.name() || 'Receta sin nombre',
-      descripcion: this.store.description() || '',
-      porciones: this.store.servings() ?? 0,
-      tiempoPrep: Number(this.store.prepMinutes()) || 0,
-      tiempoCoc: Number(this.store.cookMinutes()) || 0,
-      categoria: this.store.category() || 'Otros',
-      dificultad: dificultad as any,
-      tipo_comida: 'Casera',
+    const payloadBase = {
+      autor_id: String(userId),
+      nombre: (this.store.name() ?? '').trim(),
+      descripcion: (this.store.description() ?? '').trim(),
+      porciones: Number(this.store.servings() ?? 0) || 0,
+      tiempoPrep: Number(this.store.prepMinutes() ?? 0) || 0,
+      tiempoCoc: Number(this.store.cookMinutes() ?? 0) || 0,
+      categoria: this.store.category() || null,
+      dificultad: (() => {
+        const d = (this.store.difficulty() ?? 'facil').toLowerCase();
+        return d === 'media' ? 'medio' : d;
+      })(),
       publicada: true,
-      imageUrl: this.store.imageDataUrl() || '/assets/placeholder-recipe.webp',
-      tags: (this.store.tags() || '').split(',').map(s => s.trim()).filter(Boolean),
-
-      ingredients: this.store.ingredients().map(i =>
-        [i.name, `${i.qty ?? ''}${i.unit ? ' ' + i.unit : ''}`.trim()]
-          .filter(Boolean).join(' ')
-      ),
-
-      nutrition: this.store.nutritionItems()
-        .filter(n => n.label && n.value)
-        .map(n => ({ label: n.label, value: n.value, unit: n.unit })),
-
-      steps: this.store.steps().map(s =>
-        s.title ? `${s.title}: ${s.description ?? ''}` : (s.description ?? '')
-      ),
-      tips: this.store.tips().map(t =>
-        t.title ? `${t.title}: ${t.description ?? ''}` : (t.description ?? '')
-      ),
-
-      related: [],
-      enlace: `/detail-recipe/${id}`
+      imageUrl: this.store.imageUrl() || 'https://blocks.astratic.com/img/general-img-landscape.png',
+      enlace: null
     };
 
-    const KEY = 'newRecipe.collection.v1';
-    const current = JSON.parse(localStorage.getItem(KEY) || '[]');
-    const next = [receta, ...current.filter((r: any) => String(r?.id) !== String(id))];
-    localStorage.setItem(KEY, JSON.stringify(next));
+    const full = {
+      ...payloadBase,
+      ingredients: this.ingredientsAsObjects(),
+      steps: this.stepsAsObjects(),
+      tips: this.tipsAsObjects(),
+      nutrition: this.nutritionAsObjects(),
+      tags
+    };
 
-    localStorage.removeItem('newRecipe.draft.v1');
-    this.router.navigate(['/detail-recipe', id], { queryParams: { local: 1 }, replaceUrl: true });
+    const onOk = (r: any) => {
+      this.store.clearDraft?.();
+      this.store.resetAll();
+      this.router.navigate(['/detail-recipe', r.id]);
+    };
+
+    if (editingId) {
+      this.recipesSvc.updateReceta(String(editingId), full as any).subscribe({
+        next: onOk,
+        error: (e) => { console.error('[updateReceta]', e); alert('No se pudo actualizar la receta.'); }
+      });
+    } else {
+      const withCreated = { ...full, creado_en: new Date().toISOString() };
+      this.recipesSvc.createReceta(withCreated as any).subscribe({
+        next: onOk,
+        error: (e) => { console.error('[createReceta]', e); alert('No se pudo crear la receta.'); }
+      });
+    }
+
   }
 }
