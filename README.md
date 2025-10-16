@@ -68,4 +68,4 @@ Desarrollar una aplicación web que permita al usuario planificar comidas, acced
 
 <h2 align='center' >🎯 Nuestra Wiki</h2>
 
-<h3 align='center' >🍯 <a href="https://github.com/Winnie-The-POO-ARGBroker/WinnieTheFood-Angular/wiki" align='center'>Link a Wiki </a></h3>
+<h3 align='center' >🍯 <a href="https://github.com/Winnie-The-POO-ARGBroker/Winnie-The-Food/wiki" align='center'>Link a Wiki </a></h3>
