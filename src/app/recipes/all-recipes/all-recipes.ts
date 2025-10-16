@@ -1,47 +1,34 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { Component, inject, signal } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Featured } from '../../shared/components/featured/featured';
 import { EmptyState } from '../../shared/components/empty-state/empty-state';
-import { RecipesService, FeaturedCard } from '../../services/recipes.service';
+import type { FeaturedCard } from '../../shared/components/featured/featured';
+import { PreloaderService } from '../../shared/preloader/preloader.service';
 
 @Component({
   selector: 'app-all-recipes',
   standalone: true,
-  imports: [Featured, EmptyState, HttpClientModule, RouterLink],
+  imports: [Featured, EmptyState],
   templateUrl: './all-recipes.html',
-  styleUrl: './all-recipes.css'
+  styleUrl: './all-recipes.css',
 })
-export class AllRecipes implements OnInit {
-  private recipeService = inject(RecipesService);
-  private route = inject(ActivatedRoute);
+export class AllRecipes {
+  private route  = inject(ActivatedRoute);
+  private loader = inject(PreloaderService);
 
-  featuredRecipesArray: FeaturedCard[] = [];
-  loading = false;
-  errorMsg = '';
-  categoriaActual: string | null = null;
+  featuredRecipesArray = signal<FeaturedCard[]>([]);
+  errorMsg = signal('');
 
-  ngOnInit(): void {
-    this.route.queryParamMap.subscribe(params => {
-      this.categoriaActual = params.get('categoria');
-      this.cargar();
+  constructor() {
+    this.route.data.subscribe(async (d) => {
+      const cards = (d['recetas'] as FeaturedCard[] | undefined) ?? [];
+      this.featuredRecipesArray.set(cards);
+      this.errorMsg.set(cards.length ? '' : 'No se pudieron cargar las recetas.');
+
+      await queueMicrotask(() => {});
+      if (this.loader.pendingHttp === 0) this.loader.hide();
     });
   }
 
-  private cargar() {
-    this.loading = true;
-    this.errorMsg = '';
-    const req$ = this.categoriaActual
-      ? this.recipeService.getFeaturedCardsByCategoria(this.categoriaActual)
-      : this.recipeService.getFeaturedCards();
-
-    req$.subscribe({
-      next: (cards) => { this.featuredRecipesArray = cards; this.loading = false; },
-      error: (err) => { console.error(err); this.errorMsg = err?.message ?? 'No se pudieron cargar las recetas.'; this.loading = false; }
-    });
-  }
-
-  limpiarFiltro() {
-    location.href = '/all-recipes';
-  }
+  limpiarFiltro() { location.href = '/all-recipes'; }
 }

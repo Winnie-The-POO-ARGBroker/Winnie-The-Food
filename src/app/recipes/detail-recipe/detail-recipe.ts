@@ -1,36 +1,36 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TitleCasePipe } from '@angular/common';
-import { RecipesService } from '../../services/recipes.service';
 import { Receta } from '../../models/receta-model';
-import { Featured } from '../../shared/components/featured/featured';
+import { Featured, FeaturedCard } from '../../shared/components/featured/featured';
 import { EmptyState } from '../../shared/components/empty-state/empty-state';
+import { PreloaderService } from '../../shared/preloader/preloader.service';
 
 @Component({
   selector: 'app-detail-recipe',
   standalone: true,
-
   imports: [TitleCasePipe, Featured, EmptyState],
   templateUrl: './detail-recipe.html',
   styleUrl: './detail-recipe.css'
 })
 export class DetailRecipe {
-  private route = inject(ActivatedRoute);
-  private recipes = inject(RecipesService);
+  private route  = inject(ActivatedRoute);
+  private loader = inject(PreloaderService);
 
-  loading = signal(true);
   errorMsg = signal<string | null>(null);
   receta   = signal<Receta | null>(null);
 
   constructor() {
-    effect(() => {
-      const id = this.route.snapshot.paramMap.get('id');
-      if (!id) { this.errorMsg.set('ID de receta inválido'); this.loading.set(false); return; }
-      this.loading.set(true); this.errorMsg.set(null);
-      this.recipes.getRecetaById(String(id)).subscribe({
-        next: r => { this.receta.set(r); this.loading.set(false); },
-        error: e => { this.errorMsg.set(e?.message || 'Receta no encontrada'); this.loading.set(false); }
-      });
+    const r = this.route.snapshot.data['receta'] as Receta | null | undefined;
+    if (!r) {
+      this.errorMsg.set('Receta no encontrada');
+    } else {
+      this.receta.set(r);
+    }
+
+    queueMicrotask(async () => {
+      await this.loader.waitForImages(document);
+      if (this.loader.pendingHttp === 0) this.loader.hide();
     });
   }
 
@@ -40,16 +40,38 @@ export class DetailRecipe {
     return tot > 0 ? `${tot} min` : '—';
   });
 
-  relatedForFeatured() {
+  dificultadStr(): 'facil'|'medio'|'dificil' {
+    const v = String(this.receta()?.dificultad ?? '').toLowerCase();
+    if (v === '1' || v === 'facil') return 'facil';
+    if (v === '2' || v === 'medio') return 'medio';
+    return 'dificil';
+  }
+
+  relatedForFeatured(): FeaturedCard[] {
     const r = this.receta(); if (!r) return [];
-    return (r.related ?? []).map(x => ({
-      titulo: x.titulo,
-      descripcion: x.descripcion,
-      imagen: x.imagen,
-      enlace: x.enlace ?? '#',
-      tiempo: x.tiempo,
-      dificultad: x.dificultad as 'facil'|'medio'|'dificil'
-    }));
+    return (r.related ?? []).map((x: any, i: number): FeaturedCard => {
+      const xid = String(x?.id ?? i);
+      const difVal = String(x?.dificultad ?? '').toLowerCase();
+      const dificultad: FeaturedCard['dificultad'] =
+        difVal === '1' || difVal === 'facil' ? 'facil'
+      : difVal === '2' || difVal === 'medio' || difVal === 'media' ? 'medio'
+      : 'dificil';
+
+      const imagen = (() => {
+        const src = (x?.imagen ?? x?.imageUrl ?? '').toString().trim();
+        return src && src !== 'null' && src !== 'undefined' ? src : null;
+      })();
+
+      return {
+        id: xid,
+        titulo: String(x?.titulo ?? ''),
+        descripcion: String(x?.descripcion ?? ''),
+        imagen,
+        enlace: typeof x?.enlace === 'string' && x.enlace.trim() ? x.enlace : `/detail-recipe/${xid}`,
+        tiempo: String(x?.tiempo ?? '—'),
+        dificultad
+      };
+    });
   }
 
   onAddToFavorites() { alert('¡Agregado a favoritos!'); }

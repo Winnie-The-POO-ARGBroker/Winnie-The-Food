@@ -32,11 +32,14 @@ export class Login {
 
     this.auth.login(email!, password!, !!recordarme).subscribe({
       next: () => {
-        
         const redirect = this.route.snapshot.queryParamMap.get('redirect') || '/';
         this.router.navigateByUrl(redirect);
       },
-      error: (e) => this.errorMsg = e?.message ?? 'No se pudo iniciar sesiÃ³n'
+      error: (e) => {
+        // si viene nuestro error tipado, úsalo; sino, fallback
+        this.errorMsg = e?.message || 'No se pudo iniciar sesión';
+        // opcional: console.debug(e);
+      }
     });
   }
 }

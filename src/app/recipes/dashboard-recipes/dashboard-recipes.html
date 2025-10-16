@@ -1,26 +1,19 @@
-<section class="container m-10 flex flex-column gap-6">
+<section class="container m-10">
   <div class="title-actions">
     <h2 class="titulo-seccion">Mis Recetas</h2>
-    <a routerLink="/new-recipe" class="btn-personalizado primario">Crear receta</a>
+    <a (click)="crear()" class="btn-personalizado primario">Crear receta</a>
   </div>
 
-  @if (loading()) {
-    <p>Cargando recetas…</p>
-  } @else if (errorMsg()) {
-    <p class="error">{{ errorMsg() }}</p>
+  @if (errorMsg()) {
+    <app-empty-state [message]="errorMsg()"></app-empty-state>
+  } @else if (!cards().length) {
+    <app-empty-state message="No hay datos para mostrar"></app-empty-state>
   } @else {
-    @if (cards().length) {
-      <app-featured
-        [recipes]="cards()"
-        [actionsTemplate]="actionsTpl">
-      </app-featured>
-
-      <ng-template #actionsTpl let-card>
+    <ng-template #actions let-card>
         <button class="btn-personalizado secundario" (click)="editar(card.id)">EDITAR</button>
         <button class="btn-personalizado primario" (click)="eliminar(card.id)">ELIMINAR</button>
       </ng-template>
-    } @else {
-      <app-empty-state message="Aún no tienes recetas creadas. ¡Empieza creando una!"></app-empty-state>
-    }
+
+    <app-featured [recipes]="cards()" [actionsTemplate]="actions"></app-featured>
   }
 </section>
