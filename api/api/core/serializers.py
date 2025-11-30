@@ -16,6 +16,8 @@ class UsuarioCreateSerializer(serializers.ModelSerializer):
         extra_kwargs = {'id': {'required': False}}
 
     def create(self, vd):
+        if not vd.get('id'):
+            vd['id'] = str(uuid4())
         return super().create(vd)
 
 
