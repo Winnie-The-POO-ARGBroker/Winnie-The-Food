@@ -61,7 +61,7 @@ export class RecipesService {
     if (s === '2' || s === 'medio' || s === 'media') return 'medio';
     return 'dificil';
   }
-  private difToId(d: string | number | null | undefined): 1|2|3 {
+  private difToId(d: string | number | null | undefined): 1 | 2 | 3 {
     const s = String(d ?? '').toLowerCase();
     if (s === '1' || s === 'facil') return 1;
     if (s === '2' || s === 'medio' || s === 'media') return 2;
@@ -85,8 +85,8 @@ export class RecipesService {
       }
       const msg = err instanceof HttpErrorResponse
         ? (typeof err.error === 'string'
-            ? err.error
-            : (err.error?.detail || JSON.stringify(err.error) || 'Error del servidor.'))
+          ? err.error
+          : (err.error?.detail || JSON.stringify(err.error) || 'Error del servidor.'))
         : 'Error desconocido.';
       return throwError(() => new Error(msg || `No se pudo completar la operación (${label}).`));
     };
@@ -152,15 +152,15 @@ export class RecipesService {
     };
 
     if (Array.isArray(p.ingredients)) body.ingredients = p.ingredients;
-    if (Array.isArray(p.steps))       body.steps       = p.steps;
-    if (Array.isArray(p.tips))        body.tips        = p.tips;
-    if (Array.isArray(p.nutrition))   body.nutrition   = p.nutrition;
-    if (Array.isArray(p.related))     body.related     = p.related;
-    if (Array.isArray(p.tags))        body.tags        = p.tags;
+    if (Array.isArray(p.steps)) body.steps = p.steps;
+    if (Array.isArray(p.tips)) body.tips = p.tips;
+    if (Array.isArray(p.nutrition)) body.nutrition = p.nutrition;
+    if (Array.isArray(p.related)) body.related = p.related;
+    if (Array.isArray(p.tags)) body.tags = p.tags;
 
     if (p.creado_en) body.creado_en = p.creado_en;
 
-    console.log('[mapWritePayload]', body);
+
     return body;
   }
 
@@ -188,20 +188,20 @@ export class RecipesService {
 
   createReceta(payload: Partial<Receta> & Record<string, any>) {
     const body = self.crypto ? this.mapWritePayload(payload) : this.mapWritePayload(payload); // (mantengo firma limpia)
-    console.log('[createReceta] →', body);
+
     return this.http.post<RecetaDetailDTO>(`${this.base}/recetas`, body)
       .pipe(catchError(this.httpFail<RecetaDetailDTO>('createReceta')));
   }
 
   updateReceta(id: string | number, payload: Partial<Receta> & Record<string, any>) {
     const body = this.mapWritePayload(payload);
-    console.log('[updateReceta] →', id, body);
+
     return this.http.put<RecetaDetailDTO>(`${this.base}/recetas/${id}`, body)
       .pipe(catchError(this.httpFail<RecetaDetailDTO>('updateReceta')));
   }
 
   deleteReceta(id: string | number) {
-    console.log('[deleteReceta] →', id);
+
     return this.http.delete<void>(`${this.base}/recetas/${id}`)
       .pipe(catchError(this.httpFail<void>('deleteReceta')));
   }
